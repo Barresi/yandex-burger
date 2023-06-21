@@ -1,0 +1,45 @@
+.ingredientCard {
+     position: relative;
+     flex: 1 0 200px;
+     
+     display: flex;
+     flex-direction: column;
+     
+     align-items: center;
+     padding: 0px 16px;
+
+     text-align: center;
+     gap: 8px;
+}
+
+.ingredientCard button {
+     display: none;
+}
+
+.price {
+     display: flex;
+     align-items: center;
+     gap: 9px;
+}
+
+.title {
+     flex: 1 1 auto;
+}
+
+.imgIngredient {
+     display: block;
+     width: 100%;
+     height: 140px;
+     object-fit: cover;
+}
+
+@media (max-width: 767px) {
+     .ingredientCard button {
+          display: block;
+          width: 100%;
+     }
+     .ingredientCard {
+          padding: 0;
+     }
+
+}

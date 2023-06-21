@@ -1,4 +1,19 @@
-.App {
-  text-align: center;
+.app {
+     height: 100Vh;
+     overflow: hidden;
 }
 
+.main {
+     display: flex;
+     gap: 40px;
+     max-width: 1260px;
+     margin: 0 auto;
+     padding: 0px 10px;
+     height: 80%;
+}
+
+@media (max-width: 1270px) {
+     .main {
+          flex-direction: column;
+     }
+}

@@ -1,0 +1,79 @@
+
+
+.burgerConstructor {
+     flex: 0 0 48%;
+     margin-top: 100px;
+     position: relative;
+     z-index: 1;
+     display: flex;
+     flex-direction: column;  
+}
+
+.burgerConstructor div:nth-child(1) {
+     margin-left: 35px;
+     flex: 0 0 80px;
+}
+.burgerConstructor div:nth-child(3) {
+     margin-left: 35px;
+     flex: 0 0 80px;
+}
+
+.wrap div {
+     flex: 0 0 80px;
+     margin-right: 16px;
+     position: relative;
+     margin-left: 35px;
+}
+.wrap div::before {
+     content: url('../../images/burger-component.svg');
+     position: absolute;
+     top: 30px;
+     right: 550px;
+     z-index: 2;
+}
+
+.wrap {
+     display: inline-flex;
+     flex-direction: column;
+     gap: 10px;
+     margin: 16px 0px;
+
+     
+     overflow: auto;
+     flex: 0 1 auto;
+}
+
+.wrap::-webkit-scrollbar {
+     width: 8px;
+}
+.wrap::-webkit-scrollbar-track {
+     background-color: #2F2F37;
+}
+.wrap::-webkit-scrollbar-thumb {
+     background-color: #8585AD;
+}
+
+.checkout {
+     display: flex;
+     gap: 40px;
+     align-items: center;
+     justify-content: flex-end;
+     margin-top: 40px;
+     flex: 0 0 64px;
+}
+.checkout svg {
+     width: 33px;
+     height: 33px;
+}
+
+.price {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+}
+
+@media (max-width: 1270px) {
+     .burgerConstructor {
+          display: none;
+     }
+}
