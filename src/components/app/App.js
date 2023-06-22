@@ -5,7 +5,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor'
 
 import data from './utils/data';
 
-import style from './app.module.css';
+import style from './App.module.css';
 
 function App() {
      return (
