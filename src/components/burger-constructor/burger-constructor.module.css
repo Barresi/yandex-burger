@@ -1,6 +1,6 @@
 
 
-.burgerConstructor {
+.burger_constructor {
      flex: 0 0 48%;
      margin-top: 100px;
      position: relative;
@@ -9,11 +9,11 @@
      flex-direction: column;  
 }
 
-.burgerConstructor div:nth-child(1) {
+.burger_constructor div:nth-child(1) {
      margin-left: 35px;
      flex: 0 0 80px;
 }
-.burgerConstructor div:nth-child(3) {
+.burger_constructor div:nth-child(3) {
      margin-left: 35px;
      flex: 0 0 80px;
 }
@@ -73,7 +73,7 @@
 }
 
 @media (max-width: 1270px) {
-     .burgerConstructor {
+     .burger_constructor {
           display: none;
      }
 }

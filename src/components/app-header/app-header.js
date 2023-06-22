@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 
 import smallLogo from '../../images/small-logo.svg'
 import { BurgerIcon, ProfileIcon, Logo } from "@ya.praktikum/react-developer-burger-ui-components"
@@ -6,39 +7,44 @@ import style from './app-header.module.css';
 import burger from '../../images/burger.png';
 
 const AppHeader = ({ activePage }) => {
-     const linkConstructorImg = activePage === 'constructorPage' ? 'primary' : 'secondary';
-     const linkBuyItems = activePage === 'buyItemsPage' ? 'primary' : 'secondary';
-     const linkProfileImg = activePage === 'profilePage' ? 'primary' : 'secondary';
-
-     const linkConstructorText = activePage === 'constructorPage' ? 'text text_type_main-default text_color_active' : 'text text_type_main-default text_color_inactive';
-     const linkBuyItemsText = activePage === 'buyItemsPage' ? "text text_type_main-default text_color_active" : 'text text_type_main-default text_color_inactive';
-     const linkProfileText = activePage === 'profilePage' ? "text text_type_main-default text_color_active" : 'text text_type_main-default text_color_inactive';
+     const activePageConstructor = activePage === 'constructorPage';
+     const activePageBuyItems = activePage === 'buyItemsPage';
+     const activePageProfile = activePage === 'profilePage';
 
      return (
           <header className={style.header}>
                <div className={style.wrap}>
                     <nav>
-                         <ul className={style.headerList}>
-                              <li className={style.headerLi}>
-                                   <a href="#" className={style.headerLi}>
-                                        <BurgerIcon type={linkConstructorImg} />
-                                        <div className={linkConstructorText}>Конструктор</div>
-                                   </a>   
+                         <ul className={style.header_list}>
+                              <li className={style.header_li}>
+                                   <button className={style.header_li}>
+                                        <BurgerIcon type={activePageConstructor? 'primary' : 'secondary'} />
+                                        <div className={`
+                                             ${activePageConstructor? 'text_color_active' : 'text_color_inactive'} 
+                                             text text_type_main-default
+                                             `}>Конструктор</div>
+                                   </button>   
                               </li>
-                              <li className={style.headerLi}>
-                                   <a href="#" className={style.headerLi}>
-                                        <BurgerIcon type={linkBuyItems} />
-                                        <div className={linkBuyItemsText}>Лента заказов</div>
-                                   </a>
+                              <li className={style.header_li}>
+                                   <button className={style.header_li}>
+                                        <BurgerIcon type={activePageBuyItems? 'primary' : 'secondary'} />
+                                        <div className={`
+                                             ${activePageBuyItems? 'text_color_active' : 'text_color_inactive'} 
+                                             text text_type_main-default
+                                             `}>Лента заказов</div>
+                                   </button>
                               </li>
                          </ul>
                     </nav>
                     <div className={style.logo}><Logo /></div> 
                     <div className={style.profile}> 
-                         <a href="#" className={style.profile}>
-                              <ProfileIcon type={linkProfileImg} /> 
-                              <div className={linkProfileText}>Личный кабинет</div>
-                         </a>
+                         <button className={style.profile}>
+                              <ProfileIcon type={activePageProfile? 'primary' : 'secondary'} /> 
+                              <div className={`
+                                   ${activePageProfile? 'text_color_active' : 'text_color_inactive'} 
+                                   text text_type_main-default
+                                   `}>Личный кабинет</div>
+                         </button>
                     </div>
                </div>
                
@@ -48,6 +54,10 @@ const AppHeader = ({ activePage }) => {
                </div>
           </header>
      )
+}
+
+AppHeader.propTypes = {
+     activePage: PropTypes.string.isRequired
 }
 
 export default AppHeader

@@ -3,7 +3,7 @@
      background-color: #1C1C21;
 }
 
-.headerList {
+.header_list {
      list-style-type: none;
      display: flex;
      align-items: center;
@@ -20,17 +20,19 @@
      align-items: center;
 }
 
-.headerLi {
+.header_li {
      display: flex;
      gap: 10px;
      padding: 16px 20px;
      align-items: center;
+     background-color: transparent;
 }
 .profile {
      display: flex;
      gap: 10px;
      padding: 16px 20px;
      align-items: center;
+     background-color: transparent;
 }
 .link:hover {
      color: #fff;

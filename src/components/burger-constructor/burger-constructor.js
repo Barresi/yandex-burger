@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -6,7 +6,7 @@ import style from './burger-constructor.module.css'
 
 const BurgerConstructor = () => {
      return (
-          <section className={style.burgerConstructor}>
+          <section className={style.burger_constructor}>
                <ConstructorElement type="top" isLocked={true} text="Краторная булка N-200i (верх)" price={200} thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"/>
                <div className={style.wrap}>
                     <ConstructorElement text="Говяжий метеорит (отбивная)" price={200} thumbnail="https://code.s3.yandex.net/react/code/meat-04.png"/>

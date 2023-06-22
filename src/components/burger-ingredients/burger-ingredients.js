@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -7,23 +8,29 @@ import IngredientCard from "./ingredient-card/ingredient-card"
 import style from './burger-ingredients.module.css';
 
 const BurgerIngredients = ({dataIngredients}) => {
-     const bunCards = dataIngredients.map(item => {
-          return item['type'] === "bun" ? <IngredientCard cardInfo={item} key={item._id}/> : null
-     })
-     const sauceCards = dataIngredients.map(item => {
-          const {id, ...other} = item;
-          return item['type'] === "sauce" ? <IngredientCard cardInfo={item} key={item._id}/> : null
-     })
-     const mainCards = dataIngredients.map(item => {
-          const {id, ...other} = item;
-          return item['type'] === "main" ? <IngredientCard cardInfo={item} key={item._id}/> : null
-     })
+     const bunCards = useMemo( () => {
+          return dataIngredients
+          .filter(item => item['type'] === "bun")
+          .map(item => <IngredientCard cardInfo={item} key={item._id}/>)
+     }, [dataIngredients])
+
+     const sauceCards = useMemo( () => {
+          return dataIngredients
+          .filter(item => item['type'] === "sauce")
+          .map(item => <IngredientCard cardInfo={item} key={item._id}/>)
+     }, [dataIngredients])
+
+     const mainCards = useMemo( () => {
+          return dataIngredients
+          .filter(item => item['type'] === "main")
+          .map(item => <IngredientCard cardInfo={item} key={item._id}/>)
+     }, [dataIngredients])
 
      return (
-          <section className={style.burgerIngredients}>
+          <section className={style.burger_ingredients}>
                <h1 className={`text text_type_main-large pt-10 pb-5 ${style.h1}`}>Соберите бургер</h1>
                <Tabs className={style.tabs}/>
-               <div className={style.containerIngredients}>
+               <div className={style.container_ingredients}>
                     <div className="buns mb-10" name='bun'>
                          <h2 className="text text_type_main-medium mb-4">Булки</h2>
                          <ul className={style.list}>
