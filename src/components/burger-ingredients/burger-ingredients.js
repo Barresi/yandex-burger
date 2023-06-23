@@ -11,19 +11,16 @@ const BurgerIngredients = ({dataIngredients}) => {
      const bunCards = useMemo( () => {
           return dataIngredients
           .filter(item => item['type'] === "bun")
-          .map(item => <IngredientCard cardInfo={item} key={item._id}/>)
      }, [dataIngredients])
 
      const sauceCards = useMemo( () => {
           return dataIngredients
           .filter(item => item['type'] === "sauce")
-          .map(item => <IngredientCard cardInfo={item} key={item._id}/>)
      }, [dataIngredients])
 
      const mainCards = useMemo( () => {
           return dataIngredients
           .filter(item => item['type'] === "main")
-          .map(item => <IngredientCard cardInfo={item} key={item._id}/>)
      }, [dataIngredients])
 
      return (
@@ -34,19 +31,19 @@ const BurgerIngredients = ({dataIngredients}) => {
                     <div className="buns mb-10" name='bun'>
                          <h2 className="text text_type_main-medium mb-4">Булки</h2>
                          <ul className={style.list}>
-                              {bunCards}
+                              {bunCards.map(item => <IngredientCard cardInfo={item} key={item._id}/>)}
                          </ul>
                     </div>
                     <div className="sauce mb-10">
                          <h2 className="text text_type_main-medium mb-4">Соусы</h2>
                          <ul className={style.list}>
-                              {sauceCards}
+                              {sauceCards.map(item => <IngredientCard cardInfo={item} key={item._id}/>)}
                          </ul>
                     </div>
                     <div className="main mb-10" name='main'>
                          <h2 className="text text_type_main-medium mb-4">Начинки</h2>
                          <ul className={style.list}>
-                              {mainCards}
+                              {mainCards.map(item => <IngredientCard cardInfo={item} key={item._id}/>)}
                          </ul>
                     </div>
                </div>
