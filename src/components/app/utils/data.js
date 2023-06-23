@@ -1,4 +1,4 @@
-[
+const data = [
      {
         "_id":"60666c42cc7b410027a1a9b1",
         "name":"Краторная булка N-200i",
@@ -11,7 +11,7 @@
         "image":"https://code.s3.yandex.net/react/code/bun-02.png",
         "image_mobile":"https://code.s3.yandex.net/react/code/bun-02-mobile.png",
         "image_large":"https://code.s3.yandex.net/react/code/bun-02-large.png",
-        "__v":0
+        "__v":1
      },
      {
         "_id":"60666c42cc7b410027a1a9b5",
@@ -95,7 +95,7 @@
         "image":"https://code.s3.yandex.net/react/code/sauce-04.png",
         "image_mobile":"https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
         "image_large":"https://code.s3.yandex.net/react/code/sauce-04-large.png",
-        "__v":0
+        "__v":2
      },
      {
         "_id":"60666c42cc7b410027a1a9bc",
@@ -151,7 +151,7 @@
         "image":"https://code.s3.yandex.net/react/code/core.png",
         "image_mobile":"https://code.s3.yandex.net/react/code/core-mobile.png",
         "image_large":"https://code.s3.yandex.net/react/code/core-large.png",
-        "__v":0
+        "__v":1
      },
      {
         "_id":"60666c42cc7b410027a1a9be",
@@ -209,4 +209,6 @@
         "image_large":"https://code.s3.yandex.net/react/code/bun-01-large.png",
         "__v":0
      }
-]
+  ]
+
+export default data;
