@@ -4,9 +4,9 @@ import { CurrencyIcon , Counter, Button } from "@ya.praktikum/react-developer-bu
 
 import style from './ingredient-card.module.css';
 
-const IngredientCard = ({cardInfo}) => {
+const IngredientCard = ({cardInfo, setModalData}) => {
      return (
-          <div className={style.ingredient_card}>
+          <div className={style.ingredient_card} onClick={() => setModalData({...cardInfo, modalType: 'ingredient-details'})}>
                <img src={cardInfo['image']} alt="bun" className={style.img_ingredient}/>
                <div className={`${style.price} text text_type_digits-default`}> 
                     {cardInfo.price}
