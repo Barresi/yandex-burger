@@ -1,6 +1,6 @@
 .header {
      padding: 16px 0px;
-     background-color: #1C1C21;
+     background-color: #1c1c21;
 }
 
 .header_list {
@@ -27,12 +27,18 @@
      align-items: center;
      background-color: transparent;
 }
+.header_li:hover {
+     cursor: pointer;
+}
 .profile {
      display: flex;
      gap: 10px;
      padding: 16px 20px;
      align-items: center;
      background-color: transparent;
+}
+.profile:hover {
+     cursor: pointer;
 }
 .link:hover {
      color: #fff;
@@ -49,14 +55,13 @@
      padding: 0px 10px;
 }
 
-
-@media(max-width: 1100px) {
+@media (max-width: 1100px) {
      .logo {
           display: none;
      }
 }
 
-@media(max-width: 767px) {
+@media (max-width: 767px) {
      .mobile {
           display: flex;
           justify-content: space-between;
