@@ -7,6 +7,7 @@ const ModalOverlay = ({ children, setIsActiveModal }) => {
           if (e.target === e.currentTarget) {
                setIsActiveModal(false);
           }
+          e.stopPropagation();
      };
 
      return (

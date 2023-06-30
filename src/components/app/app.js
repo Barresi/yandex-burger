@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 import Modal from "../modal/modal-body/modal";
@@ -36,14 +35,11 @@ const App = () => {
                          <BurgerConstructor isLoading={isLoading} />
                     </main>
                </SkeletonTheme>
-               {isError
-                    ? createPortal(
-                           <Modal setIsActiveModal={setIsError}>
-                                <ModalError error={isError}></ModalError>
-                           </Modal>,
-                           document.querySelector("#modal")
-                      )
-                    : null}
+               {isError ? (
+                    <Modal setIsActiveModal={setIsError}>
+                         <ModalError error={isError}></ModalError>
+                    </Modal>
+               ) : null}
           </div>
      );
 };

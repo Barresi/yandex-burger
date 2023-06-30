@@ -1,6 +1,6 @@
 .list {
      display: grid;
-     grid-template: 1fr / repeat(2,1fr);
+     grid-template: 1fr / repeat(2, 1fr);
      grid-column-gap: 24px;
      grid-row-gap: 32px;
      padding: 0 16px;
@@ -12,19 +12,17 @@
      overflow: auto;
      width: 100%;
 
-
      flex: 1 1 60%;
 }
-
 
 .container_ingredients::-webkit-scrollbar {
      width: 8px;
 }
 .container_ingredients::-webkit-scrollbar-track {
-     background-color: #2F2F37;
+     background-color: #2f2f37;
 }
 .container_ingredients::-webkit-scrollbar-thumb {
-     background-color: #8585AD;
+     background-color: #8585ad;
 }
 
 .burger_ingredients {
@@ -62,7 +60,7 @@
           overflow: auto;
      }
      .list {
-          grid-template: 1fr / repeat(3,1fr);
+          grid-template: 1fr / repeat(3, 1fr);
      }
      .checkout {
           position: fixed;
@@ -72,7 +70,7 @@
           width: 100%;
           height: 72px;
           display: flex;
-          background-color: #1C1C21;
+          background-color: #1c1c21;
           z-index: 4;
           padding: 16px 8px;
           justify-content: flex-end;
@@ -81,7 +79,6 @@
 }
 
 @media (max-width: 767px) {
-
      .list {
           grid-template: 1fr / repeat(2, 1fr);
           grid-column-gap: 4px;

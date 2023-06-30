@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { createPortal } from "react-dom";
 
 import {
      CurrencyIcon,
@@ -43,16 +42,13 @@ const IngredientCard = ({ cardInfo }) => {
                <Button htmlType='button' type='secondary' size='small'>
                     Добавить
                </Button>
-               {isActiveModal
-                    ? createPortal(
-                           <Modal
-                                modalType='ingredient-details'
-                                setIsActiveModal={setIsActiveModal}>
-                                <IngredientDetails data={cardInfo} />
-                           </Modal>,
-                           document.querySelector("#modal")
-                      )
-                    : null}
+               {isActiveModal ? (
+                    <Modal
+                         modalType='ingredient-details'
+                         setIsActiveModal={setIsActiveModal}>
+                         <IngredientDetails data={cardInfo} />
+                    </Modal>
+               ) : null}
           </div>
      );
 };

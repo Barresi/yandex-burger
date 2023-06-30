@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import { useRef } from "react";
+import useHover from "../../hooks/useHover";
 
 import smallLogo from "../../images/small-logo.svg";
 import {
@@ -17,16 +19,29 @@ const AppHeader = ({ activePage, isLoading }) => {
      const activePageBuyItems = activePage === "buyItemsPage";
      const activePageProfile = activePage === "profilePage";
 
+     const refConstructor = useRef();
+     const isHoveringConstructor = useHover(refConstructor);
+
+     const refBuyItems = useRef();
+     const isHoveringBuyItems = useHover(refBuyItems);
+
+     const refProfile = useRef();
+     const isHoveringProfile = useHover(refProfile);
+
      return (
           <header className={style.header}>
                <div className={style.wrap}>
                     <nav className={style.header_list}>
                          {isLoading ? null : (
                               <>
-                                   <a className={style.header_li}>
+                                   <a
+                                        href='/'
+                                        className={style.link}
+                                        ref={refConstructor}>
                                         <BurgerIcon
                                              type={
-                                                  activePageConstructor
+                                                  activePageConstructor ||
+                                                  isHoveringConstructor
                                                        ? "primary"
                                                        : "secondary"
                                              }
@@ -34,7 +49,8 @@ const AppHeader = ({ activePage, isLoading }) => {
                                         <div
                                              className={`
                                                   ${
-                                                       activePageConstructor
+                                                       activePageConstructor ||
+                                                       isHoveringConstructor
                                                             ? "text_color_active"
                                                             : "text_color_inactive"
                                                   } 
@@ -44,10 +60,14 @@ const AppHeader = ({ activePage, isLoading }) => {
                                         </div>
                                    </a>
 
-                                   <a className={style.header_li}>
+                                   <a
+                                        href='/'
+                                        className={style.link}
+                                        ref={refBuyItems}>
                                         <BurgerIcon
                                              type={
-                                                  activePageBuyItems
+                                                  activePageBuyItems ||
+                                                  isHoveringBuyItems
                                                        ? "primary"
                                                        : "secondary"
                                              }
@@ -55,7 +75,8 @@ const AppHeader = ({ activePage, isLoading }) => {
                                         <div
                                              className={`
                                                   ${
-                                                       activePageBuyItems
+                                                       activePageBuyItems ||
+                                                       isHoveringBuyItems
                                                             ? "text_color_active"
                                                             : "text_color_inactive"
                                                   } 
@@ -73,10 +94,10 @@ const AppHeader = ({ activePage, isLoading }) => {
                     {isLoading ? (
                          <SkeletonLink cards={1} />
                     ) : (
-                         <a className={style.profile}>
+                         <a href='/' className={style.profile} ref={refProfile}>
                               <ProfileIcon
                                    type={
-                                        activePageProfile
+                                        activePageProfile || isHoveringProfile
                                              ? "primary"
                                              : "secondary"
                                    }
@@ -84,7 +105,8 @@ const AppHeader = ({ activePage, isLoading }) => {
                               <div
                                    className={`
                                              ${
-                                                  activePageProfile
+                                                  activePageProfile ||
+                                                  isHoveringProfile
                                                        ? "text_color_active"
                                                        : "text_color_inactive"
                                              } 

@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import Skeleton from "react-loading-skeleton";
 import { useState } from "react";
-import { createPortal } from "react-dom";
 
 import {
      Button,
@@ -122,16 +121,13 @@ const BurgerConstructor = ({ isLoading }) => {
                          </>
                     )}
                </div>
-               {isActiveModal
-                    ? createPortal(
-                           <Modal
-                                modalType='order-details'
-                                setIsActiveModal={setIsActiveModal}>
-                                <OrderDetails></OrderDetails>
-                           </Modal>,
-                           document.querySelector("#modal")
-                      )
-                    : null}
+               {isActiveModal ? (
+                    <Modal
+                         modalType='order-details'
+                         setIsActiveModal={setIsActiveModal}>
+                         <OrderDetails></OrderDetails>
+                    </Modal>
+               ) : null}
           </section>
      );
 };

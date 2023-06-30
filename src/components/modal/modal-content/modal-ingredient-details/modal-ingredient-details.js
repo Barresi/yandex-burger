@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import style from "./modal-ingredient-details.module.css";
 import ingredientPropTypes from "../../../app/utils/prop-types";
 

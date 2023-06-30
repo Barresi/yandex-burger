@@ -1,9 +1,12 @@
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
 import style from "./modal.module.css";
 import btn_close from "../../../images/modal-crest.png";
+
+const modalRootElement = document.getElementById("modal");
 
 const Modal = ({ modalType, setIsActiveModal, children }) => {
      const escapeListener = (e) => {
@@ -18,9 +21,9 @@ const Modal = ({ modalType, setIsActiveModal, children }) => {
           return () => {
                document.removeEventListener("keyup", escapeListener, false);
           };
-     }, [escapeListener]);
+     }, []);
 
-     return (
+     return createPortal(
           <ModalOverlay setIsActiveModal={setIsActiveModal}>
                <div className={style.content}>
                     <div className={style.top}>
@@ -38,13 +41,17 @@ const Modal = ({ modalType, setIsActiveModal, children }) => {
                          ) : null}
                          <button
                               className={style.btn_close}
-                              onClick={() => setIsActiveModal(false)}>
+                              onClick={(e) => {
+                                   setIsActiveModal(false);
+                                   e.stopPropagation();
+                              }}>
                               <img src={btn_close} alt='crest' />
                          </button>
                     </div>
                     {children}
                </div>
-          </ModalOverlay>
+          </ModalOverlay>,
+          modalRootElement
      );
 };
 

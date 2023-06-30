@@ -20,28 +20,20 @@
      align-items: center;
 }
 
-.header_li {
+.link {
      display: flex;
      gap: 10px;
      padding: 16px 20px;
      align-items: center;
      background-color: transparent;
 }
-.header_li:hover {
-     cursor: pointer;
-}
+
 .profile {
      display: flex;
      gap: 10px;
      padding: 16px 20px;
      align-items: center;
      background-color: transparent;
-}
-.profile:hover {
-     cursor: pointer;
-}
-.link:hover {
-     color: #fff;
 }
 
 .logo {
