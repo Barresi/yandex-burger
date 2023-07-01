@@ -39,11 +39,9 @@ const App = () => {
                     <BurgerConstructor isLoading={isLoading} />
                </main>
 
-               {isError ? (
-                    <Modal onClose={() => setIsError(false)} show={isError}>
-                         <ModalError error={isError}></ModalError>
-                    </Modal>
-               ) : null}
+               <Modal onClose={() => setIsError(false)} show={isError}>
+                    <ModalError error={isError}></ModalError>
+               </Modal>
           </div>
      );
 };

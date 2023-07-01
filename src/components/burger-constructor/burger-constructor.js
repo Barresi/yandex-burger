@@ -25,66 +25,15 @@ const BurgerConstructor = () => {
                     thumbnail='https://code.s3.yandex.net/react/code/bun-02.png'
                />
                <div className={style.wrap}>
-                    <ConstructorElement
-                         text='Говяжий метеорит (отбивная)'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/meat-04.png'
-                    />
-                    <ConstructorElement
-                         text='Соус Spicy-X'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sauce-02.png'
-                    />
-                    <ConstructorElement
-                         text='Плоды Фалленианского дерева'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sp_1.png'
-                    />
-                    <ConstructorElement
-                         text='Говяжий метеорит (отбивная)'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/meat-04.png'
-                    />
-                    <ConstructorElement
-                         text='Плоды Фалленианского дерева'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sp_1.png'
-                    />
-                    <ConstructorElement
-                         text='Плоды Фалленианского дерева'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sp_1.png'
-                    />
-                    <ConstructorElement
-                         text='Плоды Фалленианского дерева'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sp_1.png'
-                    />
-                    <ConstructorElement
-                         text='Плоды Фалленианского дерева'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sp_1.png'
-                    />
-                    <ConstructorElement
-                         text='Плоды Фалленианского дерева'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sp_1.png'
-                    />
-                    <ConstructorElement
-                         text='Плоды Фалленианского дерева'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sp_1.png'
-                    />
-                    <ConstructorElement
-                         text='Плоды Фалленианского дерева'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sp_1.png'
-                    />
-                    <ConstructorElement
-                         text='Плоды Фалленианского дерева'
-                         price={200}
-                         thumbnail='https://code.s3.yandex.net/react/code/sp_1.png'
-                    />
+                    {Array(8)
+                         .fill(0)
+                         .map((item, ind) => (
+                              <ConstructorElement
+                                   text='Говяжий метеорит (отбивная)'
+                                   price={200}
+                                   thumbnail='https://code.s3.yandex.net/react/code/meat-04.png'
+                              />
+                         ))}
                </div>
                <ConstructorElement
                     type='bottom'
@@ -107,14 +56,13 @@ const BurgerConstructor = () => {
                          Оформить заказ
                     </Button>
                </div>
-               {isActiveModal ? (
-                    <Modal
-                         modalType='Заказ оформлен'
-                         show={isActiveModal}
-                         onClose={() => setIsActiveModal(false)}>
-                         <OrderDetails />
-                    </Modal>
-               ) : null}
+
+               <Modal
+                    modalType='Заказ оформлен'
+                    show={isActiveModal}
+                    onClose={() => setIsActiveModal(false)}>
+                    <OrderDetails />
+               </Modal>
           </section>
      );
 };

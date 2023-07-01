@@ -42,14 +42,13 @@ const IngredientCard = ({ cardInfo }) => {
                <Button htmlType='button' type='secondary' size='small'>
                     Добавить
                </Button>
-               {isActiveModal ? (
-                    <Modal
-                         modalType='Детали ингредиента'
-                         show={isActiveModal}
-                         onClose={() => setIsActiveModal(false)}>
-                         <IngredientDetails data={cardInfo} />
-                    </Modal>
-               ) : null}
+
+               <Modal
+                    modalType='Детали ингредиента'
+                    show={isActiveModal}
+                    onClose={() => setIsActiveModal(false)}>
+                    <IngredientDetails data={cardInfo} />
+               </Modal>
           </div>
      );
 };
