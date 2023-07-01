@@ -59,6 +59,7 @@ const BurgerIngredients = ({ dataIngredients, isLoading }) => {
                               Соусы
                          </h2>
                          <ul className={style.list}>
+
                               {isLoading ? (
                                    <SkeletonCard cards={4} />
                               ) : (
