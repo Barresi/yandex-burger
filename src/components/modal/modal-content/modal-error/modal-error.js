@@ -4,7 +4,7 @@ import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import style from "./modal-error.module.css";
 
-const ModalError = ({ error }) => {
+const ModalError = () => {
      return (
           <>
                <Logo />
@@ -12,7 +12,7 @@ const ModalError = ({ error }) => {
                     {"Упс, что-то пошло не так :("}
                </div>
                <div className={`${style.desc} text text_type_main-medium`}>
-                    Ошибка: {error}
+                    connection is failed
                </div>
           </>
      );

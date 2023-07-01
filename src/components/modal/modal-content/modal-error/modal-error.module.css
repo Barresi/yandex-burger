@@ -5,3 +5,9 @@
      margin-top: 50px;
      align-self: flex-end;
 }
+
+@media (max-width: 767px) {
+     .desc {
+          align-self: center;
+     }
+}

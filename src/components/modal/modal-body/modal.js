@@ -8,14 +8,14 @@ import btn_close from "../../../images/modal-crest.png";
 
 const modalRootElement = document.getElementById("modal");
 
-const Modal = ({ modalType, setIsActiveModal, children }) => {
-     const escapeListener = (e) => {
-          if (e.key === "Escape") {
-               setIsActiveModal(false);
-          }
-     };
-
+const Modal = ({ modalType, show, onClose, children }) => {
      useEffect(() => {
+          const escapeListener = (e) => {
+               if (e.key === "Escape") {
+                    onClose();
+               }
+          };
+
           document.addEventListener("keyup", escapeListener, false);
 
           return () => {
@@ -24,25 +24,18 @@ const Modal = ({ modalType, setIsActiveModal, children }) => {
      }, []);
 
      return createPortal(
-          <ModalOverlay setIsActiveModal={setIsActiveModal}>
+          <div className={style.modal}>
                <div className={style.content}>
                     <div className={style.top}>
-                         {modalType === "ingredient-details" ? (
-                              <div
-                                   className={`${style.title} text text_type_main-large `}>
-                                   Детали ингредиента
-                              </div>
-                         ) : null}
-                         {modalType === "order-details" ? (
-                              <div
-                                   className={`${style.order_title} text text_type_main-large `}>
-                                   Заказ оформлен
-                              </div>
-                         ) : null}
+                         <div
+                              className={`${style.order_title} text text_type_main-large `}>
+                              {modalType}
+                         </div>
+
                          <button
                               className={style.btn_close}
                               onClick={(e) => {
-                                   setIsActiveModal(false);
+                                   onClose();
                                    e.stopPropagation();
                               }}>
                               <img src={btn_close} alt='crest' />
@@ -50,7 +43,8 @@ const Modal = ({ modalType, setIsActiveModal, children }) => {
                     </div>
                     {children}
                </div>
-          </ModalOverlay>,
+               <ModalOverlay onClose={onClose} />
+          </div>,
           modalRootElement
      );
 };

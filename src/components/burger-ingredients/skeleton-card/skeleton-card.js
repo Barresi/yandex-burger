@@ -13,11 +13,15 @@ const SkeletonCard = ({ cards }) => {
                          <div className='card_skeleton' key={ind}>
                               {
                                    <Skeleton
+                                        baseColor='#202020'
+                                        highlightColor='#444'
                                         className={`${style.img_ingredient} ${style_skeleton.img}`}
                                    />
                               }
                               {
                                    <Skeleton
+                                        baseColor='#202020'
+                                        highlightColor='#444'
                                         className={`${style.title} text text_type_main-default ${style_skeleton.name}`}
                                         count={2}
                                    />

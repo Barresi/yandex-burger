@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { SkeletonTheme } from "react-loading-skeleton";
 
 import Modal from "../modal/modal-body/modal";
 import ModalError from "../modal/modal-content/modal-error/modal-error";
@@ -17,26 +16,31 @@ const App = () => {
      const [isError, setIsError] = useState(false);
 
      useEffect(() => {
-          getDataIngredients(setIsLoading, setDataBurgers, setIsError);
+          getDataIngredients()
+               .then((data) => {
+                    setDataBurgers(data.data);
+               })
+               .catch(() => {
+                    setIsError(true);
+               })
+               .finally(() => {
+                    setIsLoading(false);
+               });
      }, []);
 
      return (
           <div className={style.app}>
-               <SkeletonTheme baseColor='#202020' highlightColor='#444'>
-                    <AppHeader
-                         activePage='constructorPage'
+               <AppHeader activePage='constructorPage' isLoading={isLoading} />
+               <main className={style.main}>
+                    <BurgerIngredients
+                         dataIngredients={dataBurgers}
                          isLoading={isLoading}
                     />
-                    <main className={style.main}>
-                         <BurgerIngredients
-                              dataIngredients={dataBurgers}
-                              isLoading={isLoading}
-                         />
-                         <BurgerConstructor isLoading={isLoading} />
-                    </main>
-               </SkeletonTheme>
+                    <BurgerConstructor isLoading={isLoading} />
+               </main>
+
                {isError ? (
-                    <Modal setIsActiveModal={setIsError}>
+                    <Modal onClose={() => setIsError(false)} show={isError}>
                          <ModalError error={isError}></ModalError>
                     </Modal>
                ) : null}

@@ -69,12 +69,6 @@
      gap: 10px;
 }
 
-.skeleton_btn {
-     border-radius: 64px;
-     width: 200px;
-     height: 60px;
-}
-
 @media (max-width: 1270px) {
      .burger_constructor {
           display: none;

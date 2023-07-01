@@ -44,8 +44,9 @@ const IngredientCard = ({ cardInfo }) => {
                </Button>
                {isActiveModal ? (
                     <Modal
-                         modalType='ingredient-details'
-                         setIsActiveModal={setIsActiveModal}>
+                         modalType='Детали ингредиента'
+                         show={isActiveModal}
+                         onClose={() => setIsActiveModal(false)}>
                          <IngredientDetails data={cardInfo} />
                     </Modal>
                ) : null}
