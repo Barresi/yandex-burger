@@ -1,53 +1,74 @@
-//import PropTypes from 'prop-types';
+import { useState } from "react";
 
-import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+     Button,
+     ConstructorElement,
+     CurrencyIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
-import style from './burger-constructor.module.css'
+import Modal from "../modal/modal-body/modal";
+import OrderDetails from "../modal/modal-content/modal-order-details/modal-order-details";
+
+import ingredientPropTypes from "../app/utils/prop-types";
+import style from "./burger-constructor.module.css";
 
 const BurgerConstructor = () => {
+     const [isActiveModal, setIsActiveModal] = useState(false);
+
      return (
           <section className={style.burger_constructor}>
-               <ConstructorElement type="top" isLocked={true} text="Краторная булка N-200i (верх)" price={200} thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"/>
+               <ConstructorElement
+                    type='top'
+                    isLocked={true}
+                    text='Краторная булка N-200i (верх)'
+                    price={200}
+                    thumbnail='https://code.s3.yandex.net/react/code/bun-02.png'
+               />
                <div className={style.wrap}>
-                    <ConstructorElement text="Говяжий метеорит (отбивная)" price={200} thumbnail="https://code.s3.yandex.net/react/code/meat-04.png"/>
-                    <ConstructorElement text="Соус Spicy-X" price={200} thumbnail="https://code.s3.yandex.net/react/code/sauce-02.png"/>
-                    <ConstructorElement text="Плоды Фалленианского дерева" price={200} thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"/>
-                    <ConstructorElement text="Говяжий метеорит (отбивная)" price={200} thumbnail="https://code.s3.yandex.net/react/code/meat-04.png"/>
-                    <ConstructorElement text="Плоды Фалленианского дерева" price={200} thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"/>
-                    <ConstructorElement text="Плоды Фалленианского дерева" price={200} thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"/>
-                    <ConstructorElement text="Плоды Фалленианского дерева" price={200} thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"/>
-                    <ConstructorElement text="Плоды Фалленианского дерева" price={200} thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"/>
-                    <ConstructorElement text="Плоды Фалленианского дерева" price={200} thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"/>
-                    <ConstructorElement text="Плоды Фалленианского дерева" price={200} thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"/>
-                    <ConstructorElement text="Плоды Фалленианского дерева" price={200} thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"/>
-                    <ConstructorElement text="Плоды Фалленианского дерева" price={200} thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"/>
+                    {Array(8)
+                         .fill(0)
+                         .map((item, ind) => (
+                              <ConstructorElement
+                                   text='Говяжий метеорит (отбивная)'
+                                   price={200}
+                                   thumbnail='https://code.s3.yandex.net/react/code/meat-04.png'
+                              />
+                         ))}
                </div>
-               <ConstructorElement type="bottom" isLocked={true} text="Краторная булка N-200i (низ)" price={200} thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"/>  
-               <div className={style.checkout}>
-                    <div className={`text text_type_digits-medium ${style.price}`}>610 <CurrencyIcon type="primary" /></div>
-                    <Button htmlType="button" type="primary" size="medium">Оформить заказ</Button>     
-               </div> 
-          </section>
-     )
-}
+               <ConstructorElement
+                    type='bottom'
+                    isLocked={true}
+                    text='Краторная булка N-200i (низ)'
+                    price={200}
+                    thumbnail='https://code.s3.yandex.net/react/code/bun-02.png'
+               />
 
-/*const objPropTypes = PropTypes.shape({
-     _id: PropTypes.string.isRequired,
-     name: PropTypes.string.isRequired,
-     type: PropTypes.string.isRequired,
-     proteins: PropTypes.number.isRequired,
-     fat: PropTypes.number.isRequired,
-     carbohydrates: PropTypes.number.isRequired,
-     calories: PropTypes.number.isRequired,
-     price: PropTypes.number.isRequired,
-     image: PropTypes.string.isRequired,
-     image_mobile: PropTypes.string.isRequired,
-     image_large: PropTypes.string.isRequired,
-     __v: PropTypes.number.isRequired,
-});
+               <div className={style.checkout}>
+                    <div
+                         className={`text text_type_digits-medium ${style.price}`}>
+                         610 <CurrencyIcon type='primary' />
+                    </div>
+                    <Button
+                         htmlType='button'
+                         type='primary'
+                         size='medium'
+                         onClick={() => setIsActiveModal(true)}>
+                         Оформить заказ
+                    </Button>
+               </div>
+
+               <Modal
+                    modalType='Заказ оформлен'
+                    show={isActiveModal}
+                    onClose={() => setIsActiveModal(false)}>
+                    <OrderDetails />
+               </Modal>
+          </section>
+     );
+};
 
 BurgerConstructor.propTypes = {
-     dataIngredients: PropTypes.arrayOf(objPropTypes).isRequired
-}*/
+     ingredient: ingredientPropTypes.isRequired,
+};
 
 export default BurgerConstructor;

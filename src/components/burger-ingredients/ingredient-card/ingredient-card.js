@@ -1,41 +1,60 @@
-import PropTypes from 'prop-types';
+import { useState } from "react";
 
-import { CurrencyIcon , Counter, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+     CurrencyIcon,
+     Counter,
+     Button,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
-import style from './ingredient-card.module.css';
+import Modal from "../../modal/modal-body/modal";
+import IngredientDetails from "../../modal/modal-content/modal-ingredient-details/modal-ingredient-details";
 
-const IngredientCard = ({cardInfo}) => {
+import style from "./ingredient-card.module.css";
+import ingredientPropTypes from "../../app/utils/prop-types";
+
+const IngredientCard = ({ cardInfo }) => {
+     const [isActiveModal, setIsActiveModal] = useState(false);
      return (
-          <div className={style.ingredient_card}>
-               <img src={cardInfo['image']} alt="bun" className={style.img_ingredient}/>
-               <div className={`${style.price} text text_type_digits-default`}> 
+          <div
+               className={style.ingredient_card}
+               onClick={() => {
+                    setIsActiveModal(true);
+               }}>
+               <img
+                    src={cardInfo["image"]}
+                    alt='bun'
+                    className={style.img_ingredient}
+               />
+               <div className={`${style.price} text text_type_digits-default`}>
                     {cardInfo.price}
-                    <CurrencyIcon type="primary" />
+                    <CurrencyIcon type='primary' />
                </div>
-               <div className={`${style.title} text text_type_main-default`}>{cardInfo.name}</div>
-               {cardInfo.__v ? <Counter count={cardInfo.__v} size="default" extraClass="m-1" /> : null}
-               <Button htmlType="button" type="secondary" size="small">Добавить</Button>
-          </div>
-     )
-}
+               <div className={`${style.title} text text_type_main-default`}>
+                    {cardInfo.name}
+               </div>
+               {cardInfo.__v ? (
+                    <Counter
+                         count={cardInfo.__v}
+                         size='default'
+                         extraClass='m-1'
+                    />
+               ) : null}
+               <Button htmlType='button' type='secondary' size='small'>
+                    Добавить
+               </Button>
 
-const objPropTypes = PropTypes.shape({
-     _id: PropTypes.string.isRequired,
-     name: PropTypes.string.isRequired,
-     type: PropTypes.string.isRequired,
-     proteins: PropTypes.number.isRequired,
-     fat: PropTypes.number.isRequired,
-     carbohydrates: PropTypes.number.isRequired,
-     calories: PropTypes.number.isRequired,
-     price: PropTypes.number.isRequired,
-     image: PropTypes.string.isRequired,
-     image_mobile: PropTypes.string.isRequired,
-     image_large: PropTypes.string.isRequired,
-     __v: PropTypes.number.isRequired,
-});
+               <Modal
+                    modalType='Детали ингредиента'
+                    show={isActiveModal}
+                    onClose={() => setIsActiveModal(false)}>
+                    <IngredientDetails data={cardInfo} />
+               </Modal>
+          </div>
+     );
+};
 
 IngredientCard.propTypes = {
-     cardInfo: objPropTypes.isRequired,
-}
+     cardInfo: ingredientPropTypes.isRequired,
+};
 
 export default IngredientCard;

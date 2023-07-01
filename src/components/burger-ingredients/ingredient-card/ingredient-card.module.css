@@ -1,17 +1,18 @@
 .ingredient_card {
      position: relative;
      flex: 1 0 200px;
-     
+
      display: flex;
      flex-direction: column;
-     
+
      align-items: center;
-     padding: 0px 16px;
 
      text-align: center;
      gap: 8px;
 }
-
+.ingredient_card:hover {
+     cursor: pointer;
+}
 .ingredient_card button {
      display: none;
 }
@@ -41,5 +42,4 @@
      .ingredient_card {
           padding: 0;
      }
-
 }

@@ -1,63 +1,102 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import smallLogo from '../../images/small-logo.svg'
-import { BurgerIcon, ProfileIcon, Logo } from "@ya.praktikum/react-developer-burger-ui-components"
+import smallLogo from "../../images/small-logo.svg";
+import {
+     BurgerIcon,
+     ProfileIcon,
+     Logo,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
-import style from './app-header.module.css';
-import burger from '../../images/burger.png';
+import style from "./app-header.module.css";
+import burger from "../../images/burger.png";
 
 const AppHeader = ({ activePage }) => {
-     const activePageConstructor = activePage === 'constructorPage';
-     const activePageBuyItems = activePage === 'buyItemsPage';
-     const activePageProfile = activePage === 'profilePage';
+     const activePageConstructor = activePage === "constructorPage";
+     const activePageBuyItems = activePage === "buyItemsPage";
+     const activePageProfile = activePage === "profilePage";
 
      return (
           <header className={style.header}>
                <div className={style.wrap}>
-                    <nav>
-                         <ul className={style.header_list}>
-                              <li className={style.header_li}>
-                                   <button className={style.header_li}>
-                                        <BurgerIcon type={activePageConstructor? 'primary' : 'secondary'} />
-                                        <div className={`
-                                             ${activePageConstructor? 'text_color_active' : 'text_color_inactive'} 
-                                             text text_type_main-default
-                                             `}>Конструктор</div>
-                                   </button>   
-                              </li>
-                              <li className={style.header_li}>
-                                   <button className={style.header_li}>
-                                        <BurgerIcon type={activePageBuyItems? 'primary' : 'secondary'} />
-                                        <div className={`
-                                             ${activePageBuyItems? 'text_color_active' : 'text_color_inactive'} 
-                                             text text_type_main-default
-                                             `}>Лента заказов</div>
-                                   </button>
-                              </li>
-                         </ul>
+                    <nav className={style.header_list}>
+                         <a href='/' className={style.link}>
+                              <BurgerIcon
+                                   type={
+                                        activePageConstructor
+                                             ? "primary"
+                                             : "secondary"
+                                   }
+                              />
+                              <div
+                                   className={`
+                                                  ${
+                                                       activePageConstructor
+                                                            ? "text_color_active"
+                                                            : "text_color_inactive"
+                                                  } 
+                                                  text text_type_main-default
+                                             `}>
+                                   Конструктор
+                              </div>
+                         </a>
+
+                         <a href='/' className={style.link}>
+                              <BurgerIcon
+                                   type={
+                                        activePageBuyItems
+                                             ? "primary"
+                                             : "secondary"
+                                   }
+                              />
+                              <div
+                                   className={`
+                                                  ${
+                                                       activePageBuyItems
+                                                            ? "text_color_active"
+                                                            : "text_color_inactive"
+                                                  } 
+                                                  text text_type_main-default
+                                             `}>
+                                   Лента заказов
+                              </div>
+                         </a>
                     </nav>
-                    <div className={style.logo}><Logo /></div> 
-                    <div className={style.profile}> 
-                         <button className={style.profile}>
-                              <ProfileIcon type={activePageProfile? 'primary' : 'secondary'} /> 
-                              <div className={`
-                                   ${activePageProfile? 'text_color_active' : 'text_color_inactive'} 
-                                   text text_type_main-default
-                                   `}>Личный кабинет</div>
-                         </button>
+                    <div className={style.logo}>
+                         <Logo />
+                    </div>
+
+                    <a href='/' className={style.profile}>
+                         <ProfileIcon
+                              type={activePageProfile ? "primary" : "secondary"}
+                         />
+                         <div
+                              className={`
+                                             ${
+                                                  activePageProfile
+                                                       ? "text_color_active"
+                                                       : "text_color_inactive"
+                                             } 
+                                             text text_type_main-default
+                                        `}>
+                              Личный кабинет
+                         </div>
+                    </a>
+               </div>
+
+               <div className={style.mobile}>
+                    <div className={style.burger}>
+                         <img src={smallLogo} alt='mobileBurger' />
+                    </div>
+                    <div className={style.burger}>
+                         <img src={burger} alt='burger' />
                     </div>
                </div>
-               
-               <div className={style.mobile}>
-                    <div className={style.burger}><img src={smallLogo} alt="mobileBurger" /></div>
-                    <div className={style.burger}><img src={burger} alt="burger" /></div>
-               </div>
           </header>
-     )
-}
+     );
+};
 
 AppHeader.propTypes = {
-     activePage: PropTypes.string.isRequired
-}
+     activePage: PropTypes.string.isRequired,
+};
 
-export default AppHeader
+export default AppHeader;

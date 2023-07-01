@@ -1,0 +1,17 @@
+.order {
+     margin-top: 60px;
+     margin-bottom: 32px;
+}
+.img {
+     margin-top: 60px;
+     margin-bottom: 60px;
+}
+.inactive {
+     margin-top: 8px;
+}
+
+@media (max-width: 767px) {
+     .order {
+          font-size: 72px;
+     }
+}
