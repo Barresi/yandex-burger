@@ -1,11 +1,13 @@
+import PropTypes from "prop-types";
+
 import style from "./modal-order-details.module.css";
 import imgOrderAccepted from "../../../../images/order-accepted.svg";
 
-const OrderDetails = () => {
+const OrderDetails = ({ order }) => {
      return (
           <>
                <div className={`${style.order} text text_type_digits-large`}>
-                    034533
+                    {order}
                </div>
                <div className='text text_type_main-medium'>
                     идентификатор заказа
@@ -20,6 +22,10 @@ const OrderDetails = () => {
                </div>
           </>
      );
+};
+
+OrderDetails.propTypes = {
+     order: PropTypes.number.isRequired,
 };
 
 export default OrderDetails;

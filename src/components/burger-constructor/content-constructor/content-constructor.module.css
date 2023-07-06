@@ -1,0 +1,36 @@
+.top,
+.bottom {
+     max-height: 80px;
+}
+.wrap div {
+     flex: 0 0 80px;
+     margin-right: 16px;
+     position: relative;
+}
+.wrap div ::before {
+     content: url("../../../images/burger-component.svg");
+     position: absolute;
+     top: 30px;
+     right: 550px;
+     z-index: 2;
+}
+
+.wrap {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     margin: 16px 0px;
+     overflow: auto;
+
+     flex: 1 0 80px;
+}
+
+.wrap::-webkit-scrollbar {
+     width: 8px;
+}
+.wrap::-webkit-scrollbar-track {
+     background-color: #2f2f37;
+}
+.wrap::-webkit-scrollbar-thumb {
+     background-color: #8585ad;
+}

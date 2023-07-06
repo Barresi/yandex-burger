@@ -3,14 +3,6 @@
      background-color: #1c1c21;
 }
 
-.header_list {
-     list-style-type: none;
-     display: flex;
-     align-items: center;
-     justify-content: flex-start;
-     gap: 8px;
-}
-
 .wrap {
      max-width: 1260px;
      margin: 0 auto;
@@ -18,22 +10,6 @@
      display: flex;
      justify-content: space-between;
      align-items: center;
-}
-
-.link {
-     display: flex;
-     gap: 10px;
-     padding: 16px 20px;
-     align-items: center;
-     background-color: transparent;
-}
-.link:hover > svg {
-     transition: var(--common-transition);
-     fill: #f2f2f3;
-}
-.link:hover > div {
-     transition: var(--common-transition);
-     color: #f2f2f3;
 }
 
 .profile {

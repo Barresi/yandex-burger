@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import style from "./tabs.module.css";
@@ -9,16 +9,13 @@ const dataTabs = [
      { value: "three", text: "Начинки" },
 ];
 
-const Tabs = () => {
-     const [current, setCurrent] = React.useState("one");
-
+const Tabs = ({ activeTab }) => {
      return (
           <div className={style.tabs}>
                {dataTabs.map((item, index) => (
                     <Tab
                          value={item.value}
-                         active={current === item.value}
-                         onClick={setCurrent}
+                         active={activeTab === item.value}
                          key={index}>
                          {" "}
                          {item.text}{" "}
@@ -26,6 +23,10 @@ const Tabs = () => {
                ))}
           </div>
      );
+};
+
+Tabs.propTypes = {
+     activeTab: PropTypes.string.isRequired,
 };
 
 export default Tabs;

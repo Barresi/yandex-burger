@@ -1,30 +1,3 @@
-.list {
-     display: grid;
-     grid-template: 1fr / repeat(2, 1fr);
-     grid-column-gap: 24px;
-     grid-row-gap: 32px;
-     padding: 0 16px;
-}
-
-.container_ingredients {
-     margin-top: 40px;
-
-     overflow: auto;
-     width: 100%;
-
-     flex: 1 1 60%;
-}
-
-.container_ingredients::-webkit-scrollbar {
-     width: 8px;
-}
-.container_ingredients::-webkit-scrollbar-track {
-     background-color: #2f2f37;
-}
-.container_ingredients::-webkit-scrollbar-thumb {
-     background-color: #8585ad;
-}
-
 .burger_ingredients {
      flex: 0 0 48%;
      display: flex;
@@ -54,14 +27,6 @@
 }
 
 @media (max-width: 1270px) {
-     .container_ingredients {
-          margin-top: 40px;
-          height: 100%;
-          overflow: auto;
-     }
-     .list {
-          grid-template: 1fr / repeat(3, 1fr);
-     }
      .checkout {
           position: fixed;
           bottom: 0px;
@@ -76,13 +41,13 @@
           justify-content: flex-end;
           gap: 17px;
      }
+     .burger_ingredients {
+          flex: 1 1;
+     }
 }
 
 @media (max-width: 767px) {
-     .list {
-          grid-template: 1fr / repeat(2, 1fr);
-          grid-column-gap: 4px;
-          grid-row-gap: 32px;
-          padding: 0;
+     .burger_ingredients {
+          padding-bottom: 92px;
      }
 }
