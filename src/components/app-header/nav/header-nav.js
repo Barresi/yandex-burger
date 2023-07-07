@@ -1,22 +1,15 @@
-import PropTypes from "prop-types";
 import { BurgerIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import style from "./header-nav.module.css";
 
-const HeaderNav = ({ activePageConstructor, activePageBuyItems }) => {
+const HeaderNav = () => {
      return (
           <nav className={style.header_list}>
                <a href='/' className={style.link}>
-                    <BurgerIcon
-                         type={activePageConstructor ? "primary" : "secondary"}
-                    />
+                    <BurgerIcon type={"primary"} />
                     <div
                          className={`
-                                   ${
-                                        activePageConstructor
-                                             ? "text_color_active"
-                                             : "text_color_inactive"
-                                   } 
+                                   ${"text_color_active"} 
                                    text text_type_main-default
                               `}>
                          Конструктор
@@ -24,16 +17,10 @@ const HeaderNav = ({ activePageConstructor, activePageBuyItems }) => {
                </a>
 
                <a href='/' className={style.link}>
-                    <BurgerIcon
-                         type={activePageBuyItems ? "primary" : "secondary"}
-                    />
+                    <BurgerIcon type={"secondary"} />
                     <div
                          className={`
-                                   ${
-                                        activePageBuyItems
-                                             ? "text_color_active"
-                                             : "text_color_inactive"
-                                   } 
+                                   ${"text_color_inactive"} 
                                    text text_type_main-default
                               `}>
                          Лента заказов
@@ -43,9 +30,6 @@ const HeaderNav = ({ activePageConstructor, activePageBuyItems }) => {
      );
 };
 
-HeaderNav.propTypes = {
-     activePageConstructor: PropTypes.bool.isRequired,
-     activePageBuyItems: PropTypes.bool.isRequired,
-};
+HeaderNav.propTypes = {};
 
 export default HeaderNav;

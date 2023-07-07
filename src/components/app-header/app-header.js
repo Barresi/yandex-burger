@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import smallLogo from "../../images/small-logo.svg";
 import {
      ProfileIcon,
@@ -11,34 +9,21 @@ import HeaderNav from "./nav/header-nav";
 import style from "./app-header.module.css";
 import burger from "../../images/burger.png";
 
-const AppHeader = ({ activePage }) => {
-     const activePageConstructor = activePage === "constructorPage";
-     const activePageBuyItems = activePage === "buyItemsPage";
-     const activePageProfile = activePage === "profilePage";
-
+const AppHeader = () => {
      return (
           <header className={style.header}>
                <div className={style.wrap}>
-                    <HeaderNav
-                         activePageBuyItems={activePageBuyItems}
-                         activePageConstructor={activePageConstructor}
-                    />
+                    <HeaderNav />
 
                     <div className={style.logo}>
                          <Logo />
                     </div>
 
                     <a href='/' className={style.profile}>
-                         <ProfileIcon
-                              type={activePageProfile ? "primary" : "secondary"}
-                         />
+                         <ProfileIcon type={"secondary"} />
                          <div
                               className={`
-                                             ${
-                                                  activePageProfile
-                                                       ? "text_color_active"
-                                                       : "text_color_inactive"
-                                             } 
+                                             ${"text_color_inactive"} 
                                              text text_type_main-default
                                         `}>
                               Личный кабинет
@@ -58,8 +43,6 @@ const AppHeader = ({ activePage }) => {
      );
 };
 
-AppHeader.propTypes = {
-     activePage: PropTypes.string.isRequired,
-};
+AppHeader.propTypes = {};
 
 export default AppHeader;

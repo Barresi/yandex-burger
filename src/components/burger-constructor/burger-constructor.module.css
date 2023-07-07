@@ -12,8 +12,8 @@
      gap: 40px;
      align-items: center;
      justify-content: flex-end;
-     margin-top: 40px;
      flex: 0 0 64px;
+     margin-top: 40px;
 }
 .checkout svg {
      width: 33px;

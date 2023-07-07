@@ -22,7 +22,7 @@
      margin: 16px 0px;
      overflow: auto;
 
-     flex: 1 0 80px;
+     flex: 1 1 1px;
 }
 
 .wrap::-webkit-scrollbar {

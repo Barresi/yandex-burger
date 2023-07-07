@@ -16,88 +16,8 @@ const App = () => {
      const [isLoading, setIsLoading] = useState(true);
      const [dataBurgers, setDataBurgers] = useState([]);
      const activeConstructorIngredients = useState({
-          bun: {
-               calories: 420,
-               carbohydrates: 53,
-               fat: 24,
-               image: "https://code.s3.yandex.net/react/code/bun-02.png",
-               image_large:
-                    "https://code.s3.yandex.net/react/code/bun-02-large.png",
-               image_mobile:
-                    "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
-               name: "Краторная булка N-200i",
-               price: 1255,
-               proteins: 80,
-               type: "bun",
-               __v: 0,
-               _id: "643d69a5c3f7b9001cfa093c",
-          },
-          ingredients: [
-               {
-                    calories: 14,
-                    carbohydrates: 11,
-                    fat: 22,
-                    image: "https://code.s3.yandex.net/react/code/sauce-04.png",
-                    image_large:
-                         "https://code.s3.yandex.net/react/code/sauce-04-large.png",
-                    image_mobile:
-                         "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
-                    name: "Соус фирменный Space Sauce",
-                    price: 80,
-                    proteins: 50,
-                    type: "sauce",
-                    __v: 0,
-                    _id: "643d69a5c3f7b9001cfa0943",
-               },
-               {
-                    calories: 14,
-                    carbohydrates: 11,
-                    fat: 22,
-                    image: "https://code.s3.yandex.net/react/code/sauce-04.png",
-                    image_large:
-                         "https://code.s3.yandex.net/react/code/sauce-04-large.png",
-                    image_mobile:
-                         "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
-                    name: "Соус фирменный Space Sauce",
-                    price: 80,
-                    proteins: 50,
-                    type: "sauce",
-                    __v: 0,
-                    _id: "643d69a5c3f7b9001cfa0943",
-               },
-               {
-                    calories: 14,
-                    carbohydrates: 11,
-                    fat: 22,
-                    image: "https://code.s3.yandex.net/react/code/sauce-04.png",
-                    image_large:
-                         "https://code.s3.yandex.net/react/code/sauce-04-large.png",
-                    image_mobile:
-                         "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
-                    name: "Соус фирменный Space Sauce",
-                    price: 80,
-                    proteins: 50,
-                    type: "sauce",
-                    __v: 0,
-                    _id: "643d69a5c3f7b9001cfa0943",
-               },
-               {
-                    calories: 14,
-                    carbohydrates: 11,
-                    fat: 22,
-                    image: "https://code.s3.yandex.net/react/code/sauce-04.png",
-                    image_large:
-                         "https://code.s3.yandex.net/react/code/sauce-04-large.png",
-                    image_mobile:
-                         "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
-                    name: "Соус фирменный Space Sauce",
-                    price: 80,
-                    proteins: 50,
-                    type: "sauce",
-                    __v: 0,
-                    _id: "643d69a5c3f7b9001cfa0943",
-               },
-          ],
+          bun: {},
+          ingredients: [],
      });
      const [isError, setIsError] = useState(false);
 
@@ -116,13 +36,13 @@ const App = () => {
 
      return (
           <div className={style.app}>
-               <AppHeader activePage='constructorPage' isLoading={isLoading} />
+               <AppHeader />
                <main className={style.main}>
                     <ActiveConstructorIngredients.Provider
                          value={activeConstructorIngredients}>
                          <DataBurgersContext.Provider value={dataBurgers}>
                               <BurgerIngredients isLoading={isLoading} />
-                              <BurgerConstructor isLoading={isLoading} />
+                              <BurgerConstructor />
                          </DataBurgersContext.Provider>
                     </ActiveConstructorIngredients.Provider>
                </main>
