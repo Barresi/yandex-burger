@@ -1,0 +1,26 @@
+.block {
+     padding: 16px 24px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     border-radius: var(--common-border-radius-s);
+     background: var(--background-element);
+     max-width: 536px;
+     width: 100%;
+     height: 80px;
+     font-family: "Jet Brains Mono";
+     font-size: 16px;
+     line-height: 24px;
+     color: #f2f2f3;
+     flex-grow: 1;
+     box-sizing: border-box;
+     margin-left: 45px;
+     text-align: center;
+}
+
+.block_top {
+     border-radius: var(--top-constructor-item-border-radius);
+}
+.block_bottom {
+     border-radius: var(--bottom-constructor-item-border-radius);
+}

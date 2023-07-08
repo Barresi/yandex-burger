@@ -18,13 +18,4 @@ const ModalError = () => {
      );
 };
 
-const objPropTypes = PropTypes.shape({
-     modalType: PropTypes.string.isRequired,
-     status: PropTypes.number.isRequired,
-});
-
-ModalError.propTypes = {
-     error: objPropTypes.isRequired,
-};
-
 export default ModalError;

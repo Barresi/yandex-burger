@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import PropTypes from "prop-types";
 
 import ModalOverlay from "../modal-overlay/modal-overlay";
 
@@ -13,13 +14,16 @@ const Modal = ({ modalType, show, onClose, children }) => {
           const escapeListener = (e) => {
                if (e.key === "Escape") {
                     onClose();
+                    console.log(1);
                }
           };
-
           document.addEventListener("keyup", escapeListener, false);
+
+          document.getElementById("root").classList.add("overflow");
 
           return () => {
                document.removeEventListener("keyup", escapeListener, false);
+               document.getElementById("root").classList.remove("overflow");
           };
      }, []);
 
@@ -49,6 +53,17 @@ const Modal = ({ modalType, show, onClose, children }) => {
                  modalRootElement
             )
           : null;
+};
+
+Modal.propTypes = {
+     modalType: PropTypes.oneOf([
+          "Детали ингредиента",
+          "Заказ оформлен",
+          undefined,
+     ]).isRequired,
+     show: PropTypes.bool.isRequired,
+     onClose: PropTypes.func.isRequired,
+     children: PropTypes.element.isRequired,
 };
 
 export default Modal;

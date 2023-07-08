@@ -1,5 +1,7 @@
 .app {
      height: 100vh;
+     display: flex;
+     flex-direction: column;
      overflow: hidden;
 }
 
@@ -9,11 +11,17 @@
      max-width: 1260px;
      margin: 0 auto;
      padding: 0px 10px;
-     height: 80%;
+     flex: 1 1;
+     margin-bottom: 70px;
 }
 
 @media (max-width: 1270px) {
      .main {
           flex-direction: column;
+     }
+}
+@media (max-width: 767px) {
+     .app {
+          overflow: visible;
      }
 }

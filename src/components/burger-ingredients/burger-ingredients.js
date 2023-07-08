@@ -1,6 +1,6 @@
-import { useMemo } from "react";
 import PropTypes from "prop-types";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useInView } from "react-intersection-observer";
 
 import {
      Button,
@@ -8,24 +8,24 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import Tabs from "./tabs/tabs";
-import IngredientCard from "./ingredient-card/ingredient-card";
-import SkeletonCard from "./skeleton-card/skeleton-card";
+import ContentCards from "./content-cards/content-cards";
 
 import style from "./burger-ingredients.module.css";
-import ingredientPropTypes from "../app/utils/prop-types";
 
-const BurgerIngredients = ({ dataIngredients, isLoading }) => {
-     const bunCards = useMemo(() => {
-          return dataIngredients.filter((item) => item["type"] === "bun");
-     }, [dataIngredients, isLoading]);
+const BurgerIngredients = ({ isLoading }) => {
+     const [refBun, inViewBun] = useInView();
+     const [refSauce, inViewSauce] = useInView();
+     const [refMain, inViewMain] = useInView();
 
-     const sauceCards = useMemo(() => {
-          return dataIngredients.filter((item) => item["type"] === "sauce");
-     }, [dataIngredients, isLoading]);
-
-     const mainCards = useMemo(() => {
-          return dataIngredients.filter((item) => item["type"] === "main");
-     }, [dataIngredients, isLoading]);
+     const activeTab = () => {
+          if (inViewBun) {
+               return "one";
+          } else if (inViewSauce) {
+               return "two";
+          } else {
+               return "three";
+          }
+     };
 
      return (
           <section className={style.burger_ingredients}>
@@ -34,64 +34,12 @@ const BurgerIngredients = ({ dataIngredients, isLoading }) => {
                     Соберите бургер
                </h1>
 
-               <Tabs className={style.tabs} />
-               <div className={style.container_ingredients}>
-                    <div className='buns mb-10' name='bun'>
-                         <h2 className='text text_type_main-medium mb-4'>
-                              Булки
-                         </h2>
-                         <ul className={style.list}>
-                              {isLoading ? (
-                                   <SkeletonCard cards={3} />
-                              ) : (
-                                   bunCards.map((item) => (
-                                        <IngredientCard
-                                             cardInfo={item}
-                                             key={item._id}
-                                             isLoading={isLoading}
-                                        />
-                                   ))
-                              )}
-                         </ul>
-                    </div>
-                    <div className='sauce mb-10'>
-                         <h2 className='text text_type_main-medium mb-4'>
-                              Соусы
-                         </h2>
-                         <ul className={style.list}>
-
-                              {isLoading ? (
-                                   <SkeletonCard cards={4} />
-                              ) : (
-                                   sauceCards.map((item) => (
-                                        <IngredientCard
-                                             cardInfo={item}
-                                             key={item._id}
-                                             isLoading={isLoading}
-                                        />
-                                   ))
-                              )}
-                         </ul>
-                    </div>
-                    <div className='main mb-10' name='main'>
-                         <h2 className='text text_type_main-medium mb-4'>
-                              Начинки
-                         </h2>
-                         <ul className={style.list}>
-                              {isLoading ? (
-                                   <SkeletonCard cards={1} />
-                              ) : (
-                                   mainCards.map((item) => (
-                                        <IngredientCard
-                                             cardInfo={item}
-                                             key={item._id}
-                                             isLoading={isLoading}
-                                        />
-                                   ))
-                              )}
-                         </ul>
-                    </div>
-               </div>
+               <Tabs className={style.tabs} activeTab={activeTab()} />
+               <ContentCards
+                    isLoading={isLoading}
+                    refActiveTabs={{ refBun, refSauce, refMain }}
+               />
+              
                <div className={style.checkout}>
                     <div
                          className={`${style.price} text text_type_digits-default`}>
@@ -110,7 +58,7 @@ const BurgerIngredients = ({ dataIngredients, isLoading }) => {
 };
 
 BurgerIngredients.propTypes = {
-     dataIngredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+     isLoading: PropTypes.bool.isRequired,
 };
 
 export default BurgerIngredients;

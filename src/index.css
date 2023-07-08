@@ -96,3 +96,6 @@ h6 {
 .text_color_active {
      color: #f2f2f3;
 }
+.overflow {
+     overflow: hidden;
+}

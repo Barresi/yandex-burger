@@ -6,9 +6,18 @@ const checkResponse = (response) => {
           : response.json().then((err) => Promise.reject(err));
 };
 
-async function getDataIngredients() {
+export async function getDataIngredients() {
      const response = await fetch(`${PATH}/ingredients`);
      return await checkResponse(response);
 }
 
-export default getDataIngredients;
+export async function postDataIngredients(data) {
+     const response = await fetch(`${PATH}/orders`, {
+          method: "POST",
+          headers: {
+               "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+     });
+     return await checkResponse(response);
+}
