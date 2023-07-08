@@ -39,7 +39,7 @@ const BurgerIngredients = ({ isLoading }) => {
                     isLoading={isLoading}
                     refActiveTabs={{ refBun, refSauce, refMain }}
                />
-
+              
                <div className={style.checkout}>
                     <div
                          className={`${style.price} text text_type_digits-default`}>
