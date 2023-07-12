@@ -1,25 +1,34 @@
-import { useMemo, useContext } from "react";
+import { useMemo, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import SkeletonCard from "../skeleton-card/skeleton-card";
 
 import IngredientCard from "../ingredient-card/ingredient-card";
-import { DataBurgersContext } from "../../app/utils/context/data-burgers-context";
 
 import style from "./content-cards.module.css";
+import { getDataIngredients } from "../../../services/ingredients-data/ingredients-data";
 
-const ContentCards = ({ isLoading }) => {
-     const dataIngredients = useContext(DataBurgersContext);
+const ContentCards = () => {
+     const dataIngredients = useSelector(
+          (store) => store.ingredients.ingredients
+     );
+     const isLoading = useSelector((store) => store.ingredients.isLoading);
+     const dispatch = useDispatch();
+
+     useEffect(() => {
+          dispatch(getDataIngredients());
+     }, [dispatch]);
 
      const bunCards = useMemo(() => {
-          return dataIngredients.filter((item) => item["type"] === "bun");
+          return dataIngredients.filter((item) => item.type === "bun");
      }, [dataIngredients, isLoading]);
 
      const sauceCards = useMemo(() => {
-          return dataIngredients.filter((item) => item["type"] === "sauce");
+          return dataIngredients.filter((item) => item.type === "sauce");
      }, [dataIngredients, isLoading]);
 
      const mainCards = useMemo(() => {
-          return dataIngredients.filter((item) => item["type"] === "main");
+          return dataIngredients.filter((item) => item.type === "main");
      }, [dataIngredients, isLoading]);
 
      return (

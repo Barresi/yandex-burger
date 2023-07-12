@@ -11,6 +11,7 @@ import IngredientDetails from "../../modal/modal-content/modal-ingredient-detail
 
 import style from "./ingredient-card.module.css";
 import ingredientPropTypes from "../../app/utils/prop-types";
+import { addIngredient } from "../../../services/constructor-elements/constructor-elements";
 
 const IngredientCard = ({ cardInfo }) => {
      const [isActiveModal, setIsActiveModal] = useState(false);
@@ -19,6 +20,7 @@ const IngredientCard = ({ cardInfo }) => {
                className={style.ingredient_card}
                onClick={() => {
                     setIsActiveModal(true);
+                    addIngredient(cardInfo);
                }}>
                <img
                     src={cardInfo["image"]}

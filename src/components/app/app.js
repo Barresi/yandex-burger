@@ -9,30 +9,14 @@ import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 
-import { getDataIngredients } from "./utils/api";
 import style from "./app.module.css";
 
 const App = () => {
-     const [isLoading, setIsLoading] = useState(true);
-     const [dataBurgers, setDataBurgers] = useState([]);
      const activeConstructorIngredients = useState({
           bun: {},
           ingredients: [],
      });
      const [isError, setIsError] = useState(false);
-
-     useEffect(() => {
-          getDataIngredients()
-               .then((data) => {
-                    setDataBurgers(data.data);
-               })
-               .catch(() => {
-                    setIsError(true);
-               })
-               .finally(() => {
-                    setIsLoading(false);
-               });
-     }, []);
 
      return (
           <div className={style.app}>
@@ -40,10 +24,8 @@ const App = () => {
                <main className={style.main}>
                     <ActiveConstructorIngredients.Provider
                          value={activeConstructorIngredients}>
-                         <DataBurgersContext.Provider value={dataBurgers}>
-                              <BurgerIngredients isLoading={isLoading} />
-                              <BurgerConstructor />
-                         </DataBurgersContext.Provider>
+                         <BurgerIngredients />
+                         <BurgerConstructor />
                     </ActiveConstructorIngredients.Provider>
                </main>
 

@@ -6,7 +6,7 @@ const checkResponse = (response) => {
           : response.json().then((err) => Promise.reject(err));
 };
 
-export async function getDataIngredients() {
+export async function fetchDataIngredients() {
      const response = await fetch(`${PATH}/ingredients`);
      return await checkResponse(response);
 }

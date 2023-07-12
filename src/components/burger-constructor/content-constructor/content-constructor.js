@@ -1,21 +1,18 @@
-import { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { ActiveConstructorIngredients } from "../../app/utils/context/active-constructor-ingredients";
 
 import SampleContentConstructor from "./sample-content/sample-content";
 
 import style from "./content-constructor.module.css";
 
 const ContentConstructor = () => {
-     const [activeItems, setActiveItems] = useContext(
-          ActiveConstructorIngredients
-     );
+     const activeItems = useSelector((store) => store.constructor);
      return (
           <>
                <div className={style.top}>
-                    {activeItems.bun.name ? (
+                    {activeItems.bun ? (
                          <ConstructorElement
                               type='top'
                               isLocked={true}
@@ -32,7 +29,7 @@ const ContentConstructor = () => {
                </div>
 
                <div className={style.wrap}>
-                    {activeItems.ingredients[0] ? (
+                    {activeItems.ingredients ? (
                          activeItems.ingredients.map((item) => (
                               <ConstructorElement
                                    text={item.name}
@@ -47,7 +44,7 @@ const ContentConstructor = () => {
                </div>
 
                <div className={style.bottom}>
-                    {activeItems.bun.name ? (
+                    {activeItems.bun ? (
                          <ConstructorElement
                               type='bottom'
                               isLocked={true}
