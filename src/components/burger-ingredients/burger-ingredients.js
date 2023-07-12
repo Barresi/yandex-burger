@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import "react-loading-skeleton/dist/skeleton.css";
-import { useInView } from "react-intersection-observer";
 
 import {
      Button,
@@ -13,20 +12,6 @@ import ContentCards from "./content-cards/content-cards";
 import style from "./burger-ingredients.module.css";
 
 const BurgerIngredients = ({ isLoading }) => {
-     const [refBun, inViewBun] = useInView();
-     const [refSauce, inViewSauce] = useInView();
-     const [refMain, inViewMain] = useInView();
-
-     const activeTab = () => {
-          if (inViewBun) {
-               return "one";
-          } else if (inViewSauce) {
-               return "two";
-          } else {
-               return "three";
-          }
-     };
-
      return (
           <section className={style.burger_ingredients}>
                <h1
@@ -34,12 +19,9 @@ const BurgerIngredients = ({ isLoading }) => {
                     Соберите бургер
                </h1>
 
-               <Tabs className={style.tabs} activeTab={activeTab()} />
-               <ContentCards
-                    isLoading={isLoading}
-                    refActiveTabs={{ refBun, refSauce, refMain }}
-               />
-              
+               <Tabs className={style.tabs} activeTab={"one"} />
+               <ContentCards isLoading={isLoading} />
+
                <div className={style.checkout}>
                     <div
                          className={`${style.price} text text_type_digits-default`}>

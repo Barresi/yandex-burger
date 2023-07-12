@@ -7,9 +7,8 @@ import { DataBurgersContext } from "../../app/utils/context/data-burgers-context
 
 import style from "./content-cards.module.css";
 
-const ContentCards = ({ isLoading, refActiveTabs }) => {
+const ContentCards = ({ isLoading }) => {
      const dataIngredients = useContext(DataBurgersContext);
-     const { refBun, refSauce, refMain } = refActiveTabs;
 
      const bunCards = useMemo(() => {
           return dataIngredients.filter((item) => item["type"] === "bun");
@@ -26,11 +25,7 @@ const ContentCards = ({ isLoading, refActiveTabs }) => {
      return (
           <div className={style.container_ingredients}>
                <div className='buns mb-10' name='bun'>
-                    <h2
-                         className='text text_type_main-medium mb-4'
-                         ref={refBun}>
-                         Булки
-                    </h2>
+                    <h2 className='text text_type_main-medium mb-4'>Булки</h2>
                     <ul className={style.list}>
                          {isLoading ? (
                               <SkeletonCard cards={3} />
@@ -46,11 +41,7 @@ const ContentCards = ({ isLoading, refActiveTabs }) => {
                     </ul>
                </div>
                <div className='sauce mb-10'>
-                    <h2
-                         className='text text_type_main-medium mb-4'
-                         ref={refSauce}>
-                         Соусы
-                    </h2>
+                    <h2 className='text text_type_main-medium mb-4'>Соусы</h2>
                     <ul className={style.list}>
                          {isLoading ? (
                               <SkeletonCard cards={4} />
@@ -66,11 +57,7 @@ const ContentCards = ({ isLoading, refActiveTabs }) => {
                     </ul>
                </div>
                <div className='main' name='main'>
-                    <h2
-                         className='text text_type_main-medium mb-4'
-                         ref={refMain}>
-                         Начинки
-                    </h2>
+                    <h2 className='text text_type_main-medium mb-4'>Начинки</h2>
                     <ul className={style.list}>
                          {isLoading ? (
                               <SkeletonCard cards={1} />

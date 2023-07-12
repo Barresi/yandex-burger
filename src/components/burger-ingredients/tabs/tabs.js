@@ -17,8 +17,7 @@ const Tabs = ({ activeTab }) => {
                          value={item.value}
                          active={activeTab === item.value}
                          key={index}>
-                         {" "}
-                         {item.text}{" "}
+                         {item.text}
                     </Tab>
                ))}
           </div>
