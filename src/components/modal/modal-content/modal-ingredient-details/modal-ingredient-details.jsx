@@ -1,8 +1,10 @@
-import style from "./modal-ingredient-details.module.css";
-import ingredientPropTypes from "../../../app/utils/prop-types";
+import style from "./modal-ingredient-details.module.scss";
+import { useSelector } from "react-redux";
 
-const IngredientDetails = ({ data }) => {
-     const { name, calories, carbohydrates, proteins, fat, image_large } = data;
+const IngredientDetails = () => {
+     const { name, calories, carbohydrates, proteins, fat, image_large } =
+          useSelector((store) => store.ingredientDetails.ingredient);
+
      return (
           <>
                <img src={image_large} alt='img-product' className={style.img} />
@@ -44,10 +46,6 @@ const IngredientDetails = ({ data }) => {
                </div>
           </>
      );
-};
-
-IngredientDetails.propTypes = {
-     data: ingredientPropTypes.isRequired,
 };
 
 export default IngredientDetails;

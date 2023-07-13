@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-
-import style from "./modal-order-details.module.css";
+import style from "./modal-order-details.module.scss";
 import imgOrderAccepted from "../../../../images/order-accepted.svg";
 
 const OrderDetails = ({ order }) => {

@@ -1,10 +1,8 @@
 import PropTypes from "prop-types";
-
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
+import style from "./modal-error.module.scss";
 
-import style from "./modal-error.module.css";
-
-const ModalError = () => {
+const ModalError = ({ error }) => {
      return (
           <>
                <Logo />
@@ -12,10 +10,14 @@ const ModalError = () => {
                     {"Упс, что-то пошло не так :("}
                </div>
                <div className={`${style.desc} text text_type_main-medium`}>
-                    connection is failed
+                    {error}
                </div>
           </>
      );
+};
+
+ModalError.propTypes = {
+     error: PropTypes.string.isRequired,
 };
 
 export default ModalError;

@@ -1,23 +1,51 @@
-/*import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { postDataIngredients } from "../../components/app/utils/api";
 
 const initialState = {
-     ingredients: [],
+     order: null,
+     error: null,
+     isLoading: false,
+     burgerName: null,
+     isActiveModal: false,
 };
 
+export const getOrder = createAsyncThunk("order/getDataOrder", async (data) => {
+     const response = await postDataIngredients(data);
+     return response;
+});
+
 const orderData = createSlice({
-     name: "ingredienDetails",
+     name: "orderData",
      initialState,
      reducers: {
-          addIngredientDetails: (state, action) => {
-               state.ingredient = action.payload;
+          closeModal: (state, action) => {
+               state.isActiveModal = false;
           },
-          deleteIngredientDetails: (state, action) => {
-               state.ingredient = {};
+          setIsError: (state, action) => {
+               state.error = action.payload;
+               state.isActiveModal = true;
           },
+     },
+     extraReducers: (builder) => {
+          builder.addCase(getOrder.pending, (state, action) => {
+               state.error = null;
+               state.isLoading = true;
+               state.burgerName = null;
+               state.order = null;
+          });
+          builder.addCase(getOrder.fulfilled, (state, action) => {
+               state.order = action.payload.order.number;
+               state.burgerName = action.payload.name;
+               state.isLoading = false;
+               state.isActiveModal = true;
+          });
+          builder.addCase(getOrder.rejected, (state, action) => {
+               state.isLoading = false;
+               state.error = action.error.message;
+               state.isActiveModal = true;
+          });
      },
 });
 
 export default orderData.reducer;
-export const { addIngredientDetails, deleteIngredientDetails } =
-     orderData.actions;
-*/
+export const { closeModal, setIsError } = orderData.actions;

@@ -1,6 +1,5 @@
 import { BurgerIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import style from "./header-nav.module.css";
+import style from "./header-nav.module.scss";
 
 const HeaderNav = () => {
      return (

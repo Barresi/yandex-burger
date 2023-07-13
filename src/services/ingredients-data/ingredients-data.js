@@ -18,7 +18,11 @@ export const getDataIngredients = createAsyncThunk(
 const ingredientsSlice = createSlice({
      name: "ingredients",
      initialState,
-     reducers: {},
+     reducers: {
+          deleteError: (state) => {
+               state.error = null;
+          },
+     },
      extraReducers: (builder) => {
           builder.addCase(getDataIngredients.pending, (state, action) => {
                state.error = null;
@@ -30,9 +34,10 @@ const ingredientsSlice = createSlice({
           });
           builder.addCase(getDataIngredients.rejected, (state, action) => {
                state.isLoading = false;
-               state.error = action;
+               state.error = "Connection has failed";
           });
      },
 });
 
 export default ingredientsSlice.reducer;
+export const { deleteError } = ingredientsSlice.actions;

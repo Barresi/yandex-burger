@@ -1,20 +1,19 @@
-.container_ingredients {
+.containerIngredients {
      margin-top: 40px;
 
      overflow: auto;
      width: 100%;
 
      flex: 1 1 1px;
-}
-
-.container_ingredients::-webkit-scrollbar {
-     width: 8px;
-}
-.container_ingredients::-webkit-scrollbar-track {
-     background-color: #2f2f37;
-}
-.container_ingredients::-webkit-scrollbar-thumb {
-     background-color: #8585ad;
+     &::-webkit-scrollbar {
+          width: 8px;
+     }
+     &::-webkit-scrollbar-track {
+          background-color: #2f2f37;
+     }
+     &::-webkit-scrollbar-thumb {
+          background-color: #8585ad;
+     }
 }
 
 .list {

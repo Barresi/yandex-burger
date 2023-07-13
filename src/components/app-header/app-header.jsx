@@ -3,10 +3,8 @@ import {
      ProfileIcon,
      Logo,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
 import HeaderNav from "./nav/header-nav";
-
-import style from "./app-header.module.css";
+import style from "./app-header.module.scss";
 import burger from "../../images/burger.png";
 
 const AppHeader = () => {
@@ -42,7 +40,5 @@ const AppHeader = () => {
           </header>
      );
 };
-
-AppHeader.propTypes = {};
 
 export default AppHeader;

@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import style from "./tabs.module.css";
+import style from "./tabs.module.scss";
 
 const dataTabs = [
      { value: "one", text: "Булки" },

@@ -1,8 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 import PropTypes from "prop-types";
-
-import style from "../ingredient-card/ingredient-card.module.css";
-import style_skeleton from "./skeleton-card.module.css";
+import style from "../ingredient-card/ingredient-card.module.scss";
+import style_skeleton from "./skeleton-card.module.scss";
 
 const SkeletonCard = ({ cards }) => {
      return (

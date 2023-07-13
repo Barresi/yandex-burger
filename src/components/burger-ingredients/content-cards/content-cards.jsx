@@ -1,38 +1,36 @@
 import { useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 import SkeletonCard from "../skeleton-card/skeleton-card";
-
 import IngredientCard from "../ingredient-card/ingredient-card";
-
-import style from "./content-cards.module.css";
-import { getDataIngredients } from "../../../services/ingredients-data/ingredients-data";
+import style from "./content-cards.module.scss";
+import {
+     deleteError,
+     getDataIngredients,
+} from "../../../services/ingredients-data/ingredients-data";
+import Modal from "../../modal/modal-body/modal";
+import ModalError from "../../modal/modal-content/modal-error/modal-error";
 
 const ContentCards = () => {
-     const dataIngredients = useSelector(
-          (store) => store.ingredients.ingredients
-     );
-     const isLoading = useSelector((store) => store.ingredients.isLoading);
      const dispatch = useDispatch();
+     const { ingredients, error, isLoading } = useSelector(
+          (store) => store.ingredients
+     );
 
      useEffect(() => {
           dispatch(getDataIngredients());
      }, [dispatch]);
 
-     const bunCards = useMemo(() => {
-          return dataIngredients.filter((item) => item.type === "bun");
-     }, [dataIngredients, isLoading]);
-
-     const sauceCards = useMemo(() => {
-          return dataIngredients.filter((item) => item.type === "sauce");
-     }, [dataIngredients, isLoading]);
-
-     const mainCards = useMemo(() => {
-          return dataIngredients.filter((item) => item.type === "main");
-     }, [dataIngredients, isLoading]);
+     const { bunCards, sauceCards, mainCards } = useMemo(
+          () => ({
+               bunCards: ingredients.filter((item) => item.type === "bun"),
+               sauceCards: ingredients.filter((item) => item.type === "sauce"),
+               mainCards: ingredients.filter((item) => item.type === "main"),
+          }),
+          [ingredients, isLoading]
+     );
 
      return (
-          <div className={style.container_ingredients}>
+          <div className={style.containerIngredients}>
                <div className='buns mb-10' name='bun'>
                     <h2 className='text text_type_main-medium mb-4'>Булки</h2>
                     <ul className={style.list}>
@@ -81,13 +79,16 @@ const ContentCards = () => {
                          )}
                     </ul>
                </div>
+               {error ? (
+                    <Modal
+                         onClose={() => {
+                              dispatch(deleteError());
+                         }}>
+                         <ModalError error={error} />
+                    </Modal>
+               ) : null}
           </div>
      );
-};
-
-ContentCards.propTypes = {
-     isLoading: PropTypes.bool.isRequired,
-     refActiveTabs: PropTypes.object.isRequired,
 };
 
 export default ContentCards;

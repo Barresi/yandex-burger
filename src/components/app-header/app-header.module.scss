@@ -1,6 +1,7 @@
 .header {
      padding: 16px 0px;
      background-color: #1c1c21;
+     position: relative;
 }
 
 .wrap {
@@ -30,6 +31,8 @@
 
 .logo {
      padding-right: 180px;
+     position: absolute;
+     left: calc(50% - 145px);
 }
 
 .mobile {

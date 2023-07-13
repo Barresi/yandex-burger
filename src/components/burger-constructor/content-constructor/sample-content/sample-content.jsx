@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-
-import style from "./sample-content.module.css";
+import style from "./sample-content.module.scss";
 
 const SampleContentConstructor = ({ type, text }) => {
      return (

@@ -1,45 +1,43 @@
-import { useState, useContext, useEffect } from "react";
-import { ActiveConstructorIngredients } from "../app/utils/context/active-constructor-ingredients";
-
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
      Button,
      CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import { postDataIngredients } from "../app/utils/api";
 import ContentConstructor from "./content-constructor/content-constructor";
 import Modal from "../modal/modal-body/modal";
 import OrderDetails from "../modal/modal-content/modal-order-details/modal-order-details";
 import ModalError from "../modal/modal-content/modal-error/modal-error";
-
-import style from "./burger-constructor.module.css";
+import style from "./burger-constructor.module.scss";
+import {
+     closeModal,
+     getOrder,
+     setIsError,
+} from "../../services/order-data/order-data";
+import Loader from "./loader-constructor/loader-constructor";
+import { clearIngredients } from "../../services/constructor-elements/constructor-elements";
 
 const BurgerConstructor = () => {
-     const [isActiveModal, setIsActiveModal] = useState(false);
-     const [activeItems, setActiveItems] = useContext(
-          ActiveConstructorIngredients
+     const { isActiveModal, order, error, isLoading } = useSelector(
+          (store) => store.order
      );
-     const [totalPrice, setTotalPrice] = useState(0);
-
-     const [orderCheckout, setOrderCheckout] = useState();
-     const [isError, setIsError] = useState(false);
+     const activeItems = useSelector((store) => store.activeConstructorItems);
+     const dispatch = useDispatch();
 
      const checkoutSubmit = () => {
-          const data = [
-               ...activeItems.ingredients.map((item) => item._id),
-               activeItems.bun._id,
-          ];
-
-          postDataIngredients({ ingredients: data })
-               .then((result) => {
-                    setOrderCheckout(result.order.number);
-                    setIsActiveModal(true);
-               })
-               .catch(() => {
-                    setIsError(true);
-                    setIsActiveModal(true);
-               });
+          if (activeItems.ingredients[0] && activeItems.bun.name) {
+               const data = [
+                    ...activeItems.ingredients.map((item) => item._id),
+                    activeItems.bun._id,
+               ];
+               dispatch(getOrder({ ingredients: data }));
+               dispatch(clearIngredients());
+          } else {
+               dispatch(setIsError("Выберите булку и начинку"));
+          }
      };
+
+     const [totalPrice, setTotalPrice] = useState(0);
 
      useEffect(() => {
           setTotalPrice(
@@ -72,23 +70,18 @@ const BurgerConstructor = () => {
 
                {isActiveModal ? (
                     <Modal
-                         modalType={isError ? null : "Заказ оформлен"}
-                         show={isActiveModal}
-                         onClose={() => {
-                              setIsActiveModal(false);
-                              setIsError(false);
-                         }}>
-                         {isError ? (
-                              <ModalError />
+                         modalType={error ? null : "Заказ оформлен"}
+                         onClose={() => dispatch(closeModal())}>
+                         {error ? (
+                              <ModalError error={error} />
                          ) : (
-                              <OrderDetails order={orderCheckout} />
+                              <OrderDetails order={order} />
                          )}
                     </Modal>
                ) : null}
+               {isLoading && <Loader />}
           </section>
      );
 };
-
-BurgerConstructor.propTypes = {};
 
 export default BurgerConstructor;

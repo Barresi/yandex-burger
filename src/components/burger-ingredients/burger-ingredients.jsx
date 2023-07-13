@@ -1,17 +1,20 @@
-import PropTypes from "prop-types";
 import "react-loading-skeleton/dist/skeleton.css";
-
+import { useDispatch, useSelector } from "react-redux";
 import {
      Button,
      CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
 import Tabs from "./tabs/tabs";
 import ContentCards from "./content-cards/content-cards";
+import style from "./burger-ingredients.module.scss";
+import { deleteIngredientDetails } from "../../services/ingredient-details/ingredient-details";
+import Modal from "../modal/modal-body/modal";
+import IngredientDetails from "../modal/modal-content/modal-ingredient-details/modal-ingredient-details";
 
-import style from "./burger-ingredients.module.css";
+const BurgerIngredients = () => {
+     const { isActiveModal } = useSelector((store) => store.ingredientDetails);
+     const dispatch = useDispatch();
 
-const BurgerIngredients = ({ isLoading }) => {
      return (
           <section className={style.burger_ingredients}>
                <h1
@@ -20,7 +23,7 @@ const BurgerIngredients = ({ isLoading }) => {
                </h1>
 
                <Tabs className={style.tabs} activeTab={"one"} />
-               <ContentCards isLoading={isLoading} />
+               <ContentCards />
 
                <div className={style.checkout}>
                     <div
@@ -35,12 +38,17 @@ const BurgerIngredients = ({ isLoading }) => {
                          Смотреть заказ
                     </Button>
                </div>
+               {isActiveModal ? (
+                    <Modal
+                         modalType='Детали ингредиента'
+                         onClose={() => {
+                              dispatch(deleteIngredientDetails());
+                         }}>
+                         <IngredientDetails />
+                    </Modal>
+               ) : null}
           </section>
      );
-};
-
-BurgerIngredients.propTypes = {
-     isLoading: PropTypes.bool.isRequired,
 };
 
 export default BurgerIngredients;
