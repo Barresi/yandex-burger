@@ -1,5 +1,5 @@
 .burger_ingredients {
-     flex: 1 0 48%;
+     flex: 0 0 48%;
      display: flex;
      flex-direction: column;
      height: 100%;
@@ -24,6 +24,18 @@
 
 .skeleton_title {
      width: 200px;
+}
+
+.tabs div {
+     padding: 16px 0px;
+     min-width: 0;
+     flex: 1 1 33%;
+}
+
+.tabs {
+     display: flex;
+     justify-content: space-between;
+     width: 100%;
 }
 
 @media (max-width: 1270px) {

@@ -22,13 +22,24 @@ const constructorSlice = createSlice({
                     (item) => item.id !== action.payload
                );
           },
-          clearIngredients: (state, action) => {
+          clearIngredients: (state) => {
                state.ingredients = [];
                state.bun = {};
+          },
+          moveIngredients: (state, action) => {
+               state.ingredients.splice(
+                    action.payload.hoverIndex,
+                    0,
+                    state.ingredients.splice(action.payload.dragIndex, 1)[0]
+               );
           },
      },
 });
 
 export default constructorSlice.reducer;
-export const { addIngredient, deleteIngredient, clearIngredients } =
-     constructorSlice.actions;
+export const {
+     addIngredient,
+     deleteIngredient,
+     clearIngredients,
+     moveIngredients,
+} = constructorSlice.actions;

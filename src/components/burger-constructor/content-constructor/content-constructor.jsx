@@ -1,12 +1,12 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import SampleContentConstructor from "./sample-content/sample-content";
 import style from "./content-constructor.module.scss";
-import { deleteIngredient } from "../../../services/constructor-elements/constructor-elements";
+
+import ElementConstructor from "./element-constructor/element-constructor";
 
 const ContentConstructor = () => {
      const activeItems = useSelector((store) => store.activeConstructorItems);
-     const dispatch = useDispatch();
 
      return (
           <>
@@ -28,16 +28,12 @@ const ContentConstructor = () => {
                </div>
 
                <div className={style.wrapper}>
-                    {activeItems.ingredients[0] ? (
-                         activeItems.ingredients.map((item) => (
-                              <ConstructorElement
-                                   text={item.name}
-                                   price={item.price}
-                                   thumbnail={item.image}
+                    {activeItems.ingredients.length ? (
+                         activeItems.ingredients.map((item, index) => (
+                              <ElementConstructor
+                                   {...item}
+                                   index={index}
                                    key={item.id}
-                                   handleClose={() =>
-                                        dispatch(deleteIngredient(item.id))
-                                   }
                               />
                          ))
                     ) : (

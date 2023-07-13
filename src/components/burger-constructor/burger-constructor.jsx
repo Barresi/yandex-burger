@@ -15,7 +15,15 @@ import {
      setIsError,
 } from "../../services/order-data/order-data";
 import Loader from "./loader-constructor/loader-constructor";
-import { clearIngredients } from "../../services/constructor-elements/constructor-elements";
+import {
+     addIngredient,
+     clearIngredients,
+} from "../../services/constructor-elements/constructor-elements";
+import { useDrop } from "react-dnd";
+import {
+     clearQuantity,
+     updateQuantity,
+} from "../../services/ingredients-data/ingredients-data";
 
 const BurgerConstructor = () => {
      const { isActiveModal, order, error, isLoading } = useSelector(
@@ -23,6 +31,14 @@ const BurgerConstructor = () => {
      );
      const activeItems = useSelector((store) => store.activeConstructorItems);
      const dispatch = useDispatch();
+
+     const [, dragRef] = useDrop({
+          accept: "ingredient",
+          drop(item) {
+               dispatch(addIngredient(item));
+               dispatch(updateQuantity(item));
+          },
+     });
 
      const checkoutSubmit = () => {
           if (activeItems.ingredients[0] && activeItems.bun.name) {
@@ -32,6 +48,7 @@ const BurgerConstructor = () => {
                ];
                dispatch(getOrder({ ingredients: data }));
                dispatch(clearIngredients());
+               dispatch(clearQuantity());
           } else {
                dispatch(setIsError("Выберите булку и начинку"));
           }
@@ -50,7 +67,7 @@ const BurgerConstructor = () => {
      }, [activeItems]);
 
      return (
-          <section className={style.burger_constructor}>
+          <section className={style.burger_constructor} ref={dragRef}>
                <ContentConstructor />
 
                <div className={style.checkout}>

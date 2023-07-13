@@ -4,16 +4,32 @@ import {
      Button,
      CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import Tabs from "./tabs/tabs";
 import ContentCards from "./content-cards/content-cards";
 import style from "./burger-ingredients.module.scss";
 import { deleteIngredientDetails } from "../../services/ingredient-details/ingredient-details";
 import Modal from "../modal/modal-body/modal";
 import IngredientDetails from "../modal/modal-content/modal-ingredient-details/modal-ingredient-details";
+import { scrollTabs } from "../app/utils/scrollTabs";
+import { useRef, useState } from "react";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const BurgerIngredients = () => {
+     const [activeTab, setActiveTab] = useState("one");
+     const bunRef = useRef();
+     const saucesRef = useRef();
+     const mainRef = useRef();
+     const tabRef = useRef();
+
      const { isActiveModal } = useSelector((store) => store.ingredientDetails);
      const dispatch = useDispatch();
+
+     const getActiveTab = () => {
+          setActiveTab(scrollTabs(bunRef, saucesRef, mainRef, tabRef));
+     };
+
+     const setScrollTabs = (ref) => {
+          ref.current.scrollIntoView({ block: "start", behavior: "smooth" });
+     };
 
      return (
           <section className={style.burger_ingredients}>
@@ -22,8 +38,36 @@ const BurgerIngredients = () => {
                     Соберите бургер
                </h1>
 
-               <Tabs className={style.tabs} activeTab={"one"} />
-               <ContentCards />
+               <div className={style.tabs} ref={tabRef}>
+                    <Tab
+                         value={"one"}
+                         active={activeTab === "one"}
+                         key={1}
+                         onClick={() => setScrollTabs(bunRef)}>
+                         Булки
+                    </Tab>
+                    <Tab
+                         value={"two"}
+                         active={activeTab === "two"}
+                         key={2}
+                         onClick={() => setScrollTabs(saucesRef)}>
+                         Соусы
+                    </Tab>
+                    <Tab
+                         value={"three"}
+                         active={activeTab === "three"}
+                         key={3}
+                         onClick={() => setScrollTabs(mainRef)}>
+                         Начинки
+                    </Tab>
+               </div>
+
+               <ContentCards
+                    bunRef={bunRef}
+                    saucesRef={saucesRef}
+                    mainRef={mainRef}
+                    getActiveTab={getActiveTab}
+               />
 
                <div className={style.checkout}>
                     <div

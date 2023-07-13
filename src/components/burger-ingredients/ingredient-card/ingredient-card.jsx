@@ -8,16 +8,22 @@ import ingredientPropTypes from "../../app/utils/prop-types";
 import { addIngredient } from "../../../services/constructor-elements/constructor-elements";
 import { useDispatch } from "react-redux";
 import { addIngredientDetails } from "../../../services/ingredient-details/ingredient-details";
+import { useDrag } from "react-dnd";
 
 const IngredientCard = ({ cardInfo }) => {
      const dispatch = useDispatch();
+
+     const [, dragRef] = useDrag({
+          type: "ingredient",
+          item: cardInfo,
+     });
+
      return (
-          <div className={style.ingredient_card}>
+          <div className={style.ingredient_card} ref={dragRef}>
                <div
                     className={style.card_content}
                     onClick={() => {
                          dispatch(addIngredientDetails(cardInfo));
-                         dispatch(addIngredient(cardInfo));
                     }}>
                     <img
                          src={cardInfo["image"]}

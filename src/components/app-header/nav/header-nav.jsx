@@ -29,6 +29,4 @@ const HeaderNav = () => {
      );
 };
 
-HeaderNav.propTypes = {};
-
 export default HeaderNav;

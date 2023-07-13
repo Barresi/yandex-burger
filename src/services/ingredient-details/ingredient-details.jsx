@@ -13,7 +13,7 @@ const ingredientDetails = createSlice({
                state.ingredient = action.payload;
                state.isActiveModal = true;
           },
-          deleteIngredientDetails: (state, action) => {
+          deleteIngredientDetails: (state) => {
                state.ingredient = {};
                state.isActiveModal = false;
           },

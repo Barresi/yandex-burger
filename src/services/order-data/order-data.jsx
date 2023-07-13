@@ -18,7 +18,7 @@ const orderData = createSlice({
      name: "orderData",
      initialState,
      reducers: {
-          closeModal: (state, action) => {
+          closeModal: (state) => {
                state.isActiveModal = false;
           },
           setIsError: (state, action) => {
@@ -27,7 +27,7 @@ const orderData = createSlice({
           },
      },
      extraReducers: (builder) => {
-          builder.addCase(getOrder.pending, (state, action) => {
+          builder.addCase(getOrder.pending, (state) => {
                state.error = null;
                state.isLoading = true;
                state.burgerName = null;

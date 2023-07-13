@@ -12,9 +12,10 @@
      max-height: calc(100vh - 550px);
 
      & div {
+          height: 100%;
+          position: relative;
           flex: 0 0 80px;
           margin-right: 16px;
-          position: relative;
           & ::before {
                content: url("../../../images/burger-component.svg");
                position: absolute;

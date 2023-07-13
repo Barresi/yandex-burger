@@ -3,13 +3,17 @@
      flex: 1 0 200px;
      display: flex;
      flex-direction: column;
+     border-radius: 15px;
+     transition: background-color 0.2s ease;
+     &:hover {
+          cursor: grab;
+          background-color: rgba($color: #c0c0c0, $alpha: 0.1);
+     }
+     & button {
+          display: none;
+     }
 }
-.ingredient_card:hover {
-     cursor: pointer;
-}
-.ingredient_card button {
-     display: none;
-}
+
 .card_content {
      display: flex;
      flex-direction: column;

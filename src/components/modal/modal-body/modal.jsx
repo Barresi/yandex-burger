@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
-
 import ModalOverlay from "../modal-overlay/modal-overlay";
-
 import style from "./modal.module.scss";
 import btn_close from "../../../images/modal-crest.png";
 
