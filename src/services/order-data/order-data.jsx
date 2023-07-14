@@ -9,10 +9,17 @@ const initialState = {
      isActiveModal: false,
 };
 
-export const getOrder = createAsyncThunk("order/getDataOrder", async (data) => {
-     const response = await postDataIngredients(data);
-     return response;
-});
+export const getOrder = createAsyncThunk(
+     "orderData/getDataOrder",
+     async (data, { rejectWithValue }) => {
+          try {
+               const response = await postDataIngredients(data);
+               return response;
+          } catch (err) {
+               return rejectWithValue(err);
+          }
+     }
+);
 
 const orderData = createSlice({
      name: "orderData",
@@ -41,7 +48,7 @@ const orderData = createSlice({
           });
           builder.addCase(getOrder.rejected, (state, action) => {
                state.isLoading = false;
-               state.error = action.error.message;
+               state.error = action.payload;
                state.isActiveModal = true;
           });
      },
