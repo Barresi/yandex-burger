@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
      Button,
@@ -54,15 +54,13 @@ const BurgerConstructor = () => {
           }
      };
 
-     const [totalPrice, setTotalPrice] = useState(0);
-
-     useEffect(() => {
-          setTotalPrice(
+     const totalPrice = useMemo(() => {
+          return (
                activeItems.ingredients.reduce(
                     (acc, curr) => acc + curr.price,
                     0
                ) +
-                    activeItems.bun.price * 2
+               activeItems.bun.price * 2
           );
      }, [activeItems]);
 
