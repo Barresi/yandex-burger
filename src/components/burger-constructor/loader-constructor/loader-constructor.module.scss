@@ -1,0 +1,34 @@
+.loader {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     z-index: 2;
+     background-color: rgba(0, 0, 0, 0.6);
+}
+.loader img {
+     width: 100px;
+     animation: 1.5s linear 0s normal none infinite running rot;
+     -webkit-animation: 1.5s linear 0s normal none infinite running rot;
+}
+
+@keyframes rot {
+     0% {
+          transform: rotate(0deg);
+     }
+     100% {
+          transform: rotate(360deg);
+     }
+}
+@-webkit-keyframes rot {
+     0% {
+          transform: rotate(0deg);
+     }
+     100% {
+          transform: rotate(360deg);
+     }
+}

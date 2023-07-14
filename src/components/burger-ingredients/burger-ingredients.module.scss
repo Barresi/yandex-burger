@@ -1,0 +1,65 @@
+.burger_ingredients {
+     flex: 0 0 48%;
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+
+     display: flex;
+     flex-direction: column;
+}
+
+.h1 {
+     align-self: start;
+     font-size: 32px;
+}
+
+.checkout {
+     display: none;
+}
+.price {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+}
+
+.skeleton_title {
+     width: 200px;
+}
+
+.tabs div {
+     padding: 16px 0px;
+     min-width: 0;
+     flex: 1 1 33%;
+}
+
+.tabs {
+     display: flex;
+     justify-content: space-between;
+     width: 100%;
+}
+
+@media (max-width: 1270px) {
+     .checkout {
+          position: fixed;
+          bottom: 0px;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 72px;
+          display: flex;
+          background-color: #1c1c21;
+          z-index: 4;
+          padding: 16px 8px;
+          justify-content: flex-end;
+          gap: 17px;
+     }
+     .burger_ingredients {
+          flex: 1 1;
+     }
+}
+
+@media (max-width: 767px) {
+     .burger_ingredients {
+          padding-bottom: 92px;
+     }
+}

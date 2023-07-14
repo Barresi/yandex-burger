@@ -1,0 +1,41 @@
+.burger_constructor {
+     padding-top: 10px;
+     flex: 0 0 49%;
+     margin-top: 100px;
+     position: relative;
+     z-index: 1;
+     display: flex;
+     flex-direction: column;
+     border-radius: 15px;
+
+     border: solid 1px transparent;
+}
+
+.checkout {
+     display: flex;
+     gap: 40px;
+     align-items: center;
+     justify-content: flex-end;
+     flex: 0 0 64px;
+     margin-top: 40px;
+}
+.checkout svg {
+     width: 33px;
+     height: 33px;
+}
+
+.price {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+}
+
+.isOver {
+     border: solid 1px white;
+}
+
+@media (max-width: 1270px) {
+     .burger_constructor {
+          display: none;
+     }
+}
