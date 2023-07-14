@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchDataIngredients } from "../../components/app/utils/api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fetchDataIngredients } from '../../components/app/utils/api';
 
 const initialState = {
      error: null,
@@ -7,29 +7,26 @@ const initialState = {
      ingredients: [],
 };
 
-export const getDataIngredients = createAsyncThunk(
-     "ingredients/getDataIngredients",
-     async (_, { rejectWithValue }) => {
-          try {
-               const response = await fetchDataIngredients();
-               return response;
-          } catch (err) {
-               return rejectWithValue(err);
-          }
+export const getDataIngredients = createAsyncThunk('ingredients/getDataIngredients', async (_, { rejectWithValue }) => {
+     try {
+          const response = await fetchDataIngredients();
+          return response;
+     } catch (err) {
+          return rejectWithValue(err);
      }
-);
+});
 
 const ingredientsSlice = createSlice({
-     name: "ingredients",
+     name: 'ingredients',
      initialState,
      reducers: {
           deleteError: (state) => {
                state.error = null;
           },
           updateQuantity: (state, action) => {
-               if (action.payload.type === "bun") {
+               if (action.payload.type === 'bun') {
                     state.ingredients = state.ingredients.map((item) =>
-                         item.type === "bun"
+                         item.type === 'bun'
                               ? item._id === action.payload._id
                                    ? { ...item, __v: 1 }
                                    : { ...item, __v: 0 }
@@ -37,9 +34,7 @@ const ingredientsSlice = createSlice({
                     );
                } else {
                     state.ingredients = state.ingredients.map((item) =>
-                         item._id === action.payload._id
-                              ? { ...item, __v: item.__v + 1 }
-                              : item
+                         item._id === action.payload._id ? { ...item, __v: item.__v + 1 } : item
                     );
                }
           },
@@ -51,9 +46,7 @@ const ingredientsSlice = createSlice({
           },
           decrementQuantity: (state, action) => {
                state.ingredients = state.ingredients.map((item) =>
-                    item._id === action.payload
-                         ? { ...item, __v: item.__v - 1 }
-                         : item
+                    item._id === action.payload ? { ...item, __v: item.__v - 1 } : item
                );
           },
      },
@@ -74,5 +67,4 @@ const ingredientsSlice = createSlice({
 });
 
 export default ingredientsSlice.reducer;
-export const { deleteError, updateQuantity, clearQuantity, decrementQuantity } =
-     ingredientsSlice.actions;
+export const { deleteError, updateQuantity, clearQuantity, decrementQuantity } = ingredientsSlice.actions;

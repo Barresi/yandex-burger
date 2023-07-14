@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { postDataIngredients } from "../../components/app/utils/api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { postDataIngredients } from '../../components/app/utils/api';
 
 const initialState = {
      order: null,
@@ -9,20 +9,17 @@ const initialState = {
      isActiveModal: false,
 };
 
-export const getOrder = createAsyncThunk(
-     "orderData/getDataOrder",
-     async (data, { rejectWithValue }) => {
-          try {
-               const response = await postDataIngredients(data);
-               return response;
-          } catch (err) {
-               return rejectWithValue(err);
-          }
+export const getOrder = createAsyncThunk('orderData/getDataOrder', async (data, { rejectWithValue }) => {
+     try {
+          const response = await postDataIngredients(data);
+          return response;
+     } catch (err) {
+          return rejectWithValue(err);
      }
-);
+});
 
 const orderData = createSlice({
-     name: "orderData",
+     name: 'orderData',
      initialState,
      reducers: {
           closeModal: (state) => {

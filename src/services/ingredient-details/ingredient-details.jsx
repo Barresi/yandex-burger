@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
      ingredient: {},
@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const ingredientDetails = createSlice({
-     name: "ingredientDetails",
+     name: 'ingredientDetails',
      initialState,
      reducers: {
           addIngredientDetails: (state, action) => {
@@ -21,5 +21,4 @@ const ingredientDetails = createSlice({
 });
 
 export default ingredientDetails.reducer;
-export const { addIngredientDetails, deleteIngredientDetails } =
-     ingredientDetails.actions;
+export const { addIngredientDetails, deleteIngredientDetails } = ingredientDetails.actions;

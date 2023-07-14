@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import SampleContentConstructor from "./sample-content/sample-content";
-import style from "./content-constructor.module.scss";
+import { useSelector } from 'react-redux';
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import SampleContentConstructor from './sample-content/sample-content';
+import style from './content-constructor.module.scss';
 
-import ElementConstructor from "./element-constructor/element-constructor";
+import ElementConstructor from './element-constructor/element-constructor';
 
 const ContentConstructor = () => {
      const activeItems = useSelector((store) => store.activeConstructorItems);
@@ -20,27 +20,17 @@ const ContentConstructor = () => {
                               thumbnail={activeItems.bun.image}
                          />
                     ) : (
-                         <SampleContentConstructor
-                              type='top'
-                              text='Выбери булку'
-                         />
+                         <SampleContentConstructor type='top' text='Выбери булку' />
                     )}
                </div>
 
                <div className={style.wrapper}>
                     {activeItems.ingredients.length ? (
                          activeItems.ingredients.map((item, index) => (
-                              <ElementConstructor
-                                   {...item}
-                                   index={index}
-                                   key={item.id}
-                              />
+                              <ElementConstructor {...item} index={index} key={item.id} />
                          ))
                     ) : (
-                         <SampleContentConstructor
-                              text='Выбери начинку'
-                              type='medium'
-                         />
+                         <SampleContentConstructor text='Выбери начинку' type='medium' />
                     )}
                </div>
 
@@ -54,10 +44,7 @@ const ContentConstructor = () => {
                               thumbnail={activeItems.bun.image}
                          />
                     ) : (
-                         <SampleContentConstructor
-                              type='bottom'
-                              text='Выбери булку'
-                         />
+                         <SampleContentConstructor type='bottom' text='Выбери булку' />
                     )}
                </div>
           </>

@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
+import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
      bun: {},
@@ -7,20 +7,18 @@ const initialState = {
 };
 
 const constructorSlice = createSlice({
-     name: "constructor",
+     name: 'constructor',
      initialState,
      reducers: {
           addIngredient: (state, action) => {
-               if (action.payload.type === "bun") {
+               if (action.payload.type === 'bun') {
                     state.bun = action.payload;
                } else {
                     state.ingredients.push({ ...action.payload, id: uuidv4() });
                }
           },
           deleteIngredient: (state, action) => {
-               state.ingredients = state.ingredients.filter(
-                    (item) => item.id !== action.payload
-               );
+               state.ingredients = state.ingredients.filter((item) => item.id !== action.payload);
           },
           clearIngredients: (state) => {
                state.ingredients = [];
@@ -37,9 +35,4 @@ const constructorSlice = createSlice({
 });
 
 export default constructorSlice.reducer;
-export const {
-     addIngredient,
-     deleteIngredient,
-     clearIngredients,
-     moveIngredients,
-} = constructorSlice.actions;
+export const { addIngredient, deleteIngredient, clearIngredients, moveIngredients } = constructorSlice.actions;

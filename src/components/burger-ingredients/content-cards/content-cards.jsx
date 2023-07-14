@@ -1,21 +1,16 @@
-import { useMemo, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import SkeletonCard from "../skeleton-card/skeleton-card";
-import IngredientCard from "../ingredient-card/ingredient-card";
-import style from "./content-cards.module.scss";
-import {
-     deleteError,
-     getDataIngredients,
-} from "../../../services/ingredients-data/ingredients-data";
-import Modal from "../../modal/modal-body/modal";
-import ModalError from "../../modal/modal-content/modal-error/modal-error";
-import PropTypes from "prop-types";
+import { useMemo, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import SkeletonCard from '../skeleton-card/skeleton-card';
+import IngredientCard from '../ingredient-card/ingredient-card';
+import style from './content-cards.module.scss';
+import { deleteError, getDataIngredients } from '../../../services/ingredients-data/ingredients-data';
+import Modal from '../../modal/modal-body/modal';
+import ModalError from '../../modal/modal-content/modal-error/modal-error';
+import PropTypes from 'prop-types';
 
 const ContentCards = ({ bunRef, saucesRef, mainRef, getActiveTab }) => {
      const dispatch = useDispatch();
-     const { ingredients, error, isLoading } = useSelector(
-          (store) => store.ingredients
-     );
+     const { ingredients, error, isLoading } = useSelector((store) => store.ingredients);
 
      useEffect(() => {
           dispatch(getDataIngredients());
@@ -23,17 +18,15 @@ const ContentCards = ({ bunRef, saucesRef, mainRef, getActiveTab }) => {
 
      const { bunCards, sauceCards, mainCards } = useMemo(
           () => ({
-               bunCards: ingredients.filter((item) => item.type === "bun"),
-               sauceCards: ingredients.filter((item) => item.type === "sauce"),
-               mainCards: ingredients.filter((item) => item.type === "main"),
+               bunCards: ingredients.filter((item) => item.type === 'bun'),
+               sauceCards: ingredients.filter((item) => item.type === 'sauce'),
+               mainCards: ingredients.filter((item) => item.type === 'main'),
           }),
           [ingredients, isLoading]
      );
 
      return (
-          <div
-               className={style.containerIngredients}
-               onScroll={() => getActiveTab()}>
+          <div className={style.containerIngredients} onScroll={() => getActiveTab()}>
                <div className='buns mb-10' name='bun' ref={bunRef}>
                     <h2 className='text text_type_main-medium mb-4'>Булки</h2>
                     <ul className={style.list}>
@@ -41,11 +34,7 @@ const ContentCards = ({ bunRef, saucesRef, mainRef, getActiveTab }) => {
                               <SkeletonCard cards={3} />
                          ) : (
                               bunCards.map((item) => (
-                                   <IngredientCard
-                                        cardInfo={item}
-                                        key={item._id}
-                                        isLoading={isLoading}
-                                   />
+                                   <IngredientCard cardInfo={item} key={item._id} isLoading={isLoading} />
                               ))
                          )}
                     </ul>
@@ -57,11 +46,7 @@ const ContentCards = ({ bunRef, saucesRef, mainRef, getActiveTab }) => {
                               <SkeletonCard cards={4} />
                          ) : (
                               sauceCards.map((item) => (
-                                   <IngredientCard
-                                        cardInfo={item}
-                                        key={item._id}
-                                        isLoading={isLoading}
-                                   />
+                                   <IngredientCard cardInfo={item} key={item._id} isLoading={isLoading} />
                               ))
                          )}
                     </ul>
@@ -73,11 +58,7 @@ const ContentCards = ({ bunRef, saucesRef, mainRef, getActiveTab }) => {
                               <SkeletonCard cards={1} />
                          ) : (
                               mainCards.map((item) => (
-                                   <IngredientCard
-                                        cardInfo={item}
-                                        key={item._id}
-                                        isLoading={isLoading}
-                                   />
+                                   <IngredientCard cardInfo={item} key={item._id} isLoading={isLoading} />
                               ))
                          )}
                     </ul>

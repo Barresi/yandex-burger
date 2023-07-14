@@ -1,14 +1,14 @@
-import { BurgerIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import style from "./header-nav.module.scss";
+import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import style from './header-nav.module.scss';
 
 const HeaderNav = () => {
      return (
           <nav className={style.header_list}>
                <a href='/' className={style.link}>
-                    <BurgerIcon type={"primary"} />
+                    <BurgerIcon type={'primary'} />
                     <div
                          className={`
-                                   ${"text_color_active"} 
+                                   ${'text_color_active'} 
                                    text text_type_main-default
                               `}>
                          Конструктор
@@ -16,10 +16,10 @@ const HeaderNav = () => {
                </a>
 
                <a href='/' className={style.link}>
-                    <BurgerIcon type={"secondary"} />
+                    <BurgerIcon type={'secondary'} />
                     <div
                          className={`
-                                   ${"text_color_inactive"} 
+                                   ${'text_color_inactive'} 
                                    text text_type_main-default
                               `}>
                          Лента заказов

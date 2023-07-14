@@ -9,16 +9,10 @@ export function scrollTabs(bunRef, saucesRef, mainRef, tabRef) {
      let mainDistance = Math.abs(tabMenuPosition - mainPosition);
 
      if (bunsDistance <= saucesDistance && bunsDistance <= mainDistance) {
-          return "one";
-     } else if (
-          saucesDistance <= bunsDistance &&
-          saucesDistance <= mainDistance
-     ) {
-          return "two";
-     } else if (
-          mainDistance <= bunsDistance ||
-          mainDistance <= saucesDistance
-     ) {
-          return "three";
+          return 'one';
+     } else if (saucesDistance <= bunsDistance && saucesDistance <= mainDistance) {
+          return 'two';
+     } else if (mainDistance <= bunsDistance || mainDistance <= saucesDistance) {
+          return 'three';
      }
 }
