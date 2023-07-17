@@ -6,7 +6,7 @@ import style from './burger-ingredients.module.scss';
 import { deleteIngredientDetails } from '../../services/ingredient-details/ingredient-details';
 import Modal from '../modal/modal-body/modal';
 import IngredientDetails from '../modal/modal-content/modal-ingredient-details/modal-ingredient-details';
-import { scrollTabs } from '../app/utils/scrollTabs';
+import { scrollTabs } from '../../utils/scrollTabs';
 import { useRef, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 

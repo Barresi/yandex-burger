@@ -11,12 +11,24 @@
      padding: 16px 20px;
      align-items: center;
      background-color: transparent;
+
+     &:hover > svg {
+          transition: var(--common-transition);
+          fill: #f2f2f3;
+     }
+     &:hover > div {
+          transition: var(--common-transition);
+          color: #f2f2f3;
+     }
 }
-.link:hover > svg {
-     transition: var(--common-transition);
-     fill: #f2f2f3;
-}
-.link:hover > div {
-     transition: var(--common-transition);
-     color: #f2f2f3;
+
+.activeLink {
+     & > svg {
+          transition: var(--common-transition);
+          fill: #f2f2f3;
+     }
+     & > div {
+          transition: var(--common-transition);
+          color: #f2f2f3;
+     }
 }

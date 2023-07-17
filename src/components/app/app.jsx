@@ -7,6 +7,7 @@ import LoginPage from '../../pages/login/login';
 import RegisterPage from '../../pages/register/register';
 import ForgotPasswordPage from '../../pages/forgot-password/forgot-password';
 import ResetPasswordPage from '../../pages/reset-password/reset-password';
+import EditProfileInfo from '../../pages/profile/pages/edit-profile-info/edit-profile-info';
 
 import style from './app.module.scss';
 
@@ -16,8 +17,12 @@ const App = () => {
                <AppHeader />
 
                <Routes>
+                    <Route path='/profile' element={<ProfilePage />}>
+                         <Route path='' element={<EditProfileInfo />}></Route>
+                         <Route path='orders' element={''}></Route>
+                    </Route>
                     <Route path='/' element={<MainPage />} />
-                    <Route path='/profile' element={<ProfilePage />} />
+                    <Route path='/ingredients/:id' element={''} />
 
                     <Route path='/login' element={<LoginPage />} />
                     <Route path='/register' element={<RegisterPage />} />

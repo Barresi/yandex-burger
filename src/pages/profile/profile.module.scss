@@ -13,8 +13,11 @@
      flex: 1 0 220px;
 }
 .links {
+     margin-bottom: 80px;
 }
 .link {
+     color: var(--text-inactive-color);
+     display: block;
      height: 64px;
      padding: 20px 0;
 
@@ -24,27 +27,12 @@
           color: #fff;
      }
 }
+.linkActive {
+     color: #fff;
+}
 .desc {
-     margin-top: 80px;
      color: #8585ad;
      opacity: 0.4;
-}
-.form {
-     flex: 0 1 480px;
-
-     display: flex;
-     flex-direction: column;
-     gap: 24px;
-     & div {
-          width: 100%;
-          & div {
-               width: auto;
-          }
-     }
-}
-.btns {
-     display: flex;
-     justify-content: end;
 }
 
 @media (max-width: 767px) {
@@ -55,8 +43,5 @@
      }
      .menu {
           display: none;
-     }
-     .btns {
-          margin-top: 20px;
      }
 }

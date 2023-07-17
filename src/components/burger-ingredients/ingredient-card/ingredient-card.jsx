@@ -1,6 +1,6 @@
 import { CurrencyIcon, Counter, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-card.module.scss';
-import ingredientPropTypes from '../../app/utils/prop-types';
+import ingredientPropTypes from '../../../utils/prop-types';
 import { addIngredient } from '../../../services/constructor-elements/constructor-elements';
 import { useDispatch } from 'react-redux';
 import { addIngredientDetails } from '../../../services/ingredient-details/ingredient-details';

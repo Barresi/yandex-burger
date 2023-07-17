@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { postDataIngredients } from '../../components/app/utils/api';
+import { postDataIngredients } from '../../utils/api';
 
 const initialState = {
      order: null,

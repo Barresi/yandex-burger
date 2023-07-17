@@ -1,11 +1,17 @@
+import { Link } from 'react-router-dom';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
+import { useAuth } from '../../utils/hooks/useAuth';
 import style from './register.module.scss';
 
 const RegisterPage = () => {
      const [name, setName] = useState('');
-     const [login, setLogin] = useState('');
+     const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
+     const { registProfile } = useAuth();
+     const sendData = async () => {
+          registProfile({ name, email, password });
+     };
      return (
           <div className={style.login}>
                <div className={style.content}>
@@ -18,11 +24,11 @@ const RegisterPage = () => {
                          onChange={(e) => setName(e.target.value)}
                     />
                     <Input
-                         value={login}
+                         value={email}
                          name='login'
                          placeholder='E-mail'
                          extraClass='mb-6'
-                         onChange={(e) => setLogin(e.target.value)}
+                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <Input
                          value={password}
@@ -32,11 +38,14 @@ const RegisterPage = () => {
                          onChange={(e) => setPassword(e.target.value)}
                          extraClass='mb-6'
                     />
-                    <Button htmlType='button' type='primary' size='medium' extraClass='mb-20'>
-                         Войти
+                    <Button htmlType='button' type='primary' size='medium' extraClass='mb-20' onClick={sendData}>
+                         Зарегистрироваться
                     </Button>
                     <p className={`${style.p} text text_type_main-default text_color_inactive`}>
-                         Уже зарегистрированы? <span className={style.span}>Войти</span>
+                         Уже зарегистрированы?{' '}
+                         <Link to='/login' className={style.link}>
+                              Войти
+                         </Link>
                     </p>
                </div>
           </div>
