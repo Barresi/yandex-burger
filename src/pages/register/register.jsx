@@ -1,20 +1,31 @@
-import { Link } from 'react-router-dom';
-import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
 import { useAuth } from '../../utils/hooks/useAuth';
 import style from './register.module.scss';
+import { useSelector } from 'react-redux';
 
 const RegisterPage = () => {
+     const { isUserLoaded } = useSelector((store) => store.profileInfo);
      const [name, setName] = useState('');
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
+     const [error, setError] = useState(null);
+
+     const navigate = useNavigate();
      const { registProfile } = useAuth();
      const sendData = async () => {
-          registProfile({ name, email, password });
+          registProfile({ name, email, password }).then((data) =>
+               data.payload.success ? navigate('/', { replace: true }) : setError(data.payload.message)
+          );
      };
+     if (isUserLoaded) {
+          return <Navigate to='/' replace />;
+     }
      return (
           <div className={style.login}>
                <div className={style.content}>
+                    <div className={`${style.error} text text_type_main-large`}>{error}</div>
                     <div className={`${style.title} text text_type_main-large mb-6`}>Регистрация</div>
                     <Input
                          value={name}
@@ -23,7 +34,7 @@ const RegisterPage = () => {
                          extraClass='mb-6'
                          onChange={(e) => setName(e.target.value)}
                     />
-                    <Input
+                    <EmailInput
                          value={email}
                          name='login'
                          placeholder='E-mail'

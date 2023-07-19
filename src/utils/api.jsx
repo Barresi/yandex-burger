@@ -1,7 +1,9 @@
+import { setCookie } from './cookie';
+
 const URL = 'https://norma.nomoreparties.space/api';
 
 const checkResponse = (response) => {
-     return response.ok ? response.json() : Promise.reject('Connection has failed');
+     return response.ok ? response.json() : response.json().then((err) => Promise.reject(err));
 };
 
 export async function fetchDataIngredients() {
@@ -28,7 +30,7 @@ export async function sendEmail(email) {
           },
           body: JSON.stringify({ email: email }),
      });
-     return await checkResponse(response);
+     return await response.json();
 }
 
 export async function sendPassword(password, token) {
@@ -42,11 +44,10 @@ export async function sendPassword(password, token) {
                token: token,
           }),
      });
-     return await checkResponse(response);
+     return await response.json();
 }
 
 export async function registerRequest({ name, email, password }) {
-     console.log(name, email, password);
      const response = await fetch(`${URL}/auth/register`, {
           method: 'POST',
           headers: {
@@ -58,8 +59,7 @@ export async function registerRequest({ name, email, password }) {
                password: password,
           }),
      });
-     console.log(response);
-     return await checkResponse(response);
+     return await response.json();
 }
 
 export async function loginRequest({ email, password }) {
@@ -73,8 +73,7 @@ export async function loginRequest({ email, password }) {
                password: password,
           }),
      });
-     console.log(response);
-     return await checkResponse(response);
+     return await response.json();
 }
 
 export async function logoutRequest(refreshToken) {
@@ -87,18 +86,65 @@ export async function logoutRequest(refreshToken) {
                token: refreshToken,
           }),
      });
-     return await checkResponse(response);
+
+     return await response.json();
 }
 
-export async function refreshTokenRequest(refreshToken) {
-     const response = await fetch(`${URL}/auth/token`, {
-          method: 'POST',
+export async function fetchWithRefresh(tokens) {
+     const { accessToken, refreshToken } = tokens;
+     const getData = async (tokenAccs) => {
+          const response = await fetch(`${URL}/auth/user`, {
+               method: 'GET',
+               headers: {
+                    'Content-Type': 'application/json',
+                    authorization: tokenAccs,
+               },
+          });
+
+          return await checkResponse(response);
+     };
+     try {
+          return await getData(accessToken);
+     } catch (err) {
+          if (err.message === 'jwt expired') {
+               const response = await fetch(`${URL}/auth/token`, {
+                    method: 'POST',
+                    headers: {
+                         'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                         token: refreshToken,
+                    }),
+               });
+               const data = await response.json();
+
+               if (data.success) {
+                    setCookie('accessToken', data.accessToken);
+                    setCookie('refreshToken', data.refreshToken);
+                    return await getData(data.accessToken);
+               } else {
+                    return Promise.reject(err);
+               }
+          } else {
+               return Promise.reject(err);
+          }
+     }
+}
+
+export async function editRequest(data) {
+     const { name, email, password, accessToken } = data;
+     const response = await fetch(`${URL}/auth/user`, {
+          method: 'PATCH',
           headers: {
                'Content-Type': 'application/json',
+               authorization: accessToken,
           },
           body: JSON.stringify({
-               token: refreshToken,
+               name: name,
+               email: email,
+               password: password,
           }),
      });
-     return await checkResponse(response);
+
+     return await response.json();
 }

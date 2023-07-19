@@ -12,7 +12,7 @@ export const getDataIngredients = createAsyncThunk('ingredients/getDataIngredien
           const response = await fetchDataIngredients();
           return response;
      } catch (err) {
-          return rejectWithValue(err);
+          return rejectWithValue('Connection has failed');
      }
 });
 

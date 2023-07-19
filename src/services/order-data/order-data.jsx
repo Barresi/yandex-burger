@@ -14,7 +14,7 @@ export const getOrder = createAsyncThunk('orderData/getDataOrder', async (data, 
           const response = await postDataIngredients(data);
           return response;
      } catch (err) {
-          return rejectWithValue(err);
+          return rejectWithValue('Connection has failed');
      }
 });
 

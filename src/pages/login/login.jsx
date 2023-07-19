@@ -1,19 +1,36 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
 import style from './login.module.scss';
 import { useAuth } from '../../utils/hooks/useAuth';
+import { useSelector } from 'react-redux';
 
 const LoginPage = () => {
+     const { isUserLoaded } = useSelector((store) => store.profileInfo);
+
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
+     const [error, setError] = useState(null);
+
+     const navigate = useNavigate();
+     const { state } = useLocation();
      const { signIn } = useAuth();
      const sendData = async () => {
-          signIn({ email, password });
+          await signIn({ email, password }).then((data) =>
+               data.payload.success
+                    ? navigate(`${state ? state.pathname : '/'}`, { replace: true })
+                    : setError(data.payload.message)
+          );
      };
+
+     if (isUserLoaded) {
+          return <Navigate to='/' replace />;
+     }
+
      return (
           <div className={style.login}>
                <div className={style.content}>
+                    <div className={`${style.error} text text_type_main-large`}>{error}</div>
                     <div className={`${style.title} text text_type_main-large mb-6`}>Вход</div>
                     <Input
                          value={email}
@@ -26,7 +43,7 @@ const LoginPage = () => {
                          value={password}
                          name='password'
                          placeholder='Пароль'
-                         type='password'
+                         //type='password'
                          icon={'ShowIcon'}
                          onChange={(e) => setPassword(e.target.value)}
                          extraClass='mb-6'

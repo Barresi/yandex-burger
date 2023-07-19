@@ -1,8 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
 import style from './forgot-password.module.scss';
 import { sendEmail } from '../../utils/api';
+import { useSelector } from 'react-redux';
 
 const ForgotPasswordPage = () => {
      const EMAIL_REGEXP =
@@ -11,18 +12,29 @@ const ForgotPasswordPage = () => {
           return EMAIL_REGEXP.test(value);
      };
 
+     const { isUserLoaded } = useSelector((store) => store.profileInfo);
+     const [desc, setDesc] = useState('');
      const [login, setLogin] = useState('');
      const navigate = useNavigate();
      const checkEmail = async () => {
-          await sendEmail(login).then((data) => {
-               if (data.success && isEmailValid(login)) {
-                    navigate('/reset-password');
-               }
-          });
+          if (isEmailValid(login)) {
+               await sendEmail(login).then((data) => {
+                    if (data.success) {
+                         setDesc('');
+                         navigate('/reset-password', { replace: true, state: true });
+                    } else {
+                         setDesc(data.message);
+                    }
+               });
+          }
      };
+     if (isUserLoaded) {
+          return <Navigate to='/' replace />;
+     }
      return (
           <div className={style.login}>
                <div className={style.content}>
+                    <div className={`${style.error} text text_type_main-large`}>{desc}</div>
                     <div className={`${style.title} text text_type_main-large mb-6`}>Восстановление пароля</div>
                     <EmailInput
                          value={login}

@@ -1,17 +1,28 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
 import style from './reset-password.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { sendPassword } from '../../utils/api';
+import { useSelector } from 'react-redux';
 
 const ResetPasswordPage = () => {
+     const { isUserLoaded } = useSelector((store) => store.profileInfo);
      const [password, setPassword] = useState('');
      const [emailCode, setEmailCode] = useState('');
      const navigate = useNavigate();
-
+     const { state } = useLocation();
      const changePassword = async () => {
-          await sendPassword(password, emailCode).then((data) => (data.success ? navigate('/') : null));
+          await sendPassword(password, emailCode).then((data) => {
+               if (data.success) {
+                    navigate('/login', { replace: true });
+               }
+               alert(data.message);
+          });
      };
+
+     if (isUserLoaded || !state) {
+          return <Navigate to='/' replace />;
+     }
 
      return (
           <div className={style.login}>

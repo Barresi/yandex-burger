@@ -1,25 +1,29 @@
 import { useDispatch } from 'react-redux';
-import { login, register, logout, updateToken } from '../../services/auth/auth';
+import { login, register, logout, checkAuth, editProfile } from '../../services/auth/auth';
 
 export const useAuth = () => {
      const dispatch = useDispatch();
 
      const signIn = async (data) => {
-          dispatch(login(data));
+          return dispatch(login(data));
      };
      const signOut = async (refreshToken) => {
-          dispatch(logout(refreshToken));
+          return dispatch(logout(refreshToken));
      };
      const registProfile = async (data) => {
-          dispatch(register(data));
+          return dispatch(register(data));
      };
-     const refreshTokenProfile = async (refreshToken) => {
-          dispatch(updateToken(refreshToken));
+     const checkUserAuth = async (tokens) => {
+          return dispatch(checkAuth(tokens));
+     };
+     const editProfileInfo = async (data) => {
+          return dispatch(editProfile(data));
      };
      return {
           signIn,
           signOut,
           registProfile,
-          refreshTokenProfile,
+          checkUserAuth,
+          editProfileInfo,
      };
 };
