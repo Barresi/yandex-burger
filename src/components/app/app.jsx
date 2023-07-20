@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import ProfilePage from '../../pages/profile/profile';
@@ -17,9 +17,13 @@ import style from './app.module.scss';
 import { useAuth } from '../../utils/hooks/useAuth';
 import { getCookie } from '../../utils/cookie';
 import { useSelector } from 'react-redux';
+import Modal from '../modal/modal-body/modal';
+import IngredientDetails from '../modal/modal-content/modal-ingredient-details/modal-ingredient-details';
 
 const App = () => {
      const isLoading = useSelector((store) => store.profileInfo.isLoading);
+
+     const navigate = useNavigate();
 
      const { checkUserAuth } = useAuth();
      const accessToken = getCookie('accessToken');
@@ -27,13 +31,22 @@ const App = () => {
      useEffect(() => {
           checkUserAuth({ accessToken, refreshToken });
      }, [accessToken, refreshToken]);
+
      return (
           <div className={style.app}>
                <AppHeader />
 
                <Routes>
-                    <Route path='/' element={<MainPage />} />
-                    <Route path='/ingredients/:id' element={''} />
+                    <Route path='/' element={<MainPage />}>
+                         <Route
+                              path='ingredients/:id'
+                              element={
+                                   <Modal onClose={() => navigate(-1)} modalType={'Детали ингредиента'}>
+                                        <IngredientDetails />
+                                   </Modal>
+                              }
+                         />
+                    </Route>
 
                     <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} />}>
                          <Route path='' element={<EditProfileInfo />}></Route>

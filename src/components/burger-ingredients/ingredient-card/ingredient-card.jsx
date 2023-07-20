@@ -5,6 +5,7 @@ import { addIngredient } from '../../../services/constructor-elements/constructo
 import { useDispatch } from 'react-redux';
 import { addIngredientDetails } from '../../../services/ingredient-details/ingredient-details';
 import { useDrag } from 'react-dnd';
+import { Link } from 'react-router-dom';
 
 const IngredientCard = ({ cardInfo }) => {
      const dispatch = useDispatch();
@@ -16,11 +17,7 @@ const IngredientCard = ({ cardInfo }) => {
 
      return (
           <div className={style.ingredient_card} ref={dragRef}>
-               <div
-                    className={style.card_content}
-                    onClick={() => {
-                         dispatch(addIngredientDetails(cardInfo));
-                    }}>
+               <Link className={style.card_content} to={`/ingredients/${cardInfo._id}`}>
                     <img src={cardInfo['image']} alt='bun' className={style.img_ingredient} />
                     <div className={`${style.price} text text_type_digits-default`}>
                          {cardInfo.price}
@@ -28,7 +25,7 @@ const IngredientCard = ({ cardInfo }) => {
                     </div>
                     <div className={`${style.title} text text_type_main-default`}>{cardInfo.name}</div>
                     {cardInfo.__v ? <Counter count={cardInfo.__v} size='default' extraClass='m-1' /> : null}
-               </div>
+               </Link>
 
                <Button
                     htmlType='button'
