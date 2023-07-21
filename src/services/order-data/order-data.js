@@ -9,13 +9,9 @@ const initialState = {
      isActiveModal: false,
 };
 
-export const getOrder = createAsyncThunk('orderData/getDataOrder', async (data, { rejectWithValue }) => {
-     try {
-          const response = await postDataIngredients(data);
-          return response;
-     } catch (err) {
-          return rejectWithValue('Connection has failed');
-     }
+export const getOrder = createAsyncThunk('orderData/getDataOrder', async (data) => {
+     const response = await postDataIngredients(data);
+     return response;
 });
 
 const orderData = createSlice({
@@ -45,7 +41,7 @@ const orderData = createSlice({
           });
           builder.addCase(getOrder.rejected, (state, action) => {
                state.isLoading = false;
-               state.error = action.payload;
+               state.error = 'Connection has failed';
                state.isActiveModal = true;
           });
      },

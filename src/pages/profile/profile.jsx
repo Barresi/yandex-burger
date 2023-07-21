@@ -1,6 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/hooks/useAuth';
-import { getCookie } from '../../utils/cookie';
 import style from './profile.module.scss';
 
 const ProfilePage = () => {
@@ -8,8 +7,7 @@ const ProfilePage = () => {
      const { signOut } = useAuth();
 
      const exitProfile = () => {
-          const refreshToken = getCookie('refreshToken');
-          signOut(refreshToken).then((data) => (data.payload.success ? navigate('/login') : null));
+          signOut().then((data) => (data.payload?.success ? navigate('/login') : null));
      };
 
      return (

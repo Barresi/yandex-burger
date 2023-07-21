@@ -7,13 +7,13 @@ const IngredientDetails = () => {
      const { id } = useParams();
 
      const ingredients = useSelector((store) => store.ingredients.ingredients);
-     const [ingredientInfo, setIngredientInfo] = useState({});
+     const [ingredientInfo, setIngredientInfo] = useState();
 
      useEffect(() => {
           if (ingredients.length) {
                setIngredientInfo(ingredients.find((item) => item._id === id));
           }
-     }, [ingredients]);
+     }, [ingredients, id]);
 
      return (
           <>

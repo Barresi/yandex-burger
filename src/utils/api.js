@@ -1,4 +1,4 @@
-import { setCookie } from './cookie';
+import { getCookie, setCookie } from './cookie';
 
 const URL = 'https://norma.nomoreparties.space/api';
 
@@ -12,14 +12,19 @@ export async function fetchDataIngredients() {
 }
 
 export async function postDataIngredients(data) {
-     const response = await fetch(`${URL}/orders`, {
+     return await fetchWithRefresh(`${URL}/orders`, {
           method: 'POST',
           headers: {
                'Content-Type': 'application/json',
+               authorization: getCookie('accessToken'),
           },
           body: JSON.stringify(data),
+     }).then((data) => {
+          if (data.success) {
+               return data;
+          }
+          return Promise.reject(data);
      });
-     return await checkResponse(response);
 }
 
 export async function sendEmail(email) {
@@ -47,104 +52,96 @@ export async function sendPassword(password, token) {
      return await response.json();
 }
 
-export async function registerRequest({ name, email, password }) {
+export async function registerRequest(data) {
      const response = await fetch(`${URL}/auth/register`, {
           method: 'POST',
           headers: {
                'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-               name: name,
-               email: email,
-               password: password,
-          }),
+          body: JSON.stringify(data),
      });
-     return await response.json();
+     return await checkResponse(response);
 }
 
-export async function loginRequest({ email, password }) {
+export async function loginRequest(data) {
      const response = await fetch(`${URL}/auth/login`, {
           method: 'POST',
           headers: {
                'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-               email: email,
-               password: password,
-          }),
+          body: JSON.stringify(data),
      });
-     return await response.json();
+     return await checkResponse(response);
 }
 
-export async function logoutRequest(refreshToken) {
+export async function logoutRequest() {
      const response = await fetch(`${URL}/auth/logout`, {
           method: 'POST',
           headers: {
                'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-               token: refreshToken,
+               token: getCookie('refreshToken'),
           }),
      });
 
-     return await response.json();
+     return await checkResponse(response);
 }
 
-export async function fetchWithRefresh(tokens) {
-     const { accessToken, refreshToken } = tokens;
-     const getData = async (tokenAccs) => {
-          const response = await fetch(`${URL}/auth/user`, {
-               method: 'GET',
-               headers: {
-                    'Content-Type': 'application/json',
-                    authorization: tokenAccs,
-               },
-          });
-
-          return await checkResponse(response);
-     };
+export async function fetchWithRefresh(url, options) {
      try {
-          return await getData(accessToken);
+          const res = await fetch(url, options);
+          return await checkResponse(res);
      } catch (err) {
           if (err.message === 'jwt expired') {
-               const response = await fetch(`${URL}/auth/token`, {
+               const refreshRes = await fetch(`${URL}/auth/token`, {
                     method: 'POST',
                     headers: {
                          'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                         token: refreshToken,
+                         token: getCookie('refreshToken'),
                     }),
                });
-               const data = await response.json();
-
-               if (data.success) {
-                    setCookie('accessToken', data.accessToken);
-                    setCookie('refreshToken', data.refreshToken);
-                    return await getData(data.accessToken);
-               } else {
-                    return Promise.reject(err);
-               }
-          } else {
-               return Promise.reject(err);
+               const refreshData = await refreshRes.json();
+               if (!refreshData.success) return Promise.reject(refreshData);
+               setCookie('accessToken', refreshData.accessToken);
+               setCookie('refreshToken', refreshData.refreshToken);
+               options.headers.authorization = refreshData.accessToken;
+               const res = await fetch(url, options);
+               return await checkResponse(res);
           }
+          return Promise.reject(err);
      }
 }
 
+export async function getProfileInfo() {
+     return await fetchWithRefresh(`${URL}/auth/user`, {
+          method: 'GET',
+          headers: {
+               'Content-Type': 'application/json',
+               authorization: getCookie('accessToken'),
+          },
+     }).then((data) => {
+          if (data.success) {
+               return data;
+          }
+          return Promise.reject(data);
+     });
+}
+
 export async function editRequest(data) {
-     const { name, email, password, accessToken } = data;
-     const response = await fetch(`${URL}/auth/user`, {
+     return await fetchWithRefresh(`${URL}/auth/user`, {
           method: 'PATCH',
           headers: {
                'Content-Type': 'application/json',
-               authorization: accessToken,
+               authorization: getCookie('accessToken'),
           },
-          body: JSON.stringify({
-               name: name,
-               email: email,
-               password: password,
-          }),
+          body: JSON.stringify(data),
+     }).then((data) => {
+          if (data.success) {
+               return data;
+          }
+          return Promise.reject(data);
      });
-
-     return await response.json();
 }

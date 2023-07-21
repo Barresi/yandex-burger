@@ -21,8 +21,9 @@ const EditProfileInfo = () => {
           setPassword('');
      };
 
-     const editProfile = () => {
-          editProfileInfo({ name: userName, email: userEmail, password: password, accessToken: accessToken });
+     const editProfile = async (e) => {
+          e.preventDefault();
+          editProfileInfo({ name: userName, email: userEmail, password, accessToken });
      };
 
      useEffect(() => {
@@ -33,7 +34,7 @@ const EditProfileInfo = () => {
           }
      }, [userName, userEmail, password, name, email]);
      return (
-          <form className={style.form}>
+          <form className={style.form} onSubmit={editProfile}>
                <Input
                     value={userName}
                     name='name'
@@ -67,7 +68,7 @@ const EditProfileInfo = () => {
                          <Button htmlType='button' type='secondary' size='medium' onClick={resetData}>
                               Отмена
                          </Button>
-                         <Button htmlType='button' type='primary' size='medium' onClick={editProfile}>
+                         <Button htmlType='submit' type='primary' size='medium'>
                               Сохранить
                          </Button>
                     </div>

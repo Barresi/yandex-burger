@@ -32,8 +32,12 @@ const BurgerConstructor = () => {
 
      const checkoutSubmit = () => {
           if (isUserLoaded) {
-               if (activeItems.ingredients[0] && activeItems.bun.name) {
-                    const data = [...activeItems.ingredients.map((item) => item._id), activeItems.bun._id];
+               if (activeItems.ingredients.length && activeItems.bun.name) {
+                    const data = [
+                         activeItems.bun._id,
+                         ...activeItems.ingredients.map((item) => item._id),
+                         activeItems.bun._id,
+                    ];
                     dispatch(getOrder({ ingredients: data }));
                     dispatch(clearIngredients());
                     dispatch(clearQuantity());

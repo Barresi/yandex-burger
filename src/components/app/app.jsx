@@ -15,7 +15,6 @@ import Loader from '../loader/loader';
 import ProtectedRouteElement from '../protected-route-element/protected-route-element';
 import style from './app.module.scss';
 import { useAuth } from '../../utils/hooks/useAuth';
-import { getCookie } from '../../utils/cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../modal/modal-body/modal';
 import IngredientDetails from '../modal/modal-content/modal-ingredient-details/modal-ingredient-details';
@@ -29,15 +28,14 @@ const App = () => {
      const location = useLocation();
      const navigate = useNavigate();
 
-     const { checkUserAuth } = useAuth();
-     const accessToken = getCookie('accessToken');
-     const refreshToken = getCookie('refreshToken');
-     useEffect(() => {
-          checkUserAuth({ accessToken, refreshToken });
-     }, [accessToken, refreshToken]);
+     const { getUser } = useAuth();
+     // if add function getUser in deps, happened some bugs xD
+     /* eslint-disable */
      useEffect(() => {
           dispatch(getDataIngredients());
+          getUser();
      }, [dispatch]);
+     /* eslint-enable */
      return (
           <div className={style.app}>
                <AppHeader />
@@ -51,10 +49,22 @@ const App = () => {
                          <Route path='orders' element={''}></Route>
                     </Route>
 
-                    <Route path='/login' element={<LoginPage />} />
-                    <Route path='/register' element={<RegisterPage />} />
-                    <Route path='/forgot-password' element={<ForgotPasswordPage />} />
-                    <Route path='/reset-password' element={<ResetPasswordPage />} />
+                    <Route
+                         path='/login'
+                         element={<ProtectedRouteElement element={<LoginPage />} onlyUnAuth={true} />}
+                    />
+                    <Route
+                         path='/register'
+                         element={<ProtectedRouteElement element={<RegisterPage />} onlyUnAuth={true} />}
+                    />
+                    <Route
+                         path='/forgot-password'
+                         element={<ProtectedRouteElement element={<ForgotPasswordPage />} onlyUnAuth={true} />}
+                    />
+                    <Route
+                         path='/reset-password'
+                         element={<ProtectedRouteElement element={<ResetPasswordPage />} onlyUnAuth={true} />}
+                    />
 
                     <Route path='*' element={<PageNotFound />} />
                </Routes>
