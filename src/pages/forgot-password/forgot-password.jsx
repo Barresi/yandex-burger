@@ -43,6 +43,7 @@ const ForgotPasswordPage = () => {
                          extraClass='mb-6'
                          isIcon={false}
                          onChange={(e) => setLogin(e.target.value)}
+                         errorText='Введите ваш E-mail'
                     />
 
                     <Button htmlType='button' type='primary' size='medium' extraClass='mb-20' onClick={checkEmail}>

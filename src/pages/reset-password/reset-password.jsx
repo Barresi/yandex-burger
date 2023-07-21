@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 
 const ResetPasswordPage = () => {
      const { isUserLoaded } = useSelector((store) => store.profileInfo);
+     const [isHidePassword, setIsHidePassword] = useState(true);
      const [password, setPassword] = useState('');
      const [emailCode, setEmailCode] = useState('');
      const navigate = useNavigate();
@@ -33,7 +34,9 @@ const ResetPasswordPage = () => {
                          name='password'
                          placeholder='Введите новый пароль'
                          extraClass='mb-6'
-                         icon='HideIcon'
+                         type={isHidePassword ? 'password' : 'text'}
+                         icon={isHidePassword ? 'ShowIcon' : 'HideIcon'}
+                         onIconClick={() => setIsHidePassword(!isHidePassword)}
                          onChange={(e) => setPassword(e.target.value)}
                     />
                     <Input

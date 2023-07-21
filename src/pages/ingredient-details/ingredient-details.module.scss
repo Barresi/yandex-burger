@@ -1,0 +1,21 @@
+.background {
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+     height: 100%;
+     width: 100%;
+     z-index: 1;
+}
+
+.content {
+     margin-top: 70px;
+     padding: 60px 100px 60px 100px;
+     background-color: transparent;
+     border-radius: 25px;
+     position: relative;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: center;
+     z-index: 10;
+}

@@ -16,13 +16,17 @@ import ProtectedRouteElement from '../protected-route-element/protected-route-el
 import style from './app.module.scss';
 import { useAuth } from '../../utils/hooks/useAuth';
 import { getCookie } from '../../utils/cookie';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../modal/modal-body/modal';
 import IngredientDetails from '../modal/modal-content/modal-ingredient-details/modal-ingredient-details';
+import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
+import { getDataIngredients } from '../../services/ingredients-data/ingredients-data';
 
 const App = () => {
      const isLoading = useSelector((store) => store.profileInfo.isLoading);
 
+     const dispatch = useDispatch();
+     const location = useLocation();
      const navigate = useNavigate();
 
      const { checkUserAuth } = useAuth();
@@ -31,22 +35,16 @@ const App = () => {
      useEffect(() => {
           checkUserAuth({ accessToken, refreshToken });
      }, [accessToken, refreshToken]);
-
+     useEffect(() => {
+          dispatch(getDataIngredients());
+     }, [dispatch]);
      return (
           <div className={style.app}>
                <AppHeader />
 
-               <Routes>
-                    <Route path='/' element={<MainPage />}>
-                         <Route
-                              path='ingredients/:id'
-                              element={
-                                   <Modal onClose={() => navigate(-1)} modalType={'Детали ингредиента'}>
-                                        <IngredientDetails />
-                                   </Modal>
-                              }
-                         />
-                    </Route>
+               <Routes location={location.state?.backgroundLocation}>
+                    <Route path='/' element={<MainPage />} />
+                    <Route path='ingredients/:id' element={<IngredientDetailsPage />} />
 
                     <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} />}>
                          <Route path='' element={<EditProfileInfo />}></Route>
@@ -60,6 +58,19 @@ const App = () => {
 
                     <Route path='*' element={<PageNotFound />} />
                </Routes>
+
+               {location.state?.backgroundLocation && (
+                    <Routes>
+                         <Route
+                              path='ingredients/:id'
+                              element={
+                                   <Modal onClose={() => navigate(-1)} modalType={'Детали ингредиента'}>
+                                        <IngredientDetails />
+                                   </Modal>
+                              }
+                         />
+                    </Routes>
+               )}
 
                {isLoading && <Loader />}
           </div>

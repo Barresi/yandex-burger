@@ -3,7 +3,6 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../../components/burger-constructor/burger-constructor';
 import style from './main.module.scss';
-import { Outlet } from 'react-router-dom';
 
 const MainPage = () => {
      return (
@@ -14,7 +13,6 @@ const MainPage = () => {
                          <BurgerConstructor />
                     </main>
                </DndProvider>
-               <Outlet />
           </>
      );
 };

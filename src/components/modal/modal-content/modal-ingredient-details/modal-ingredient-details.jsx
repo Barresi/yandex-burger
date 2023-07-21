@@ -1,19 +1,17 @@
 import style from './modal-ingredient-details.module.scss';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
 const IngredientDetails = () => {
      const { id } = useParams();
 
      const ingredients = useSelector((store) => store.ingredients.ingredients);
      const [ingredientInfo, setIngredientInfo] = useState({});
-     const findIngredient = useCallback(() => {
-          return setIngredientInfo(ingredients.find((item) => item._id === id));
-     }, [ingredients]);
+
      useEffect(() => {
           if (ingredients.length) {
-               findIngredient();
+               setIngredientInfo(ingredients.find((item) => item._id === id));
           }
      }, [ingredients]);
 

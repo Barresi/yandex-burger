@@ -10,6 +10,7 @@ const RegisterPage = () => {
      const [name, setName] = useState('');
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
+     const [isHidePassword, setIsHidePassword] = useState(true);
      const [error, setError] = useState(null);
 
      const navigate = useNavigate();
@@ -40,14 +41,17 @@ const RegisterPage = () => {
                          placeholder='E-mail'
                          extraClass='mb-6'
                          onChange={(e) => setEmail(e.target.value)}
+                         errorText='Введите ваш E-mail'
                     />
                     <Input
                          value={password}
                          name='password'
+                         type={isHidePassword ? 'password' : 'text'}
+                         icon={isHidePassword ? 'ShowIcon' : 'HideIcon'}
                          placeholder='Пароль'
-                         icon={'HideIcon'}
                          onChange={(e) => setPassword(e.target.value)}
                          extraClass='mb-6'
+                         onIconClick={() => setIsHidePassword(!isHidePassword)}
                     />
                     <Button htmlType='button' type='primary' size='medium' extraClass='mb-20' onClick={sendData}>
                          Зарегистрироваться
