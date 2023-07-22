@@ -22,7 +22,7 @@ const Modal = ({ modalType, onClose, children }) => {
                document.removeEventListener('keyup', escapeListener, false);
                document.getElementById('root').classList.remove('overflow');
           };
-     }, []);
+     });
 
      return createPortal(
           <div className={style.modal}>

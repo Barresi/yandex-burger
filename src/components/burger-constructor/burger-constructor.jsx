@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ContentConstructor from './content-constructor/content-constructor';
@@ -7,16 +7,18 @@ import OrderDetails from '../modal/modal-content/modal-order-details/modal-order
 import ModalError from '../modal/modal-content/modal-error/modal-error';
 import style from './burger-constructor.module.scss';
 import { closeModal, getOrder, setIsError } from '../../services/order-data/order-data';
-import Loader from './loader-constructor/loader-constructor';
+import Loader from '../loader/loader';
 import { addIngredient, clearIngredients } from '../../services/constructor-elements/constructor-elements';
 import { useDrop } from 'react-dnd';
 import { clearQuantity, updateQuantity } from '../../services/ingredients-data/ingredients-data';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const BurgerConstructor = () => {
      const { isActiveModal, order, error, isLoading } = useSelector((store) => store.order);
+     const { isUserAuth } = useSelector((store) => store.profileInfo);
      const activeItems = useSelector((store) => store.activeConstructorItems);
      const dispatch = useDispatch();
-
+     const navigate = useNavigate();
      const [{ isOver }, dragRef] = useDrop({
           accept: 'ingredient',
           drop(item) {
@@ -29,18 +31,36 @@ const BurgerConstructor = () => {
      });
 
      const checkoutSubmit = () => {
-          if (activeItems.ingredients[0] && activeItems.bun.name) {
-               const data = [...activeItems.ingredients.map((item) => item._id), activeItems.bun._id];
-               dispatch(getOrder({ ingredients: data }));
-               dispatch(clearIngredients());
-               dispatch(clearQuantity());
+          if (activeItems.ingredients.length && activeItems.bun.name) {
+               if (isUserAuth) {
+                    const data = [
+                         activeItems.bun._id,
+                         ...activeItems.ingredients.map((item) => item._id),
+                         activeItems.bun._id,
+                    ];
+                    dispatch(getOrder({ ingredients: data }));
+                    dispatch(clearIngredients());
+                    dispatch(clearQuantity());
+               } else {
+                    navigate('/login', { replace: true, state: { pathname: '/', activeItems } });
+               }
           } else {
                dispatch(setIsError('Выберите булку и начинку'));
           }
      };
 
+     const { state } = useLocation();
+     useEffect(() => {
+          if (state) {
+               state.activeItems.forEach((item) => dispatch(addIngredient(item)));
+          }
+     });
+
      const totalPrice = useMemo(() => {
-          return activeItems.ingredients.reduce((acc, curr) => acc + curr.price, 0) + activeItems.bun.price * 2;
+          return (
+               activeItems.ingredients.reduce((acc, curr) => acc + curr.price, 0) +
+               (activeItems.bun.price ? activeItems.bun.price * 2 : 0)
+          );
      }, [activeItems]);
 
      return (

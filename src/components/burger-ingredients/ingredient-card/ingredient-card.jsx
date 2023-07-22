@@ -1,14 +1,14 @@
 import { CurrencyIcon, Counter, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-card.module.scss';
-import ingredientPropTypes from '../../app/utils/prop-types';
+import ingredientPropTypes from '../../../utils/prop-types';
 import { addIngredient } from '../../../services/constructor-elements/constructor-elements';
 import { useDispatch } from 'react-redux';
-import { addIngredientDetails } from '../../../services/ingredient-details/ingredient-details';
 import { useDrag } from 'react-dnd';
+import { Link, useLocation } from 'react-router-dom';
 
 const IngredientCard = ({ cardInfo }) => {
+     let location = useLocation();
      const dispatch = useDispatch();
-
      const [, dragRef] = useDrag({
           type: 'ingredient',
           item: cardInfo,
@@ -16,11 +16,10 @@ const IngredientCard = ({ cardInfo }) => {
 
      return (
           <div className={style.ingredient_card} ref={dragRef}>
-               <div
+               <Link
                     className={style.card_content}
-                    onClick={() => {
-                         dispatch(addIngredientDetails(cardInfo));
-                    }}>
+                    to={`/ingredients/${cardInfo._id}`}
+                    state={{ backgroundLocation: location }}>
                     <img src={cardInfo['image']} alt='bun' className={style.img_ingredient} />
                     <div className={`${style.price} text text_type_digits-default`}>
                          {cardInfo.price}
@@ -28,7 +27,7 @@ const IngredientCard = ({ cardInfo }) => {
                     </div>
                     <div className={`${style.title} text text_type_main-default`}>{cardInfo.name}</div>
                     {cardInfo.__v ? <Counter count={cardInfo.__v} size='default' extraClass='m-1' /> : null}
-               </div>
+               </Link>
 
                <Button
                     htmlType='button'

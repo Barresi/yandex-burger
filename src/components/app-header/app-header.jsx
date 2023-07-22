@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom';
 import smallLogo from '../../images/small-logo.svg';
 import { ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import HeaderNav from './nav/header-nav';
@@ -10,11 +11,15 @@ const AppHeader = () => {
                <div className={style.wrap}>
                     <HeaderNav />
 
-                    <div className={style.logo}>
+                    <Link to='/' className={style.logo}>
                          <Logo />
-                    </div>
+                    </Link>
 
-                    <a href='/' className={style.profile}>
+                    <NavLink
+                         to='/profile'
+                         className={({ isActive }) =>
+                              isActive ? `${style.profileActive} ${style.profile}` : style.profile
+                         }>
                          <ProfileIcon type={'secondary'} />
                          <div
                               className={`
@@ -23,7 +28,7 @@ const AppHeader = () => {
                                         `}>
                               Личный кабинет
                          </div>
-                    </a>
+                    </NavLink>
                </div>
 
                <div className={style.mobile}>

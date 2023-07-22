@@ -1,0 +1,23 @@
+.form {
+     flex: 0 1 480px;
+
+     display: flex;
+     flex-direction: column;
+     gap: 24px;
+     & div {
+          width: 100%;
+          & div {
+               width: auto;
+          }
+     }
+}
+.btns {
+     display: flex;
+     justify-content: flex-end;
+}
+
+@media (max-width: 767px) {
+     .btns {
+          margin-top: 20px;
+     }
+}

@@ -5,23 +5,6 @@
      overflow: hidden;
 }
 
-.main {
-     display: flex;
-
-     max-width: 1260px;
-     margin: 0 auto;
-     padding: 0px 10px;
-     flex: 1 1;
-     margin-bottom: 70px;
-     width: 100%;
-     justify-content: space-between;
-}
-
-@media (max-width: 1270px) {
-     .main {
-          flex-direction: column;
-     }
-}
 @media (max-width: 767px) {
      .app {
           overflow: visible;

@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
-import smallLogo from '../../../images/small-logo.svg';
-import style from './loader-constructor.module.scss';
+import smallLogo from '../../images/small-logo.svg';
+import style from './loader.module.scss';
 
 const Loader = () => {
      return createPortal(

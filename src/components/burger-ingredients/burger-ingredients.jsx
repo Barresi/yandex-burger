@@ -1,12 +1,8 @@
 import 'react-loading-skeleton/dist/skeleton.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ContentCards from './content-cards/content-cards';
 import style from './burger-ingredients.module.scss';
-import { deleteIngredientDetails } from '../../services/ingredient-details/ingredient-details';
-import Modal from '../modal/modal-body/modal';
-import IngredientDetails from '../modal/modal-content/modal-ingredient-details/modal-ingredient-details';
-import { scrollTabs } from '../app/utils/scrollTabs';
+import { scrollTabs } from '../../utils/scrollTabs';
 import { useRef, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -16,9 +12,6 @@ const BurgerIngredients = () => {
      const saucesRef = useRef();
      const mainRef = useRef();
      const tabRef = useRef();
-
-     const { isActiveModal } = useSelector((store) => store.ingredientDetails);
-     const dispatch = useDispatch();
 
      const getActiveTab = () => {
           setActiveTab(scrollTabs(bunRef, saucesRef, mainRef, tabRef));
@@ -54,15 +47,6 @@ const BurgerIngredients = () => {
                          Смотреть заказ
                     </Button>
                </div>
-               {isActiveModal ? (
-                    <Modal
-                         modalType='Детали ингредиента'
-                         onClose={() => {
-                              dispatch(deleteIngredientDetails());
-                         }}>
-                         <IngredientDetails />
-                    </Modal>
-               ) : null}
           </section>
      );
 };

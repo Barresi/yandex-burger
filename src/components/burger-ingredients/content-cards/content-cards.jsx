@@ -1,9 +1,9 @@
-import { useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SkeletonCard from '../skeleton-card/skeleton-card';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import style from './content-cards.module.scss';
-import { deleteError, getDataIngredients } from '../../../services/ingredients-data/ingredients-data';
+import { deleteError } from '../../../services/ingredients-data/ingredients-data';
 import Modal from '../../modal/modal-body/modal';
 import ModalError from '../../modal/modal-content/modal-error/modal-error';
 import PropTypes from 'prop-types';
@@ -11,10 +11,6 @@ import PropTypes from 'prop-types';
 const ContentCards = ({ bunRef, saucesRef, mainRef, getActiveTab }) => {
      const dispatch = useDispatch();
      const { ingredients, error, isLoading } = useSelector((store) => store.ingredients);
-
-     useEffect(() => {
-          dispatch(getDataIngredients());
-     }, [dispatch]);
 
      const { bunCards, sauceCards, mainCards } = useMemo(
           () => ({
