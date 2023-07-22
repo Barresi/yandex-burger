@@ -14,12 +14,12 @@ import Loader from '../loader/loader';
 
 import ProtectedRouteElement from '../protected-route-element/protected-route-element';
 import style from './app.module.scss';
-import { useAuth } from '../../utils/hooks/useAuth';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../modal/modal-body/modal';
 import IngredientDetails from '../modal/modal-content/modal-ingredient-details/modal-ingredient-details';
 import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
 import { getDataIngredients } from '../../services/ingredients-data/ingredients-data';
+import { getUserInfo } from '../../services/auth/auth';
 
 const App = () => {
      const isLoading = useSelector((store) => store.profileInfo.isLoading);
@@ -28,14 +28,11 @@ const App = () => {
      const location = useLocation();
      const navigate = useNavigate();
 
-     const { getUser } = useAuth();
-     // if add function getUser in deps, happened some bugs xD
-     /* eslint-disable */
      useEffect(() => {
           dispatch(getDataIngredients());
-          getUser();
+          dispatch(getUserInfo());
      }, [dispatch]);
-     /* eslint-enable */
+
      return (
           <div className={style.app}>
                <AppHeader />

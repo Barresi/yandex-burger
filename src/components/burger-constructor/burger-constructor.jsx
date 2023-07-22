@@ -15,7 +15,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 const BurgerConstructor = () => {
      const { isActiveModal, order, error, isLoading } = useSelector((store) => store.order);
-     const { isUserLoaded } = useSelector((store) => store.profileInfo);
+     const { isUserAuth } = useSelector((store) => store.profileInfo);
      const activeItems = useSelector((store) => store.activeConstructorItems);
      const dispatch = useDispatch();
      const navigate = useNavigate();
@@ -31,8 +31,8 @@ const BurgerConstructor = () => {
      });
 
      const checkoutSubmit = () => {
-          if (isUserLoaded) {
-               if (activeItems.ingredients.length && activeItems.bun.name) {
+          if (activeItems.ingredients.length && activeItems.bun.name) {
+               if (isUserAuth) {
                     const data = [
                          activeItems.bun._id,
                          ...activeItems.ingredients.map((item) => item._id),
@@ -42,10 +42,10 @@ const BurgerConstructor = () => {
                     dispatch(clearIngredients());
                     dispatch(clearQuantity());
                } else {
-                    dispatch(setIsError('Выберите булку и начинку'));
+                    navigate('/login', { replace: true, state: { pathname: '/', activeItems } });
                }
           } else {
-               navigate('/login', { replace: true, state: { pathname: '/', activeItems } });
+               dispatch(setIsError('Выберите булку и начинку'));
           }
      };
 

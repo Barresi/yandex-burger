@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { login, register, logout, getUserInfo, editProfile } from '../../services/auth/auth';
+import { login, register, logout, editProfile } from '../../services/auth/auth';
 
 export const useAuth = () => {
      const dispatch = useDispatch();
@@ -13,9 +13,6 @@ export const useAuth = () => {
      const registProfile = async (data) => {
           return dispatch(register(data));
      };
-     const getUser = async () => {
-          return dispatch(getUserInfo());
-     };
      const editProfileInfo = async (data) => {
           return dispatch(editProfile(data));
      };
@@ -23,7 +20,6 @@ export const useAuth = () => {
           signIn,
           signOut,
           registProfile,
-          getUser,
           editProfileInfo,
      };
 };

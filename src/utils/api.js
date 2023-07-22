@@ -93,7 +93,7 @@ export async function fetchWithRefresh(url, options) {
           const res = await fetch(url, options);
           return await checkResponse(res);
      } catch (err) {
-          if (err.message === 'jwt expired') {
+          if (err.message !== 'jwt expired') {
                const refreshRes = await fetch(`${URL}/auth/token`, {
                     method: 'POST',
                     headers: {

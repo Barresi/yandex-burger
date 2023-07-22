@@ -7,7 +7,7 @@ const initialState = {
           email: '',
           name: '',
      },
-     isUserLoaded: false,
+     isUserAuth: false,
      isLoading: false,
      isAuthChecked: false,
 };
@@ -52,7 +52,7 @@ const authSlice = createSlice({
                     email: action.payload.user.email,
                     name: action.payload.user.name,
                };
-               state.isUserLoaded = true;
+               state.isUserAuth = true;
                setCookie('accessToken', action.payload.accessToken);
                setCookie('refreshToken', action.payload.refreshToken);
           });
@@ -70,7 +70,7 @@ const authSlice = createSlice({
                     email: action.payload.user.email,
                     name: action.payload.user.name,
                };
-               state.isUserLoaded = true;
+               state.isUserAuth = true;
                setCookie('accessToken', action.payload.accessToken);
                setCookie('refreshToken', action.payload.refreshToken);
           });
@@ -88,7 +88,7 @@ const authSlice = createSlice({
                     email: '',
                     name: '',
                };
-               state.isUserLoaded = false;
+               state.isUserAuth = false;
                deleteCookie('accessToken');
                deleteCookie('refreshToken');
           });
@@ -98,6 +98,7 @@ const authSlice = createSlice({
           });
           builder.addCase(getUserInfo.rejected, (state) => {
                state.isLoading = false;
+               state.isAuthChecked = true;
           });
           builder.addCase(getUserInfo.fulfilled, (state, action) => {
                state.isLoading = false;
@@ -107,7 +108,7 @@ const authSlice = createSlice({
                     name: action.payload.user.name,
                };
                state.isAuthChecked = true;
-               state.isUserLoaded = true;
+               state.isUserAuth = true;
           });
           //EditProfileInfo
           builder.addCase(editProfile.pending, (state) => {

@@ -4,16 +4,16 @@ import { Navigate, useLocation } from 'react-router-dom';
 import Loader from '../loader/loader';
 
 const ProtectedRouteElement = ({ element, onlyUnAuth = false }) => {
-     const { isUserLoaded, isAuthChecked } = useSelector((store) => store.profileInfo);
+     const { isUserAuth, isAuthChecked } = useSelector((store) => store.profileInfo);
      const location = useLocation();
      if (!isAuthChecked) {
           return <Loader />;
      }
 
-     if (!isUserLoaded && !onlyUnAuth) {
+     if (!isUserAuth && !onlyUnAuth) {
           return <Navigate to='/login' replace state={{ pathname: location.pathname }} />;
      }
-     if (onlyUnAuth && isUserLoaded) {
+     if (onlyUnAuth && isUserAuth) {
           return <Navigate to={'/'} />;
      }
      return element;
