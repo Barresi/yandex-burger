@@ -22,7 +22,8 @@ const Modal = ({ modalType, onClose, children }) => {
                document.removeEventListener('keyup', escapeListener, false);
                document.getElementById('root').classList.remove('overflow');
           };
-     });
+          // eslint-disable-next-line
+     }, []);
 
      return createPortal(
           <div className={style.modal}>

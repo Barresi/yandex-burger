@@ -18,7 +18,7 @@ const ContentCards = ({ bunRef, saucesRef, mainRef, getActiveTab }) => {
                sauceCards: ingredients.filter((item) => item.type === 'sauce'),
                mainCards: ingredients.filter((item) => item.type === 'main'),
           }),
-          [ingredients, isLoading]
+          [ingredients]
      );
 
      return (
