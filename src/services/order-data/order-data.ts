@@ -23,6 +23,7 @@ const orderData = createSlice({
      reducers: {
           closeModal: (state) => {
                state.isActiveModal = false;
+               state.order = null;
           },
           setIsError: (state, action: PayloadAction<string>) => {
                state.error = action.payload;

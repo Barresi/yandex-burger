@@ -7,6 +7,7 @@ import { moveIngredients } from '../../../../services/constructor-elements/const
 import style from './element-constructor.module.scss';
 import { IIngredient } from '../../../../types/ingredient';
 import { useAppDispatch } from '../../../../utils/hooks/redux-hook';
+import { Identifier } from 'typescript';
 
 interface IActiveElem extends IIngredient {
      id: string;
@@ -16,15 +17,15 @@ interface IActiveElem extends IIngredient {
 const ElementConstructor: FC<IActiveElem> = ({ name, price, image, id, _id, index }) => {
      const dispatch = useAppDispatch();
      const ref = useRef<HTMLDivElement>(null);
-     //@ts-ignore
-     const [{ handlerId }, drop] = useDrop({
+
+     const [{ handlerId }, drop] = useDrop<IActiveElem, unknown, { handlerId: Identifier | null }>({
           accept: 'sort',
           collect(monitor) {
                return {
                     handlerId: monitor.getHandlerId(),
                };
           },
-          //@ts-ignore
+
           hover(item: IActiveElem, monitor: DropTargetMonitor) {
                if (!ref.current) {
                     return;

@@ -23,7 +23,9 @@ const EditProfileInfo = () => {
 
      const editProfile = async (e) => {
           e.preventDefault();
-          editProfileInfo({ name: userName, email: userEmail, password, accessToken });
+          editProfileInfo({ name: userName, email: userEmail, password, accessToken }).then((data) =>
+               data.payload.success ? setPassword('') : null
+          );
      };
 
      useEffect(() => {
