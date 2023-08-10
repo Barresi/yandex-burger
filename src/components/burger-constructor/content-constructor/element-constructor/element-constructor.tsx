@@ -7,7 +7,7 @@ import { moveIngredients } from '../../../../services/constructor-elements/const
 import style from './element-constructor.module.scss';
 import { IIngredient } from '../../../../types/ingredient';
 import { useAppDispatch } from '../../../../utils/hooks/redux-hook';
-import { Identifier } from 'typescript';
+import { Identifier } from 'dnd-core';
 
 interface IActiveElem extends IIngredient {
      id: string;
