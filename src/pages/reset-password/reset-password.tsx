@@ -1,26 +1,27 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import style from './reset-password.module.scss';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { sendPassword } from '../../utils/api';
 
-const ResetPasswordPage = () => {
+const ResetPasswordPage: FC = () => {
      const [isHidePassword, setIsHidePassword] = useState(true);
      const [password, setPassword] = useState('');
      const [emailCode, setEmailCode] = useState('');
-     const [error, setError] = useState(null);
+     const [error, setError] = useState<string | null>(null);
      const navigate = useNavigate();
      const { state } = useLocation();
-     const changePassword = async (e) => {
+     const changePassword = async (e: FormEvent) => {
           e.preventDefault();
-          await sendPassword(password, emailCode).then((data) => {
-               if (data.success) {
-                    navigate('/login', { replace: true });
-                    alert(data.message);
-               } else {
-                    setError(data.message);
-               }
-          });
+          await sendPassword(password, emailCode)
+               .then((data) => {
+                    if (data.success) {
+                         navigate('/login', { replace: true });
+                    } else {
+                         setError(data.message);
+                    }
+               })
+               .catch(() => setError('Что-то пошло не так('));
      };
 
      if (!state) {

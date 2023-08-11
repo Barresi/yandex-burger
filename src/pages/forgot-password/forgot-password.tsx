@@ -8,17 +8,19 @@ const ForgotPasswordPage: FC = () => {
      const [desc, setDesc] = useState('');
      const [login, setLogin] = useState('');
      const navigate = useNavigate();
-     const checkEmail = async (e: FormEvent<HTMLFormElement>) => {
+     const checkEmail = async (e: FormEvent) => {
           e.preventDefault();
 
-          await sendEmail(login).then((data) => {
-               if (data.success) {
-                    setDesc('');
-                    navigate('/reset-password', { replace: true, state: true });
-               } else {
-                    setDesc(data.message);
-               }
-          });
+          await sendEmail(login)
+               .then((data) => {
+                    if (data.success) {
+                         setDesc('');
+                         navigate('/reset-password', { replace: true, state: true });
+                    } else {
+                         setDesc(data.message);
+                    }
+               })
+               .catch(() => setDesc('Что-то пошло не так('));
      };
 
      return (

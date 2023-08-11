@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { loginRequest, logoutRequest, registerRequest, editRequest, getProfileInfo } from '../../utils/api';
 import { deleteCookie, setCookie } from '../../utils/cookie';
+import { IInitialStateAuth } from '../../types/slices/auth';
 import {
-     IEditProfileArg,
-     IGetAndEditProfile,
-     IInitialStateAuth,
-     ILogAndRegProfile,
-     IRegisterArg,
-     ISignInArg,
-} from '../../types/slices/auth';
+     IEditProfilePayload,
+     IGetAndEditProfileResponse,
+     ILogAndRegProfileResponse,
+     ILogInPayload,
+     ILogoutResponse,
+     IRegisterPayload,
+} from '../../types/api-types';
 
 const initialState: IInitialStateAuth = {
      user: {
@@ -20,21 +21,24 @@ const initialState: IInitialStateAuth = {
      isAuthChecked: false,
 };
 
-export const register = createAsyncThunk<ILogAndRegProfile, IRegisterArg>('auth/register', async (data) => {
+export const register = createAsyncThunk<ILogAndRegProfileResponse, IRegisterPayload>('auth/register', async (data) => {
      return await registerRequest(data);
 });
-export const login = createAsyncThunk<ILogAndRegProfile, ISignInArg>('auth/login', async (data) => {
+export const login = createAsyncThunk<ILogAndRegProfileResponse, ILogInPayload>('auth/login', async (data) => {
      return await loginRequest(data);
 });
-export const logout = createAsyncThunk<{ message: string; success: boolean }>('auth/logout', async () => {
+export const logout = createAsyncThunk<ILogoutResponse>('auth/logout', async () => {
      return await logoutRequest();
 });
-export const getUserInfo = createAsyncThunk<IGetAndEditProfile>('auth/getUserInfo', async () => {
+export const getUserInfo = createAsyncThunk<IGetAndEditProfileResponse>('auth/getUserInfo', async () => {
      return await getProfileInfo();
 });
-export const editProfile = createAsyncThunk<IGetAndEditProfile, IEditProfileArg>('auth/editProfile', async (data) => {
-     return await editRequest(data);
-});
+export const editProfile = createAsyncThunk<IGetAndEditProfileResponse, IEditProfilePayload>(
+     'auth/editProfile',
+     async (data) => {
+          return await editRequest(data);
+     }
+);
 
 const authSlice = createSlice({
      name: 'auth',
