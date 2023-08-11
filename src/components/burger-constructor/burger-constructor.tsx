@@ -20,9 +20,9 @@ const BurgerConstructor: FC = () => {
      const activeItems = useAppSelector((store) => store.activeConstructorItems);
      const dispatch = useAppDispatch();
      const navigate = useNavigate();
-     const [{ isOver }, dragRef] = useDrop({
+     const [{ isOver }, dragRef] = useDrop<IIngredient, unknown, { isOver: boolean }>({
           accept: 'ingredient',
-          drop(item: IIngredient) {
+          drop(item) {
                dispatch(addIngredient(item));
                dispatch(updateQuantity(item));
           },

@@ -1,8 +1,9 @@
+import { FC } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useAuth } from '../../utils/hooks/useAuth';
 import style from './profile.module.scss';
 
-const ProfilePage = () => {
+const ProfilePage: FC = () => {
      const { signOut } = useAuth();
 
      const exitProfile = () => {

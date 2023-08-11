@@ -1,5 +1,5 @@
 import { FC, useRef } from 'react';
-import { DropTargetMonitor, XYCoord, useDrag, useDrop } from 'react-dnd';
+import { XYCoord, useDrag, useDrop } from 'react-dnd';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { decrementQuantity } from '../../../../services/ingredients-data/ingredients-data';
 import { deleteIngredient } from '../../../../services/constructor-elements/constructor-elements';
@@ -26,7 +26,7 @@ const ElementConstructor: FC<IActiveElem> = ({ name, price, image, id, _id, inde
                };
           },
 
-          hover(item: IActiveElem, monitor: DropTargetMonitor) {
+          hover(item, monitor) {
                if (!ref.current) {
                     return;
                }

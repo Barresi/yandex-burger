@@ -26,6 +26,7 @@ const App: FC = () => {
 
      const dispatch = useAppDispatch();
      const location = useLocation();
+     const locationState = location.state as { backgroundLocation?: string };
      const navigate = useNavigate();
 
      useEffect(() => {
@@ -37,7 +38,7 @@ const App: FC = () => {
           <div className={style.app}>
                <AppHeader />
 
-               <Routes location={location.state?.backgroundLocation}>
+               <Routes location={locationState?.backgroundLocation}>
                     <Route path='/' element={<MainPage />} />
                     <Route path='ingredients/:id' element={<IngredientDetailsPage />} />
 
@@ -66,7 +67,7 @@ const App: FC = () => {
                     <Route path='*' element={<PageNotFound />} />
                </Routes>
 
-               {location.state?.backgroundLocation && (
+               {locationState?.backgroundLocation && (
                     <Routes>
                          <Route
                               path='ingredients/:id'

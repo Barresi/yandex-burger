@@ -8,7 +8,7 @@ import { IIngredient } from '../../../types/ingredient';
 import { useAppDispatch } from '../../../utils/hooks/redux-hook';
 
 const IngredientCard: FC<{ cardInfo: IIngredient }> = ({ cardInfo }) => {
-     let location = useLocation();
+     const location = useLocation();
      const dispatch = useAppDispatch();
      const [, dragRef] = useDrag({
           type: 'ingredient',
