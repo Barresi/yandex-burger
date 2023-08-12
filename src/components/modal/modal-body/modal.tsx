@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import ModalOverlay from '../modal-overlay/modal-overlay';
 import style from './modal.module.scss';
@@ -6,11 +6,12 @@ import btn_close from '../../../images/modal-crest.png';
 
 const modalRootElement = document.getElementById('modal') as HTMLDivElement;
 
-const Modal: FC<{ modalType?: string | null; onClose: () => void; children: ReactNode }> = ({
-     modalType,
-     onClose,
-     children,
-}) => {
+interface IModal {
+     modalType?: string | null;
+     onClose: () => void;
+}
+
+const Modal: FC<PropsWithChildren<IModal>> = ({ modalType, onClose, children }) => {
      const escapeListener = (e: KeyboardEvent) => {
           if (e.key === 'Escape') {
                onClose();

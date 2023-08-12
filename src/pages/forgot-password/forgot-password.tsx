@@ -36,6 +36,7 @@ const ForgotPasswordPage: FC = () => {
                               extraClass='mb-6'
                               isIcon={false}
                               onChange={(e) => setLogin(e.target.value)}
+                              // @ts-ignore
                               errorText='Введите ваш E-mail'
                          />
 

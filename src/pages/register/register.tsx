@@ -45,6 +45,7 @@ const RegisterPage: FC = () => {
                               placeholder='E-mail'
                               extraClass='mb-6'
                               onChange={(e) => setEmail(e.target.value)}
+                              // @ts-ignore
                               errorText='Введите ваш E-mail'
                          />
                          <Input
