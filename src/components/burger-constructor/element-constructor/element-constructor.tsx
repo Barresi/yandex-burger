@@ -1,12 +1,12 @@
 import { FC, useRef } from 'react';
 import { XYCoord, useDrag, useDrop } from 'react-dnd';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { decrementQuantity } from '../../../../services/ingredients-data/ingredients-data';
-import { deleteIngredient } from '../../../../services/constructor-elements/constructor-elements';
-import { moveIngredients } from '../../../../services/constructor-elements/constructor-elements';
+import { decrementQuantity } from '../../../services/ingredients-data/ingredients-data';
+import { deleteIngredient } from '../../../services/constructor-elements/constructor-elements';
+import { moveIngredients } from '../../../services/constructor-elements/constructor-elements';
 import style from './element-constructor.module.scss';
-import { IIngredient } from '../../../../types/ingredient';
-import { useAppDispatch } from '../../../../utils/hooks/redux-hook';
+import { IIngredient } from '../../../types/ingredient';
+import { useAppDispatch } from '../../../utils/hooks/redux-hook';
 import { Identifier } from 'dnd-core';
 
 interface IActiveElem extends IIngredient {

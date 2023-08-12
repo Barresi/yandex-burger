@@ -4,7 +4,7 @@ import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-comp
 import SampleContentConstructor from '../sample-content/sample-content';
 import style from './content-constructor.module.scss';
 
-import ElementConstructor from './element-constructor/element-constructor';
+import ElementConstructor from '../element-constructor/element-constructor';
 
 const ContentConstructor: FC = () => {
      const activeItems = useAppSelector((store) => store.activeConstructorItems);
