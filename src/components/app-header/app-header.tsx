@@ -5,6 +5,7 @@ import { ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-compo
 import HeaderNav from './nav/header-nav';
 import style from './app-header.module.scss';
 import burger from '../../images/burger.png';
+import { clx } from '../../utils/set-active-links';
 
 const AppHeader: FC = () => {
      return (
@@ -18,9 +19,7 @@ const AppHeader: FC = () => {
 
                     <NavLink
                          to='/profile'
-                         className={({ isActive }) =>
-                              isActive ? `${style.profileActive} ${style.profile}` : style.profile
-                         }>
+                         className={({ isActive }) => clx({ [style.profile]: true, [style.profileActive]: isActive })}>
                          <ProfileIcon type={'secondary'} />
                          <div
                               className={`

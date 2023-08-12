@@ -4,6 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import style from './profile.module.scss';
 import { useAppDispatch } from '../../utils/hooks/redux-hook';
 import { logout } from '../../services/auth/auth';
+import { clx } from '../../utils/set-active-links';
 
 const ProfilePage: FC = () => {
      const dispatch = useAppDispatch();
@@ -20,18 +21,22 @@ const ProfilePage: FC = () => {
                               to=''
                               end
                               className={({ isActive }) =>
-                                   isActive
-                                        ? `${style.link} ${style.linkActive} text text_type_main-medium`
-                                        : `${style.link} text text_type_main-medium`
+                                   clx({
+                                        [style.link]: true,
+                                        [style.linkActive]: isActive,
+                                        'text text_type_main-medium': true,
+                                   })
                               }>
                               Профиль
                          </NavLink>
                          <NavLink
                               to='orders'
                               className={({ isActive }) =>
-                                   isActive
-                                        ? `${style.link} ${style.linkActive} text text_type_main-medium`
-                                        : `${style.link} text text_type_main-medium`
+                                   clx({
+                                        [style.link]: true,
+                                        [style.linkActive]: isActive,
+                                        'text text_type_main-medium': true,
+                                   })
                               }>
                               История заказов
                          </NavLink>
