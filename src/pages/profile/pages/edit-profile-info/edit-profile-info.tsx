@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { FormEvent, useEffect, useState } from 'react';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useAuth } from '../../../../utils/hooks/useAuth';
 import { getCookie } from '../../../../utils/cookie';
 import style from './edit-profile-info.module.scss';
+import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/redux-hook';
+import { editProfile } from '../../../../services/auth/auth';
 
 const EditProfileInfo = () => {
-     const { editProfileInfo } = useAuth();
-     const accessToken = getCookie('accessToken');
-     const { name, email } = useSelector((store) => store.profileInfo.user);
+     const accessToken = getCookie('accessToken') as string;
+     const dispatch = useAppDispatch();
+     const { name, email } = useAppSelector((store) => store.profileInfo.user);
      const [userName, setUserName] = useState(name);
      const [userEmail, setUserEmail] = useState(email);
      const [password, setPassword] = useState('');
-
      const [isActiveBtns, setActiveBtns] = useState(false);
 
      const resetData = () => {
@@ -21,11 +20,16 @@ const EditProfileInfo = () => {
           setPassword('');
      };
 
-     const editProfile = async (e) => {
+     const editProfileInfo = async (e: FormEvent) => {
           e.preventDefault();
-          editProfileInfo({ name: userName, email: userEmail, password, accessToken }).then((data) =>
-               data.payload.success ? setPassword('') : null
-          );
+
+          const resultAction = await dispatch(editProfile({ name: userName, email: userEmail, password, accessToken }));
+
+          if (editProfile.fulfilled.match(resultAction)) {
+               setPassword('');
+          } else {
+               console.log(resultAction.error);
+          }
      };
 
      useEffect(() => {
@@ -36,7 +40,7 @@ const EditProfileInfo = () => {
           }
      }, [userName, userEmail, password, name, email]);
      return (
-          <form className={style.form} onSubmit={editProfile}>
+          <form className={style.form} onSubmit={editProfileInfo}>
                <Input
                     value={userName}
                     name='name'

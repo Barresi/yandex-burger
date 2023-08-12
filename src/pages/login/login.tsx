@@ -1,38 +1,37 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
-import { useAuth } from '../../utils/hooks/useAuth';
-import style from './register.module.scss';
+import { FC, FormEvent, useState } from 'react';
+import style from './login.module.scss';
+import { useAppDispatch } from '../../utils/hooks/redux-hook';
+import { login } from '../../services/auth/auth';
 
-const RegisterPage = () => {
-     const [name, setName] = useState('');
+const LoginPage: FC = () => {
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
      const [isHidePassword, setIsHidePassword] = useState(true);
-     const [error, setError] = useState(null);
+     const [error, setError] = useState<string | null>(null);
 
+     const dispatch = useAppDispatch();
      const navigate = useNavigate();
-     const { registProfile } = useAuth();
-     const sendData = async (e) => {
+     const { state } = useLocation();
+
+     const sendData = async (e: FormEvent) => {
           e.preventDefault();
-          registProfile({ name, email, password }).then((data) =>
-               data.payload?.success ? navigate('/', { replace: true }) : setError(data.error.message)
-          );
+          const resultAction = await dispatch(login({ email, password }));
+
+          if (login.fulfilled.match(resultAction)) {
+               navigate(`${state ? state.pathname : '/'}`, { replace: true });
+          } else {
+               resultAction.error.message ? setError(resultAction.error.message) : setError('Что-то пошло не так(');
+          }
      };
 
      return (
           <div className={style.login}>
                <div className={style.content}>
                     <div className={`${style.error} text text_type_main-large`}>{error}</div>
-                    <div className={`${style.title} text text_type_main-large mb-6`}>Регистрация</div>
-                    <form className={style.form} onSubmit={sendData}>
-                         <Input
-                              value={name}
-                              name='name'
-                              placeholder='Имя'
-                              extraClass='mb-6'
-                              onChange={(e) => setName(e.target.value)}
-                         />
+                    <div className={`${style.title} text text_type_main-large mb-6`}>Вход</div>
+                    <form onSubmit={sendData} className={style.form}>
                          <EmailInput
                               value={email}
                               name='login'
@@ -44,22 +43,28 @@ const RegisterPage = () => {
                          <Input
                               value={password}
                               name='password'
+                              placeholder='Пароль'
                               type={isHidePassword ? 'password' : 'text'}
                               icon={isHidePassword ? 'ShowIcon' : 'HideIcon'}
-                              placeholder='Пароль'
                               onChange={(e) => setPassword(e.target.value)}
                               extraClass='mb-6'
                               onIconClick={() => setIsHidePassword(!isHidePassword)}
                          />
                          <Button htmlType='submit' type='primary' size='medium' extraClass='mb-20'>
-                              Зарегистрироваться
+                              Войти
                          </Button>
                     </form>
 
                     <p className={`${style.p} text text_type_main-default text_color_inactive`}>
-                         Уже зарегистрированы?{' '}
-                         <Link to='/login' className={style.link}>
-                              Войти
+                         Вы — новый пользователь?{' '}
+                         <Link to='/register' className={style.link}>
+                              Зарегистрироваться
+                         </Link>
+                    </p>
+                    <p className={`${style.p} text text_type_main-default text_color_inactive`}>
+                         Забыли пароль?{' '}
+                         <Link to='/forgot-password' className={style.link}>
+                              Восстановить пароль
                          </Link>
                     </p>
                </div>
@@ -67,4 +72,4 @@ const RegisterPage = () => {
      );
 };
 
-export default RegisterPage;
+export default LoginPage;

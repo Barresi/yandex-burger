@@ -1,10 +1,10 @@
 import style from './modal-ingredient-details.module.scss';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../utils/hooks/redux-hook';
 import { IIngredient } from '../../../../types/ingredient';
 
-const IngredientDetails = () => {
+const IngredientDetails: FC = () => {
      const { id } = useParams();
 
      const ingredients = useAppSelector((store) => store.ingredients.ingredients);

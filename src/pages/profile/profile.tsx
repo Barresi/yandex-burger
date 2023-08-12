@@ -1,13 +1,15 @@
 import { FC } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { useAuth } from '../../utils/hooks/useAuth';
+
 import style from './profile.module.scss';
+import { useAppDispatch } from '../../utils/hooks/redux-hook';
+import { logout } from '../../services/auth/auth';
 
 const ProfilePage: FC = () => {
-     const { signOut } = useAuth();
+     const dispatch = useAppDispatch();
 
      const exitProfile = () => {
-          signOut();
+          dispatch(logout());
      };
 
      return (

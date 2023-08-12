@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useAppSelector } from '../../../utils/hooks/redux-hook';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import SampleContentConstructor from './sample-content/sample-content';
+import SampleContentConstructor from '../sample-content/sample-content';
 import style from './content-constructor.module.scss';
 
 import ElementConstructor from './element-constructor/element-constructor';
