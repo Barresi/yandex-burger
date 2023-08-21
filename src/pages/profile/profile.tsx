@@ -50,7 +50,9 @@ const ProfilePage: FC = () => {
                          В этом разделе вы можете изменить свои персональные данные
                     </div>
                </div>
-               <Outlet />
+               <section className={style.orders}>
+                    <Outlet />
+               </section>
           </div>
      );
 };

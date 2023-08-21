@@ -1,0 +1,60 @@
+.container {
+     max-width: 1260px;
+     margin: 0 auto;
+     padding: 0px 10px;
+     display: flex;
+     flex: 1 1;
+     width: 100%;
+     gap: 60px;
+     justify-content: space-between;
+}
+.orders_list {
+     width: 50%;
+     display: flex;
+     flex-direction: column;
+     & h2 {
+          margin-top: 40px;
+          margin-bottom: 20px;
+     }
+     & ul {
+          margin-bottom: 20px;
+          overflow: auto;
+          width: 100%;
+          height: 100%;
+          flex: 1 1 1px;
+          &::-webkit-scrollbar {
+               width: 8px;
+               margin-left: 8px;
+          }
+          &::-webkit-scrollbar-track {
+               background-color: #2f2f37;
+          }
+          &::-webkit-scrollbar-thumb {
+               background-color: #8585ad;
+          }
+     }
+}
+
+.info {
+     width: 50%;
+     margin-top: 95px;
+}
+.state_orders {
+     display: flex;
+     gap: 36px;
+     margin-bottom: 60px;
+}
+.ready_list {
+     color: rgba(0, 204, 204, 1);
+     columns: 2;
+     column-gap: 20px;
+     margin-top: 24px;
+}
+.process_list {
+     column-count: 2;
+     column-gap: 20px;
+     margin-top: 24px;
+}
+.total_all_time {
+     margin-bottom: 60px;
+}

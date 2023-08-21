@@ -20,6 +20,8 @@ import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-det
 import { getDataIngredients } from '../../services/ingredients-data/ingredients-data';
 import { getUserInfo } from '../../services/auth/auth';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/redux-hook';
+import FeedPage from '../../pages/feed/feed';
+import ProfileOrdersPage from '../../pages/profile/pages/profile-orders/profile-orders';
 
 const App: FC = () => {
      const isLoading = useAppSelector((store) => store.profileInfo.isLoading);
@@ -44,8 +46,10 @@ const App: FC = () => {
 
                     <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} />}>
                          <Route path='' element={<EditProfileInfo />}></Route>
-                         <Route path='orders' element={''}></Route>
+                         <Route path='orders' element={<ProfileOrdersPage />}></Route>
                     </Route>
+
+                    <Route path='/feed' element={<FeedPage />}></Route>
 
                     <Route
                          path='/login'

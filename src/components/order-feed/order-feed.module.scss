@@ -1,0 +1,80 @@
+.block {
+     padding: 24px;
+     display: flex;
+     flex-direction: column;
+     gap: 24px;
+     background-color: #1c1c21;
+     border-radius: 40px;
+     &:not(:last-child) {
+          margin-bottom: 16px;
+     }
+     margin-right: 8px;
+     &:hover {
+          cursor: pointer;
+     }
+}
+
+.head {
+     display: flex;
+     justify-content: space-between;
+}
+
+.ingredients {
+     display: flex;
+     justify-content: space-between;
+     gap: 24px;
+     & ul {
+          display: flex;
+
+          flex: 1 1 1px;
+          padding-left: 18px;
+          & li {
+               width: 64px;
+               height: 64px;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               border-radius: 50%;
+               position: relative;
+               overflow: hidden;
+               background: -webkit-linear-gradient(45deg, rgb(128, 26, 178) 47%, rgb(76, 76, 255));
+               background: -moz-linear-gradient(45deg, rgb(128, 26, 178) 47%, rgb(76, 76, 255));
+               background: linear-gradient(45deg, rgb(128, 26, 178) 47%, rgb(76, 76, 255));
+               margin-left: -18px;
+               min-height: 64px;
+               &::before {
+                    content: '';
+
+                    position: absolute;
+                    top: 2px;
+                    bottom: 2px;
+                    left: 2px;
+                    right: 2px;
+                    border-radius: 50%;
+                    background: #131316;
+               }
+               & img {
+                    width: 150%;
+                    position: absolute;
+                    min-height: 64px;
+               }
+               & div {
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 2px;
+                    bottom: 2px;
+                    left: 2px;
+                    right: 2px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: rgba($color: #000000, $alpha: 0.4);
+               }
+          }
+     }
+}
+.total_price {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+}
