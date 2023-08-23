@@ -45,9 +45,12 @@
      .profile {
           flex-direction: column;
           margin-top: 60px;
-          padding: 0px 15px 0px 15px;
+          padding: 0px 10px 0px 10px;
      }
      .menu {
           display: none;
+     }
+     .orders {
+          display: block;
      }
 }

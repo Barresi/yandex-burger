@@ -81,6 +81,14 @@ const App: FC = () => {
                                    </Modal>
                               }
                          />
+                         <Route
+                              path='feed/:id'
+                              element={
+                                   <Modal onClose={() => navigate(-1)} modalType={'17412'}>
+                                        1
+                                   </Modal>
+                              }
+                         />
                     </Routes>
                )}
 

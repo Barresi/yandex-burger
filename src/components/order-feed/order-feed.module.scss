@@ -1,4 +1,5 @@
 .block {
+     color: #fff;
      padding: 24px;
      display: flex;
      flex-direction: column;
@@ -23,11 +24,13 @@
      display: flex;
      justify-content: space-between;
      gap: 24px;
+     align-items: center;
      & ul {
           display: flex;
 
           flex: 1 1 1px;
           padding-left: 18px;
+          align-items: center;
           & li {
                width: 64px;
                height: 64px;
@@ -56,7 +59,7 @@
                & img {
                     width: 150%;
                     position: absolute;
-                    min-height: 64px;
+                    min-height: 35px;
                }
                & div {
                     border-radius: 50%;
@@ -77,4 +80,20 @@
      display: flex;
      align-items: center;
      gap: 8px;
+}
+@media (max-width: 767px) {
+     .block {
+          margin-right: 0;
+     }
+}
+@media (max-width: 500px) {
+     .ingredients ul li {
+          width: 35px;
+          height: 35px;
+          min-height: 35px;
+     }
+     .head {
+          flex-direction: column-reverse;
+          gap: 10px;
+     }
 }

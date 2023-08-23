@@ -1,11 +1,18 @@
 .container {
      max-width: 1260px;
      margin: 0 auto;
-     padding: 0px 10px;
-     display: flex;
+     padding: 0px 30px;
+
      flex: 1 1;
      width: 100%;
+     margin-top: 40px;
+     display: flex;
+     flex-direction: column;
+}
+.main {
+     display: flex;
      gap: 60px;
+     flex: 1 1;
      justify-content: space-between;
 }
 .orders_list {
@@ -17,7 +24,6 @@
           margin-bottom: 20px;
      }
      & ul {
-          margin-bottom: 20px;
           overflow: auto;
           width: 100%;
           height: 100%;
@@ -37,7 +43,6 @@
 
 .info {
      width: 50%;
-     margin-top: 95px;
 }
 .state_orders {
      display: flex;
@@ -57,4 +62,53 @@
 }
 .total_all_time {
      margin-bottom: 60px;
+}
+.tabs {
+     display: none;
+     justify-content: center;
+     width: 100%;
+     & div {
+          flex: 50%;
+     }
+     margin-bottom: 20px;
+}
+
+@media (max-width: 1023px) {
+     h2 {
+          text-align: center;
+     }
+     .info {
+          width: 100%;
+     }
+     .orders_list {
+          width: 100%;
+     }
+     .tabs {
+          display: flex;
+     }
+     .orders_list ul {
+          overflow: visible;
+     }
+}
+
+@media (max-width: 767px) {
+     .container {
+          padding: 0px 10px 20px 10px;
+     }
+
+     .process_list {
+          column-count: 1;
+     }
+     .ready_list {
+          column-count: 1;
+     }
+     .state_orders {
+          justify-content: center;
+     }
+     .total_all_time {
+          text-align: center;
+     }
+     .total_day {
+          text-align: center;
+     }
 }

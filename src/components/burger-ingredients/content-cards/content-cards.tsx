@@ -27,7 +27,7 @@ const ContentCards: FC<IIngredientsRefs & { getActiveTab: () => void }> = ({
      );
 
      return (
-          <div className={style.containerIngredients} onScroll={() => getActiveTab()}>
+          <div className={style.container_ingredients} onScroll={() => getActiveTab()}>
                <div className='buns mb-10' ref={bunRef}>
                     <h2 className='text text_type_main-medium mb-4'>Булки</h2>
                     <ul className={style.list}>
