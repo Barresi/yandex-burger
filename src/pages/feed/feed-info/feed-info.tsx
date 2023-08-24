@@ -8,16 +8,8 @@ const FeedInfo = () => {
      const totalToday = useAppSelector((store) => store.wsConnection.data?.totalToday);
      const { readyOrders, processOrders } = useMemo(
           () => ({
-               readyOrders: orders?.map((item) => {
-                    if (item.status === 'done') {
-                         return item.number;
-                    }
-               }),
-               processOrders: orders?.map((item) => {
-                    if (item.status === 'pending') {
-                         return item.number;
-                    }
-               }),
+               readyOrders: orders?.map((item) => (item.status === 'done' ? item.number : null)),
+               processOrders: orders?.map((item) => (item.status === 'pending' ? item.number : null)),
           }),
           [orders]
      );
