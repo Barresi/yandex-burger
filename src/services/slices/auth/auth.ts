@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { loginRequest, logoutRequest, registerRequest, editRequest, getProfileInfo } from '../../utils/api';
-import { deleteCookie, setCookie } from '../../utils/cookie';
-import { IInitialStateAuth } from '../../types/slices/auth';
+import { loginRequest, logoutRequest, registerRequest, editRequest, getProfileInfo } from '../../../utils/api';
+import { deleteCookie, setCookie } from '../../../utils/cookie';
+import { IInitialStateAuth } from '../../../types/slices/auth';
 import {
      IEditProfilePayload,
      IGetAndEditProfileResponse,
@@ -9,7 +9,7 @@ import {
      ILogInPayload,
      ILogoutResponse,
      IRegisterPayload,
-} from '../../types/api-types';
+} from '../../../types/api-types';
 
 const initialState: IInitialStateAuth = {
      user: {

@@ -2,9 +2,13 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderFeed from '../../components/order-feed/order-feed';
 import style from './feed.module.scss';
 import { useState } from 'react';
+import { useAppSelector } from '../../utils/hooks/redux-hook';
+import FeedInfo from './feed-info/feed-info';
 
 const FeedPage = () => {
      const [current, setCurrent] = useState<'orders' | 'info'>('orders');
+     const orders = useAppSelector((store) => store.wsConnection.data?.orders);
+
      return (
           <div className={style.container}>
                <h2 className='text text_type_main-large mb-5'>Лента заказов</h2>
@@ -21,166 +25,23 @@ const FeedPage = () => {
                          <>
                               <section className={style.orders_list}>
                                    <ul>
-                                        <OrderFeed />
-                                        <OrderFeed />
-                                        <OrderFeed />
-                                        <OrderFeed />
-                                        <OrderFeed />
-                                        <OrderFeed />
-                                        <OrderFeed />
-                                        <OrderFeed />
+                                        {orders?.map((item, ind) => (
+                                             <OrderFeed {...item} key={ind} />
+                                        ))}
                                    </ul>
                               </section>
-                              <section className={style.info}>
-                                   <div className={style.state_orders}>
-                                        <div className={style.ready}>
-                                             <div className='text text_type_main-medium'>Готовы:</div>
-                                             <ul className={style.ready_list}>
-                                                  <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                             </ul>
-                                        </div>
-                                        <div className={style.process}>
-                                             <div className='text text_type_main-medium'>В работе:</div>
-                                             <ul className={style.process_list}>
-                                                  <li
-                                                       className={`${style.process_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li
-                                                       className={`${style.process_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li
-                                                       className={`${style.process_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li
-                                                       className={`${style.process_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li
-                                                       className={`${style.process_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li
-                                                       className={`${style.process_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                                  <li
-                                                       className={`${style.process_number} text text_type_digits-default`}>
-                                                       034533
-                                                  </li>
-                                             </ul>
-                                        </div>
-                                   </div>
-                                   <div className={style.total_all_time}>
-                                        <p className='text text_type_main-medium'>Выполнено за все время:</p>
-                                        <div className='text text_type_digits-large'>28 752</div>
-                                   </div>
-                                   <div className={style.total_day}>
-                                        <p className='text text_type_main-medium'>Выполнено за сегодня:</p>
-                                        <div className='text text_type_digits-large'>138</div>
-                                   </div>
-                              </section>
+                              <FeedInfo />
                          </>
                     ) : current === 'orders' ? (
                          <section className={style.orders_list}>
                               <ul>
-                                   <OrderFeed />
-                                   <OrderFeed />
-                                   <OrderFeed />
-                                   <OrderFeed />
-                                   <OrderFeed />
-                                   <OrderFeed />
-                                   <OrderFeed />
-                                   <OrderFeed />
+                                   {orders?.map((item, ind) => (
+                                        <OrderFeed {...item} key={ind} />
+                                   ))}
                               </ul>
                          </section>
                     ) : (
-                         <section className={style.info}>
-                              <div className={style.state_orders}>
-                                   <div className={style.ready}>
-                                        <div className='text text_type_main-medium'>Готовы:</div>
-                                        <ul className={style.ready_list}>
-                                             <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.ready_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                        </ul>
-                                   </div>
-                                   <div className={style.process}>
-                                        <div className='text text_type_main-medium'>В работе:</div>
-                                        <ul className={style.process_list}>
-                                             <li className={`${style.process_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.process_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.process_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.process_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.process_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.process_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                             <li className={`${style.process_number} text text_type_digits-default`}>
-                                                  034533
-                                             </li>
-                                        </ul>
-                                   </div>
-                              </div>
-                              <div className={style.total_all_time}>
-                                   <p className='text text_type_main-medium'>Выполнено за все время:</p>
-                                   <div className='text text_type_digits-large'>28 752</div>
-                              </div>
-                              <div className={style.total_day}>
-                                   <p className='text text_type_main-medium'>Выполнено за сегодня:</p>
-                                   <div className='text text_type_digits-large'>138</div>
-                              </div>
-                         </section>
+                         <FeedInfo />
                     )}
                </div>
           </div>

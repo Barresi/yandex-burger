@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import ingredientsReducer from './ingredients-data/ingredients-data';
-import constructorSlice from './constructor-elements/constructor-elements';
-import orderReducer from './order-data/order-data';
-import authReducer from './auth/auth';
+import ingredientsReducer from './slices/ingredients-data/ingredients-data';
+import constructorSlice from './slices/constructor-elements/constructor-elements';
+import orderReducer from './slices/order-data/order-data';
+import authReducer from './slices/auth/auth';
+import feedSlice from './slices/feed-web-socket/slice';
+import { socketMiddleware } from './middleware/socket-middleware';
+
+const feedMiddleware = socketMiddleware('wss://norma.nomoreparties.space/orders/all');
 
 export const store = configureStore({
      reducer: {
@@ -10,6 +14,10 @@ export const store = configureStore({
           activeConstructorItems: constructorSlice,
           order: orderReducer,
           profileInfo: authReducer,
+          wsConnection: feedSlice,
+     },
+     middleware: (getDefaultMiddleware) => {
+          return getDefaultMiddleware().concat(feedMiddleware);
      },
 });
 

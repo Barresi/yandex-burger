@@ -1,6 +1,6 @@
 import { CurrencyIcon, Counter, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-card.module.scss';
-import { addIngredient } from '../../../services/constructor-elements/constructor-elements';
+import { addIngredient } from '../../../services/slices/constructor-elements/constructor-elements';
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';

@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { FC, FormEvent, useState } from 'react';
 import style from './register.module.scss';
-import { register } from '../../services/auth/auth';
+import { register } from '../../services/slices/auth/auth';
 import { useAppDispatch } from '../../utils/hooks/redux-hook';
 
 const RegisterPage: FC = () => {

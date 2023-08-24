@@ -17,11 +17,12 @@ import style from './app.module.scss';
 import Modal from '../modal/modal-body/modal';
 import IngredientDetails from '../modal/modal-content/modal-ingredient-details/modal-ingredient-details';
 import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
-import { getDataIngredients } from '../../services/ingredients-data/ingredients-data';
-import { getUserInfo } from '../../services/auth/auth';
+import { getDataIngredients } from '../../services/slices/ingredients-data/ingredients-data';
+import { getUserInfo } from '../../services/slices/auth/auth';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/redux-hook';
 import FeedPage from '../../pages/feed/feed';
 import ProfileOrdersPage from '../../pages/profile/pages/profile-orders/profile-orders';
+import { wsConnect } from '../../services/slices/feed-web-socket/actions';
 
 const App: FC = () => {
      const isLoading = useAppSelector((store) => store.profileInfo.isLoading);
@@ -34,6 +35,7 @@ const App: FC = () => {
      useEffect(() => {
           dispatch(getDataIngredients());
           dispatch(getUserInfo());
+          dispatch(wsConnect());
      }, [dispatch]);
 
      return (

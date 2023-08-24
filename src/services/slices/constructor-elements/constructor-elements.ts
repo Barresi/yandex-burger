@@ -1,14 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { IInitialStateActiveItems } from '../../types/slices/active-ingredients';
-import { IIngredient } from '../../types/ingredient';
+import { IInitialStateActiveItems } from '../../../types/slices/active-ingredients';
+import { IIngredient } from '../../../types/ingredient';
 
 const initialState: IInitialStateActiveItems = {
      bun: null,
      ingredients: [],
 };
 
-const constructorSlice = createSlice({
+const constructorReducer = createSlice({
      name: 'constructor',
      initialState,
      reducers: {
@@ -36,5 +36,5 @@ const constructorSlice = createSlice({
      },
 });
 
-export default constructorSlice.reducer;
-export const { addIngredient, deleteIngredient, clearIngredients, moveIngredients } = constructorSlice.actions;
+export default constructorReducer.reducer;
+export const { addIngredient, deleteIngredient, clearIngredients, moveIngredients } = constructorReducer.actions;

@@ -2,7 +2,7 @@ import { useMemo, FC } from 'react';
 import SkeletonCard from '../skeleton-card/skeleton-card';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import style from './content-cards.module.scss';
-import { deleteError } from '../../../services/ingredients-data/ingredients-data';
+import { deleteError } from '../../../services/slices/ingredients-data/ingredients-data';
 import Modal from '../../modal/modal-body/modal';
 import ModalError from '../../modal/modal-content/modal-error/modal-error';
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks/redux-hook';

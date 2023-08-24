@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { postDataIngredients } from '../../utils/api';
-import { IInitialStateOrderSlice } from '../../types/slices/order';
-import { IOrderResponse } from '../../types/api-types';
+import { postDataIngredients } from '../../../utils/api';
+import { IInitialStateOrderSlice } from '../../../types/slices/order';
+import { IOrderResponse } from '../../../types/api-types';
 
 const initialState: IInitialStateOrderSlice = {
      order: null,

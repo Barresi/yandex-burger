@@ -3,7 +3,7 @@ import { Button, EmailInput, Input } from '@ya.praktikum/react-developer-burger-
 import { FC, FormEvent, useState } from 'react';
 import style from './login.module.scss';
 import { useAppDispatch } from '../../utils/hooks/redux-hook';
-import { login } from '../../services/auth/auth';
+import { login } from '../../services/slices/auth/auth';
 
 const LoginPage: FC = () => {
      const [email, setEmail] = useState('');

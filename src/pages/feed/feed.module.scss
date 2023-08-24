@@ -41,28 +41,6 @@
      }
 }
 
-.info {
-     width: 50%;
-}
-.state_orders {
-     display: flex;
-     gap: 36px;
-     margin-bottom: 60px;
-}
-.ready_list {
-     color: rgba(0, 204, 204, 1);
-     columns: 2;
-     column-gap: 20px;
-     margin-top: 24px;
-}
-.process_list {
-     column-count: 2;
-     column-gap: 20px;
-     margin-top: 24px;
-}
-.total_all_time {
-     margin-bottom: 60px;
-}
 .tabs {
      display: none;
      justify-content: center;

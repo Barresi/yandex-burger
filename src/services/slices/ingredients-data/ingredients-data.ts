@@ -1,8 +1,8 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchDataIngredients } from '../../utils/api';
-import { IInitialStateIngredientsSlice } from '../../types/slices/ingredients-data';
-import { IIngredient } from '../../types/ingredient';
-import { IIngredientsResponse } from '../../types/api-types';
+import { fetchDataIngredients } from '../../../utils/api';
+import { IInitialStateIngredientsSlice } from '../../../types/slices/ingredients-data';
+import { IIngredient } from '../../../types/ingredient';
+import { IIngredientsResponse } from '../../../types/api-types';
 
 const initialState: IInitialStateIngredientsSlice = {
      error: null,
