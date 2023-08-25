@@ -3,9 +3,9 @@ import { useMemo } from 'react';
 import style from './feed-info.module.scss';
 
 const FeedInfo = () => {
-     const orders = useAppSelector((store) => store.wsConnection.data?.orders);
-     const total = useAppSelector((store) => store.wsConnection.data?.total);
-     const totalToday = useAppSelector((store) => store.wsConnection.data?.totalToday);
+     const orders = useAppSelector((store) => store.allFeed.data?.orders);
+     const total = useAppSelector((store) => store.allFeed.data?.total);
+     const totalToday = useAppSelector((store) => store.allFeed.data?.totalToday);
      const { readyOrders, processOrders } = useMemo(
           () => ({
                readyOrders: orders?.map((item) => (item.status === 'done' ? item.number : null)),

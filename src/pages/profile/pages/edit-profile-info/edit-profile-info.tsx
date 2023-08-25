@@ -3,7 +3,7 @@ import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-component
 import { getCookie } from '../../../../utils/cookie';
 import style from './edit-profile-info.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/redux-hook';
-import { editProfile } from '../../../../services/slices/auth/auth';
+import { editProfile } from '../../../../services/reducers/auth/reducer';
 
 const EditProfileInfo = () => {
      const accessToken = getCookie('accessToken') as string;

@@ -3,11 +3,11 @@ import { useAppSelector } from '../../../../utils/hooks/redux-hook';
 import style from './profile-orders.module.scss';
 
 const ProfileOrdersPage = () => {
-     const orders = useAppSelector((store) => store.wsConnection.data?.orders);
+     const orders = useAppSelector((store) => store.profileFeed.data?.orders);
      return (
           <div className={style.orders}>
-               {orders?.map((item) => (
-                    <OrderFeed {...item} />
+               {orders?.map((item, ind) => (
+                    <OrderFeed {...item} key={ind} />
                ))}
           </div>
      );

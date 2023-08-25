@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 
 import style from './profile.module.scss';
 import { useAppDispatch } from '../../utils/hooks/redux-hook';
-import { logout } from '../../services/slices/auth/auth';
+import { logout } from '../../services/reducers/auth/reducer';
 import { clx } from '../../utils/set-active-links';
 
 const ProfilePage: FC = () => {

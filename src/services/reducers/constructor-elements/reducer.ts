@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { IInitialStateActiveItems } from '../../../types/slices/active-ingredients';
+import { IInitialStateActiveItems } from '../../../types/reducers/active-ingredients';
 import { IIngredient } from '../../../types/ingredient';
 
 const initialState: IInitialStateActiveItems = {

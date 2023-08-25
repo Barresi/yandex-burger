@@ -1,23 +1,28 @@
 import { configureStore } from '@reduxjs/toolkit';
-import ingredientsReducer from './slices/ingredients-data/ingredients-data';
-import constructorSlice from './slices/constructor-elements/constructor-elements';
-import orderReducer from './slices/order-data/order-data';
-import authReducer from './slices/auth/auth';
-import feedSlice from './slices/feed-web-socket/slice';
+import ingredientsReducer from './reducers/ingredients-data/reducer';
+import constructorReducer from './reducers/constructor-elements/reducer';
+import orderReducer from './reducers/get-order/reducer';
+import authReducer from './reducers/auth/reducer';
+import allFeedReducer from './reducers/all-orders/reducer';
+import profileFeedReducer from './reducers/profile-orders/reducer';
 import { socketMiddleware } from './middleware/socket-middleware';
+import { allFeedActions } from './reducers/all-orders/actions';
+import { profileFeedActions } from './reducers/profile-orders/actions';
 
-const feedMiddleware = socketMiddleware('wss://norma.nomoreparties.space/orders/all');
+const allFeedMiddleware = socketMiddleware(allFeedActions);
+const profileFeedMiddleware = socketMiddleware(profileFeedActions);
 
 export const store = configureStore({
      reducer: {
           ingredients: ingredientsReducer,
-          activeConstructorItems: constructorSlice,
-          order: orderReducer,
+          activeConstructorItems: constructorReducer,
+          getOrder: orderReducer,
           profileInfo: authReducer,
-          wsConnection: feedSlice,
+          allFeed: allFeedReducer,
+          profileFeed: profileFeedReducer,
      },
      middleware: (getDefaultMiddleware) => {
-          return getDefaultMiddleware().concat(feedMiddleware);
+          return getDefaultMiddleware().concat(allFeedMiddleware, profileFeedMiddleware);
      },
 });
 

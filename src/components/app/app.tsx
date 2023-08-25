@@ -17,16 +17,20 @@ import style from './app.module.scss';
 import Modal from '../modal/modal-body/modal';
 import IngredientDetails from '../modal/modal-content/modal-ingredient-details/modal-ingredient-details';
 import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
-import { getDataIngredients } from '../../services/slices/ingredients-data/ingredients-data';
-import { getUserInfo } from '../../services/slices/auth/auth';
+import { getDataIngredients } from '../../services/reducers/ingredients-data/reducer';
+import { getUserInfo } from '../../services/reducers/auth/reducer';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/redux-hook';
 import FeedPage from '../../pages/feed/feed';
 import ProfileOrdersPage from '../../pages/profile/pages/profile-orders/profile-orders';
-import { wsConnect } from '../../services/slices/feed-web-socket/actions';
+import { wsConnectAllFeed } from '../../services/reducers/all-orders/actions';
+import { wsConnectProfileFeed, wsDisconnectProfileFeed } from '../../services/reducers/profile-orders/actions';
+import { getCookie } from '../../utils/cookie';
+import { WebsocketStatus } from '../../types/reducers/feed-web-socket';
 
 const App: FC = () => {
-     const isLoading = useAppSelector((store) => store.profileInfo.isLoading);
-
+     const { isLoading, isUserAuth } = useAppSelector((store) => store.profileInfo);
+     const statusAllFeed = useAppSelector((store) => store.allFeed.status);
+     const statusProfileFeed = useAppSelector((store) => store.profileFeed.status);
      const dispatch = useAppDispatch();
      const location = useLocation();
      const locationState = location.state as { backgroundLocation?: string };
@@ -35,8 +39,15 @@ const App: FC = () => {
      useEffect(() => {
           dispatch(getDataIngredients());
           dispatch(getUserInfo());
-          dispatch(wsConnect());
-     }, [dispatch]);
+          dispatch(wsConnectAllFeed('wss://norma.nomoreparties.space/orders/all'));
+          isUserAuth
+               ? dispatch(
+                      wsConnectProfileFeed(
+                           `wss://norma.nomoreparties.space/orders?token=${getCookie('accessToken')?.slice(7)}`
+                      )
+                 )
+               : dispatch(wsDisconnectProfileFeed());
+     }, [dispatch, isUserAuth]);
 
      return (
           <div className={style.app}>
@@ -94,7 +105,11 @@ const App: FC = () => {
                     </Routes>
                )}
 
-               {isLoading && <Loader />}
+               {isLoading ||
+               statusAllFeed === WebsocketStatus.CONNECTING ||
+               statusProfileFeed === WebsocketStatus.CONNECTING ? (
+                    <Loader />
+               ) : null}
           </div>
      );
 };

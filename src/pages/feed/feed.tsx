@@ -7,7 +7,7 @@ import FeedInfo from './feed-info/feed-info';
 
 const FeedPage = () => {
      const [current, setCurrent] = useState<'orders' | 'info'>('orders');
-     const orders = useAppSelector((store) => store.wsConnection.data?.orders);
+     const orders = useAppSelector((store) => store.allFeed.data?.orders);
 
      return (
           <div className={style.container}>

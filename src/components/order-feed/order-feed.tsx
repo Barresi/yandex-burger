@@ -2,7 +2,7 @@ import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burge
 import style from './order-feed.module.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { FC, useMemo } from 'react';
-import { IFeedIngredient } from '../../types/slices/feed-web-socket';
+import { IFeedIngredient } from '../../types/reducers/feed-web-socket';
 import { useAppSelector } from '../../utils/hooks/redux-hook';
 import { ReactElement } from 'react';
 
@@ -21,7 +21,7 @@ const OrderFeed: FC<IFeedIngredient> = ({ _id, createdAt, status, number, name, 
                if (i <= 6) {
                     if (i === 6) {
                          imgIngredients.push(
-                              <li className={style.ingredient}>
+                              <li className={style.ingredient} key={i}>
                                    <img src={image_large} alt='ingredient' />
                                    <div className={`${style.last_ingredient} text text_type_digits-default`}>
                                         +{ingredients.length - i}
@@ -30,7 +30,7 @@ const OrderFeed: FC<IFeedIngredient> = ({ _id, createdAt, status, number, name, 
                          );
                     } else {
                          imgIngredients.push(
-                              <li className={style.ingredient}>
+                              <li className={style.ingredient} key={i}>
                                    <img src={image_large} alt='ingredient' />
                               </li>
                          );

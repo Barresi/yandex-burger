@@ -1,9 +1,9 @@
 import { FC, useRef } from 'react';
 import { XYCoord, useDrag, useDrop } from 'react-dnd';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { decrementQuantity } from '../../../services/slices/ingredients-data/ingredients-data';
-import { deleteIngredient } from '../../../services/slices/constructor-elements/constructor-elements';
-import { moveIngredients } from '../../../services/slices/constructor-elements/constructor-elements';
+import { decrementQuantity } from '../../../services/reducers/ingredients-data/reducer';
+import { deleteIngredient } from '../../../services/reducers/constructor-elements/reducer';
+import { moveIngredients } from '../../../services/reducers/constructor-elements/reducer';
 import style from './element-constructor.module.scss';
 import { IIngredient } from '../../../types/ingredient';
 import { useAppDispatch } from '../../../utils/hooks/redux-hook';
