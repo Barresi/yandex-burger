@@ -5,6 +5,7 @@ import { FC, useMemo } from 'react';
 import { IFeedIngredient } from '../../types/reducers/feed-web-socket';
 import { useAppSelector } from '../../utils/hooks/redux-hook';
 import { ReactElement } from 'react';
+import OrderStatusTransform from '../order-status/order-status';
 
 const OrderFeed: FC<IFeedIngredient> = ({ _id, createdAt, status, number, name, ingredients }) => {
      const allIngredients = useAppSelector((store) => store.ingredients.ingredients);
@@ -48,7 +49,7 @@ const OrderFeed: FC<IFeedIngredient> = ({ _id, createdAt, status, number, name, 
                     </div>
                </div>
                <div className='text text_type_main-medium'>{name}</div>
-               {pathname === '/profile/orders' ? <div>{status}</div> : null}
+               {pathname === '/profile/orders' && <OrderStatusTransform status={status} />}
                <div className={style.ingredients}>
                     <ul>{imgIngredients}</ul>
                     <div className={`${style.total_price} text text_type_digits-default`}>
