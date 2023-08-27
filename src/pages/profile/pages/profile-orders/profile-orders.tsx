@@ -5,11 +5,7 @@ import style from './profile-orders.module.scss';
 const ProfileOrdersPage = () => {
      const orders = useAppSelector((store) => store.profileFeed.data?.orders);
      return (
-          <div className={style.orders}>
-               {orders?.map((item, ind) => (
-                    <OrderFeed {...item} key={ind} />
-               ))}
-          </div>
+          <div className={style.orders}>{orders?.map((item, ind) => <OrderFeed {...item} key={ind} />).reverse()}</div>
      );
 };
 

@@ -8,7 +8,7 @@ export interface IFeedIngredient {
      _id: string;
      createdAt: string;
      updatedAt: string;
-     status: string;
+     status: 'created' | 'pending' | 'done';
      number: number;
      name: string;
      ingredients: string[];

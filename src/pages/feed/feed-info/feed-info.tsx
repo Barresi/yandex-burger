@@ -1,8 +1,8 @@
 import { useAppSelector } from '../../../utils/hooks/redux-hook';
-import { useMemo } from 'react';
+import { useMemo, FC } from 'react';
 import style from './feed-info.module.scss';
 
-const FeedInfo = () => {
+const FeedInfo: FC = () => {
      const orders = useAppSelector((store) => store.allFeed.data?.orders);
      const total = useAppSelector((store) => store.allFeed.data?.total);
      const totalToday = useAppSelector((store) => store.allFeed.data?.totalToday);

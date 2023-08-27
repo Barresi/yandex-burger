@@ -1,11 +1,11 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderFeed from '../../components/order-feed/order-feed';
 import style from './feed.module.scss';
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import { useAppSelector } from '../../utils/hooks/redux-hook';
 import FeedInfo from './feed-info/feed-info';
 
-const FeedPage = () => {
+const FeedPage: FC = () => {
      const [current, setCurrent] = useState<'orders' | 'info'>('orders');
      const orders = useAppSelector((store) => store.allFeed.data?.orders);
 

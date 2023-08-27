@@ -30,23 +30,25 @@ const Modal: FC<PropsWithChildren<IModal>> = ({ modalType, onClose, children }) 
      }, []);
 
      return createPortal(
-          <div className={style.modal}>
-               <div className={style.content}>
-                    <div className={style.top}>
-                         <div className={`${style.order_title} text text_type_main-large `}>{modalType}</div>
+          <div className={style.big_modal}>
+               <div className={style.modal}>
+                    <div className={style.content}>
+                         <div className={style.top}>
+                              <div className={`${style.order_title} text text_type_main-large `}>{modalType}</div>
 
-                         <button
-                              className={style.btn_close}
-                              onClick={(e) => {
-                                   onClose();
-                                   e.stopPropagation();
-                              }}>
-                              <img src={btn_close} alt='crest' />
-                         </button>
+                              <button
+                                   className={style.btn_close}
+                                   onClick={(e) => {
+                                        onClose();
+                                        e.stopPropagation();
+                                   }}>
+                                   <img src={btn_close} alt='crest' />
+                              </button>
+                         </div>
+                         {children}
                     </div>
-                    {children}
+                    <ModalOverlay onClose={onClose} />
                </div>
-               <ModalOverlay onClose={onClose} />
           </div>,
           modalRootElement
      );

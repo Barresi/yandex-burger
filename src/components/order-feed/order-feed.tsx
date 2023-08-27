@@ -9,7 +9,7 @@ import OrderStatusTransform from '../order-status/order-status';
 
 const OrderFeed: FC<IFeedIngredient> = ({ _id, createdAt, status, number, name, ingredients }) => {
      const allIngredients = useAppSelector((store) => store.ingredients.ingredients);
-     const { pathname } = useLocation();
+     const location = useLocation();
 
      const { imgIngredients, totalPrice } = useMemo(() => {
           let totalPrice = 0;
@@ -41,7 +41,10 @@ const OrderFeed: FC<IFeedIngredient> = ({ _id, createdAt, status, number, name, 
           return { imgIngredients, totalPrice };
      }, [allIngredients, ingredients]);
      return (
-          <Link to={`/feed/${_id}`} className={style.block}>
+          <Link
+               to={_id}
+               className={style.block}
+               state={{ backgroundLocation: location, orderNumber: number.toString() }}>
                <div className={style.head}>
                     <div className='text text_type_main-medium'>#{number}</div>
                     <div className='text text_type_main-default text_color_inactive'>
@@ -49,7 +52,7 @@ const OrderFeed: FC<IFeedIngredient> = ({ _id, createdAt, status, number, name, 
                     </div>
                </div>
                <div className='text text_type_main-medium'>{name}</div>
-               {pathname === '/profile/orders' && <OrderStatusTransform status={status} />}
+               {location.pathname === '/profile/orders' && <OrderStatusTransform status={status} />}
                <div className={style.ingredients}>
                     <ul>{imgIngredients}</ul>
                     <div className={`${style.total_price} text text_type_digits-default`}>
