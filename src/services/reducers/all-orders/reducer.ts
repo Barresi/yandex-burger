@@ -19,6 +19,7 @@ const allFeedReducer = createReducer(initialState, (builder) => {
           })
           .addCase(wsClose, (state) => {
                state.status = WebsocketStatus.OFFLINE;
+               state.data = null;
           })
           .addCase(wsError, (state, action) => {
                state.connectionError = action.payload;

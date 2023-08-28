@@ -6,6 +6,7 @@
      align-items: flex-start;
      margin: 0 auto;
      margin-top: 120px;
+     padding: 0 10px;
 }
 .bottom {
      display: flex;
@@ -27,4 +28,10 @@
      width: 100%;
      flex: 1 1;
      overflow: auto;
+}
+
+@media (max-width: 767px) {
+     .content {
+          margin-top: 50px;
+     }
 }

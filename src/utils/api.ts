@@ -13,6 +13,10 @@ import {
 import { getCookie, setCookie } from './cookie';
 
 const URL = 'https://norma.nomoreparties.space/api';
+export const allOrdersWsURL = 'wss://norma.nomoreparties.space/orders/all';
+export const getProfileOrdersWsURL = () => {
+     return `wss://norma.nomoreparties.space/orders?token=${getCookie('accessToken')?.slice(7)}`;
+};
 
 const checkResponse = <T>(response: Response): Promise<T> => {
      return response.ok ? response.json() : response.json().then((err) => Promise.reject(err));

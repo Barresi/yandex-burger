@@ -1,9 +1,11 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../../utils/hooks/redux-hook';
 import OrderStatusTransform from '../../../order-status/order-status';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './modal-ingredient-feed.module.scss';
+import OrderListIngredients from '../../../order-list-ingredients/order-list-ingredients';
+import { IFeedIngredient } from '../../../../types/reducers/feed-web-socket';
 
 const ModalIngredientFeed: FC = () => {
      const { id } = useParams();
@@ -12,7 +14,7 @@ const ModalIngredientFeed: FC = () => {
      const orders = useAppSelector((store) =>
           pathname.split('/')[1] === 'profile' ? store.profileFeed.data?.orders : store.allFeed.data?.orders
      );
-     let price = 0;
+     const [totalPrice, setTotalPrice] = useState(0);
 
      const order = useMemo(() => {
           return orders?.find((item) => item._id === id);
@@ -25,16 +27,14 @@ const ModalIngredientFeed: FC = () => {
                     <OrderStatusTransform status={order?.status} />
                </div>
                <h3 className='text text_type_main-medium mb-6'>Состав:</h3>
-               <ul className={style.list}>
-                    <li>1</li>
-               </ul>
+               <OrderListIngredients order={order as IFeedIngredient} setTotalPrice={(price) => setTotalPrice(price)} />
                <div className={style.bottom}>
                     <FormattedDate
                          date={new Date(order?.createdAt as string)}
                          className='text text_type_main-default text_color_inactive'
                     />
                     <div className={`text text_type_digits-default ${style.price}`}>
-                         {price} <CurrencyIcon type='primary' />
+                         {totalPrice} <CurrencyIcon type='primary' />
                     </div>
                </div>
           </div>

@@ -1,14 +1,22 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderFeed from '../../components/order-feed/order-feed';
 import style from './feed.module.scss';
-import { useState, FC } from 'react';
-import { useAppSelector } from '../../utils/hooks/redux-hook';
+import { useState, FC, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks/redux-hook';
 import FeedInfo from './feed-info/feed-info';
+import { wsConnectAllFeed, wsDisconnectAllFeed } from '../../services/reducers/all-orders/actions';
+import { allOrdersWsURL } from '../../utils/api';
 
 const FeedPage: FC = () => {
      const [current, setCurrent] = useState<'orders' | 'info'>('orders');
      const orders = useAppSelector((store) => store.allFeed.data?.orders);
-
+     const dispatch = useAppDispatch();
+     useEffect(() => {
+          dispatch(wsConnectAllFeed(allOrdersWsURL));
+          return () => {
+               dispatch(wsDisconnectAllFeed());
+          };
+     }, [dispatch]);
      return (
           <div className={style.container}>
                <h2 className='text text_type_main-large mb-5'>Лента заказов</h2>

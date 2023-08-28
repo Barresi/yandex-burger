@@ -22,15 +22,12 @@ import { getUserInfo } from '../../services/reducers/auth/reducer';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/redux-hook';
 import FeedPage from '../../pages/feed/feed';
 import ProfileOrdersPage from '../../pages/profile/pages/profile-orders/profile-orders';
-import { wsConnectAllFeed } from '../../services/reducers/all-orders/actions';
-import { wsConnectProfileFeed, wsDisconnectProfileFeed } from '../../services/reducers/profile-orders/actions';
-import { getCookie } from '../../utils/cookie';
 import { WebsocketStatus } from '../../types/reducers/feed-web-socket';
 import IngredientFeedPage from '../../pages/ingredient-feed/ingredient-feed';
 import ModalIngredientFeed from '../modal/modal-content/modal-ingredient-feed/modal-ingredient-feed';
 
 const App: FC = () => {
-     const { isLoading, isUserAuth } = useAppSelector((store) => store.profileInfo);
+     const { isLoading } = useAppSelector((store) => store.profileInfo);
      const statusAllFeed = useAppSelector((store) => store.allFeed.status);
      const statusProfileFeed = useAppSelector((store) => store.profileFeed.status);
      const dispatch = useAppDispatch();
@@ -41,23 +38,15 @@ const App: FC = () => {
      useEffect(() => {
           dispatch(getDataIngredients());
           dispatch(getUserInfo());
-          dispatch(wsConnectAllFeed('wss://norma.nomoreparties.space/orders/all'));
-          isUserAuth
-               ? dispatch(
-                      wsConnectProfileFeed(
-                           `wss://norma.nomoreparties.space/orders?token=${getCookie('accessToken')?.slice(7)}`
-                      )
-                 )
-               : dispatch(wsDisconnectProfileFeed());
-     }, [dispatch, isUserAuth]);
+     }, [dispatch]);
 
      return (
           <div className={style.app}>
                <AppHeader />
 
-               <Routes location={locationState?.backgroundLocation}>
+               <Routes location={locationState?.backgroundLocation || location}>
                     <Route path='/' element={<MainPage />} />
-                    <Route path='ingredients/:id' element={<IngredientDetailsPage />} />
+                    <Route path='/ingredients/:id' element={<IngredientDetailsPage />} />
 
                     <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} />}>
                          <Route path='' element={<EditProfileInfo />} />
@@ -94,7 +83,7 @@ const App: FC = () => {
                {locationState?.backgroundLocation && (
                     <Routes>
                          <Route
-                              path='ingredients/:id'
+                              path='/ingredients/:id'
                               element={
                                    <Modal onClose={() => navigate(-1)} modalType={'Детали ингредиента'}>
                                         <IngredientDetails />
@@ -102,7 +91,7 @@ const App: FC = () => {
                               }
                          />
                          <Route
-                              path='feed/:id'
+                              path='/feed/:id'
                               element={
                                    <Modal onClose={() => navigate(-1)} modalType={'#' + locationState.orderNumber}>
                                         <ModalIngredientFeed />
@@ -110,7 +99,7 @@ const App: FC = () => {
                               }
                          />
                          <Route
-                              path='profile/orders/:id'
+                              path='/profile/orders/:id'
                               element={
                                    <Modal onClose={() => navigate(-1)} modalType={'#' + locationState.orderNumber}>
                                         <ModalIngredientFeed />
