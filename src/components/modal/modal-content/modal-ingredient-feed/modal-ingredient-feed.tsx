@@ -1,6 +1,4 @@
-import { FC, useMemo, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../../../utils/hooks/redux-hook';
+import { FC, useState } from 'react';
 import OrderStatusTransform from '../../../order-status/order-status';
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './modal-ingredient-feed.module.scss';
