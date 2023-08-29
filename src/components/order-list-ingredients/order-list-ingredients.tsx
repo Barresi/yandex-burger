@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import style from './order-list-ingredients.module.scss';
 import { useAppSelector } from '../../utils/hooks/redux-hook';
 import { IFeedIngredient } from '../../types/reducers/feed-web-socket';
@@ -17,7 +17,7 @@ const OrderListIngredients: FC<{ order: IFeedIngredient; setTotalPrice: (price: 
      setTotalPrice,
 }) => {
      const allIngredients = useAppSelector((store) => store.ingredients.ingredients);
-     const ingredientsData = useMemo(() => {
+     const { ingredientsData, totalPrice } = useMemo(() => {
           let totalPrice = 0;
           const ingredientsData: IIngredientData[] = [];
           order?.ingredients.forEach((itemOfOrder) => {
@@ -28,7 +28,7 @@ const OrderListIngredients: FC<{ order: IFeedIngredient; setTotalPrice: (price: 
                     totalPrice += isThereIngredient.price;
                     isThereIngredient.count += 1;
                } else {
-                    const findedElem = allIngredients.find((itemOfAll) => itemOfAll._id === itemOfOrder);
+                    const findedElem = allIngredients.find((itemOfAll: IIngredient) => itemOfAll._id === itemOfOrder);
                     const { _id, price, image_large, name } = findedElem as IIngredient;
                     totalPrice += price;
                     ingredientsData.push({
@@ -40,14 +40,18 @@ const OrderListIngredients: FC<{ order: IFeedIngredient; setTotalPrice: (price: 
                     });
                }
           });
-          setTotalPrice(totalPrice);
-          return ingredientsData;
+
+          return { ingredientsData, totalPrice };
      }, [order, allIngredients]);
+
+     useEffect(() => {
+          setTotalPrice(totalPrice);
+     }, [totalPrice, setTotalPrice]);
 
      return (
           <ul className={style.list}>
-               {ingredientsData.map((item) => (
-                    <li>
+               {ingredientsData.map((item, ind) => (
+                    <li key={ind}>
                          <div className={style.image}>
                               <img src={item.image_large} alt='ingredient' />
                          </div>

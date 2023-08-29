@@ -22,14 +22,12 @@ export const socketMiddleware = (wsActions: IWsActions): Middleware => {
                const { wsConnect, wsDisconnect, wsClose, wsConnecting, wsOpen, wsMessage, wsError } = wsActions;
 
                if (wsConnect.match(action)) {
-                    console.log('connection...');
                     dispatch(wsConnecting());
                     socket = new WebSocket(action.payload);
                }
 
                if (socket) {
                     socket.onopen = () => {
-                         console.log('connect');
                          dispatch(wsOpen());
                     };
 
@@ -39,15 +37,13 @@ export const socketMiddleware = (wsActions: IWsActions): Middleware => {
 
                     socket.onclose = (event) => {
                          if (event.code !== 1000) {
-                              console.log('error', event.code);
                               dispatch(wsError(event.code.toString()));
                          }
-                         console.log('close');
+
                          dispatch(wsClose());
                     };
 
                     if (wsDisconnect.match(action)) {
-                         console.log('disconnect');
                          socket.close(1000, 'user logged out');
                          dispatch(wsClose());
                     }
