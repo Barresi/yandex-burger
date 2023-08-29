@@ -6,19 +6,12 @@ import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burge
 import style from './modal-ingredient-feed.module.scss';
 import OrderListIngredients from '../../../order-list-ingredients/order-list-ingredients';
 import { IFeedIngredient } from '../../../../types/reducers/feed-web-socket';
+import { useGetOrder } from '../../../../utils/hooks/use-get-order';
 
 const ModalIngredientFeed: FC = () => {
-     const { id } = useParams();
-     const { pathname } = useLocation();
+     const { order } = useGetOrder();
 
-     const orders = useAppSelector((store) =>
-          pathname.split('/')[1] === 'profile' ? store.profileFeed.data?.orders : store.allFeed.data?.orders
-     );
      const [totalPrice, setTotalPrice] = useState(0);
-
-     const order = useMemo(() => {
-          return orders?.find((item) => item._id === id);
-     }, [orders, id]);
 
      return (
           <div className={style.content}>
