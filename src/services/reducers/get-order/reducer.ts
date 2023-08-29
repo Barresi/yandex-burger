@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { postDataIngredients } from '../../utils/api';
-import { IInitialStateOrderSlice } from '../../types/slices/order';
-import { IOrderResponse } from '../../types/api-types';
+import { postDataIngredients } from '../../../utils/api';
+import { IInitialStateOrderSlice } from '../../../types/reducers/order';
+import { IOrderResponse } from '../../../types/api-types';
 
 const initialState: IInitialStateOrderSlice = {
      order: null,
@@ -18,7 +18,7 @@ export const getOrder = createAsyncThunk<IOrderResponse, { ingredients: string[]
      }
 );
 
-const orderData = createSlice({
+const getOrderReducer = createSlice({
      name: 'orderData',
      initialState,
      reducers: {
@@ -52,5 +52,5 @@ const orderData = createSlice({
      },
 });
 
-export default orderData.reducer;
-export const { closeModal, setIsError } = orderData.actions;
+export default getOrderReducer.reducer;
+export const { closeModal, setIsError } = getOrderReducer.actions;

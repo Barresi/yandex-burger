@@ -7,6 +7,7 @@
      justify-content: flex-start;
      margin-top: 120px;
      gap: 60px;
+     flex: auto;
 }
 .menu {
      max-width: 320px;
@@ -34,14 +35,22 @@
      color: #8585ad;
      opacity: 0.4;
 }
+.orders {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+}
 
 @media (max-width: 767px) {
      .profile {
           flex-direction: column;
           margin-top: 60px;
-          padding: 0px 15px 0px 15px;
+          padding: 0px 10px 0px 10px;
      }
      .menu {
           display: none;
+     }
+     .orders {
+          display: block;
      }
 }

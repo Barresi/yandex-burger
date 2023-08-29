@@ -13,7 +13,7 @@ const HeaderNav: FC = () => {
                </NavLink>
 
                <NavLink
-                    to='/buy-items'
+                    to='/feed'
                     className={({ isActive }) => clx({ [style.link]: true, [style.activeLink]: isActive })}>
                     <ListIcon type={'secondary'} />
                     <div className='text_color_inactive text text_type_main-default'>Лента заказов</div>

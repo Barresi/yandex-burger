@@ -1,13 +1,14 @@
 import { FC } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 import style from './profile.module.scss';
 import { useAppDispatch } from '../../utils/hooks/redux-hook';
-import { logout } from '../../services/auth/auth';
+import { logout } from '../../services/reducers/auth/reducer';
 import { clx } from '../../utils/set-active-links';
 
 const ProfilePage: FC = () => {
      const dispatch = useAppDispatch();
+     const { pathname } = useLocation();
 
      const exitProfile = () => {
           dispatch(logout());
@@ -47,10 +48,14 @@ const ProfilePage: FC = () => {
                          </p>
                     </nav>
                     <div className={`${style.desc} text text_type_main-default`}>
-                         В этом разделе вы можете изменить свои персональные данные
+                         {pathname === '/profile'
+                              ? 'В этом разделе вы можете изменить свои персональные данные'
+                              : 'В этом разделе вы можете просмотреть свою историю заказов'}
                     </div>
                </div>
-               <Outlet />
+               <section className={style.orders}>
+                    <Outlet />
+               </section>
           </div>
      );
 };

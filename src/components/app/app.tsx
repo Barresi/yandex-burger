@@ -17,16 +17,22 @@ import style from './app.module.scss';
 import Modal from '../modal/modal-body/modal';
 import IngredientDetails from '../modal/modal-content/modal-ingredient-details/modal-ingredient-details';
 import IngredientDetailsPage from '../../pages/ingredient-details/ingredient-details';
-import { getDataIngredients } from '../../services/ingredients-data/ingredients-data';
-import { getUserInfo } from '../../services/auth/auth';
+import { getDataIngredients } from '../../services/reducers/ingredients-data/reducer';
+import { getUserInfo } from '../../services/reducers/auth/reducer';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/redux-hook';
+import FeedPage from '../../pages/feed/feed';
+import ProfileOrdersPage from '../../pages/profile/pages/profile-orders/profile-orders';
+import { WebsocketStatus } from '../../types/reducers/feed-web-socket';
+import IngredientFeedPage from '../../pages/ingredient-feed/ingredient-feed';
+import ModalIngredientFeed from '../modal/modal-content/modal-ingredient-feed/modal-ingredient-feed';
 
 const App: FC = () => {
-     const isLoading = useAppSelector((store) => store.profileInfo.isLoading);
-
+     const { isLoading } = useAppSelector((store) => store.profileInfo);
+     const statusAllFeed = useAppSelector((store) => store.allFeed.status);
+     const statusProfileFeed = useAppSelector((store) => store.profileFeed.status);
      const dispatch = useAppDispatch();
      const location = useLocation();
-     const locationState = location.state as { backgroundLocation?: string };
+     const locationState = location.state as { backgroundLocation?: string; orderNumber?: string };
      const navigate = useNavigate();
 
      useEffect(() => {
@@ -38,14 +44,21 @@ const App: FC = () => {
           <div className={style.app}>
                <AppHeader />
 
-               <Routes location={locationState?.backgroundLocation}>
+               <Routes location={locationState?.backgroundLocation || location}>
                     <Route path='/' element={<MainPage />} />
-                    <Route path='ingredients/:id' element={<IngredientDetailsPage />} />
+                    <Route path='/ingredients/:id' element={<IngredientDetailsPage />} />
 
                     <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} />}>
-                         <Route path='' element={<EditProfileInfo />}></Route>
-                         <Route path='orders' element={''}></Route>
+                         <Route path='' element={<EditProfileInfo />} />
+                         <Route path='orders' element={<ProfileOrdersPage />} />
                     </Route>
+                    <Route
+                         path='/profile/orders/:id'
+                         element={<ProtectedRouteElement element={<IngredientFeedPage />} />}
+                    />
+
+                    <Route path='/feed' element={<FeedPage />} />
+                    <Route path='/feed/:id' element={<IngredientFeedPage />} />
 
                     <Route
                          path='/login'
@@ -70,17 +83,37 @@ const App: FC = () => {
                {locationState?.backgroundLocation && (
                     <Routes>
                          <Route
-                              path='ingredients/:id'
+                              path='/ingredients/:id'
                               element={
                                    <Modal onClose={() => navigate(-1)} modalType={'Детали ингредиента'}>
                                         <IngredientDetails />
                                    </Modal>
                               }
                          />
+                         <Route
+                              path='/feed/:id'
+                              element={
+                                   <Modal onClose={() => navigate(-1)} modalType={'#' + locationState.orderNumber}>
+                                        <ModalIngredientFeed />
+                                   </Modal>
+                              }
+                         />
+                         <Route
+                              path='/profile/orders/:id'
+                              element={
+                                   <Modal onClose={() => navigate(-1)} modalType={'#' + locationState.orderNumber}>
+                                        <ModalIngredientFeed />
+                                   </Modal>
+                              }
+                         />
                     </Routes>
                )}
 
-               {isLoading && <Loader />}
+               {isLoading ||
+               statusAllFeed === WebsocketStatus.CONNECTING ||
+               statusProfileFeed === WebsocketStatus.CONNECTING ? (
+                    <Loader />
+               ) : null}
           </div>
      );
 };

@@ -1,13 +1,20 @@
-.modal {
-     position: fixed;
-     top: 0;
-     left: 0;
+.big_modal {
      display: flex;
      justify-content: center;
      align-items: center;
+     position: fixed;
+     top: 0;
+     left: 0;
      height: 100vh;
      width: 100vw;
      z-index: 10;
+}
+
+.modal {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex: 0 1 720px;
 }
 
 .content {
@@ -20,6 +27,7 @@
      align-items: center;
      text-align: center;
      z-index: 10;
+     flex: 1 1;
 }
 .top {
      display: flex;

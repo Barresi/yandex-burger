@@ -2,11 +2,5 @@
      height: 100vh;
      display: flex;
      flex-direction: column;
-     overflow: hidden;
-}
-
-@media (max-width: 767px) {
-     .app {
-          overflow: visible;
-     }
+     overflow: visible;
 }

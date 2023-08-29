@@ -5,17 +5,17 @@ import Modal from '../modal/modal-body/modal';
 import OrderDetails from '../modal/modal-content/modal-order-details/modal-order-details';
 import ModalError from '../modal/modal-content/modal-error/modal-error';
 import style from './burger-constructor.module.scss';
-import { closeModal, getOrder, setIsError } from '../../services/order-data/order-data';
+import { closeModal, getOrder, setIsError } from '../../services/reducers/get-order/reducer';
 import Loader from '../loader/loader';
-import { addIngredient, clearIngredients } from '../../services/constructor-elements/constructor-elements';
+import { addIngredient, clearIngredients } from '../../services/reducers/constructor-elements/reducer';
 import { useDrop } from 'react-dnd';
-import { clearQuantity, updateQuantity } from '../../services/ingredients-data/ingredients-data';
+import { clearQuantity, updateQuantity } from '../../services/reducers/ingredients-data/reducer';
 import { useNavigate } from 'react-router-dom';
 import { IIngredient } from '../../types/ingredient';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/redux-hook';
 
 const BurgerConstructor: FC = () => {
-     const { isActiveModal, order, error, isLoading } = useAppSelector((store) => store.order);
+     const { isActiveModal, order, error, isLoading } = useAppSelector((store) => store.getOrder);
      const { isUserAuth } = useAppSelector((store) => store.profileInfo);
      const activeItems = useAppSelector((store) => store.activeConstructorItems);
      const dispatch = useAppDispatch();
