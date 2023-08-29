@@ -101,7 +101,7 @@ export async function logoutRequest() {
      return await checkResponse<ILogoutResponse>(response);
 }
 
-async function refreshRequest(): Promise<IRefreshResponse> {
+export async function refreshRequest(): Promise<IRefreshResponse> {
      const response = await fetch(`${URL}/auth/token`, {
           method: 'POST',
           headers: {
@@ -111,7 +111,12 @@ async function refreshRequest(): Promise<IRefreshResponse> {
                token: getCookie('refreshToken'),
           }),
      });
-     return await response.json();
+     const data = await response.json();
+     if (data.success) {
+          setCookie('accessToken', data.accessToken);
+          setCookie('refreshToken', data.refreshToken);
+     }
+     return data;
 }
 
 export async function fetchWithRefresh<T>(url: RequestInfo, options: RequestInit) {
@@ -122,8 +127,6 @@ export async function fetchWithRefresh<T>(url: RequestInfo, options: RequestInit
           if ((err as Error).message === 'jwt expired') {
                const refreshData = await refreshRequest();
                if (!refreshData.success) return Promise.reject(refreshData);
-               setCookie('accessToken', refreshData.accessToken);
-               setCookie('refreshToken', refreshData.refreshToken);
                (options.headers as { [key: string]: string }).authorization = refreshData.accessToken;
                const res = await fetch(url, options);
                return await checkResponse<T>(res);
