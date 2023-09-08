@@ -3,7 +3,7 @@ import { postDataIngredients } from '../../../utils/api';
 import { IInitialStateOrderSlice } from '../../../types/reducers/order';
 import { IOrderResponse } from '../../../types/api-types';
 
-const initialState: IInitialStateOrderSlice = {
+export const initialState: IInitialStateOrderSlice = {
      order: null,
      error: null,
      isLoading: false,

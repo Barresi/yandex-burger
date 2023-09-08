@@ -9,7 +9,7 @@ import { closeModal, getOrder, setIsError } from '../../services/reducers/get-or
 import Loader from '../loader/loader';
 import { addIngredient, clearIngredients } from '../../services/reducers/constructor-elements/reducer';
 import { useDrop } from 'react-dnd';
-import { clearQuantity, updateQuantity } from '../../services/reducers/ingredients-data/reducer';
+import { clearQuantity, incrementQuantity } from '../../services/reducers/ingredients-data/reducer';
 import { useNavigate } from 'react-router-dom';
 import { IIngredient } from '../../types/ingredient';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/redux-hook';
@@ -24,7 +24,7 @@ const BurgerConstructor: FC = () => {
           accept: 'ingredient',
           drop(item) {
                dispatch(addIngredient(item));
-               dispatch(updateQuantity(item));
+               dispatch(incrementQuantity(item));
           },
           collect: (monitor) => ({
                isOver: monitor.isOver(),
