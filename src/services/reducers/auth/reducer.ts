@@ -11,7 +11,7 @@ import {
      IRegisterPayload,
 } from '../../../types/api-types';
 
-const initialState: IInitialStateAuth = {
+export const initialState: IInitialStateAuth = {
      user: {
           email: '',
           name: '',

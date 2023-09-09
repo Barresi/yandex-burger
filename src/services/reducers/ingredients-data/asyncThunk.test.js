@@ -24,10 +24,6 @@ describe('Получение данных о ингредиентах с сер�
      });
 
      it('Должен упасть запрос getDataIngredients', async () => {
-          const mockResponse = {
-               data: [],
-               success: false,
-          };
           fetch.mockResolvedValue({ ok: false, json: () => Promise.reject() });
           const dispatch = jest.fn();
           const thunk = getDataIngredients();

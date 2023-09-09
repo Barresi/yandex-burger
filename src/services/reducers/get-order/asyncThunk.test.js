@@ -23,7 +23,7 @@ describe('Отправка запроса на заказ на сервер', ()
      });
 
      it('Должен упасть запрос getOrder', async () => {
-          fetch.mockResolvedValue({ ok: false, json: () => Promise.resolve() });
+          fetch.mockResolvedValue({ ok: false, json: () => Promise.reject() });
           const dispatch = jest.fn();
           const thunk = getOrder({
                ingredients: ['643d69a5c3f7b9001cfa093c', '643d69a5c3f7b9001cfa0941', '643d69a5c3f7b9001cfa093c'],
