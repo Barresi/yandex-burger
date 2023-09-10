@@ -16,7 +16,7 @@ const IngredientCard: FC<{ cardInfo: IIngredient }> = ({ cardInfo }) => {
      });
 
      return (
-          <div className={style.ingredient_card} ref={dragRef}>
+          <div className={style.ingredient_card} ref={dragRef} data-cy={`dragitem-${cardInfo._id}`}>
                <Link
                     className={style.card_content}
                     to={`/ingredients/${cardInfo._id}`}

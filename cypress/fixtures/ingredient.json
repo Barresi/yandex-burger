@@ -1,0 +1,15 @@
+{
+     "_id": "643d69a5c3f7b9001cfa0943",
+     "name": "Соус фирменный Space Sauce",
+     "type": "sauce",
+     "proteins": 50,
+     "fat": 22,
+     "carbohydrates": 11,
+     "calories": 14,
+     "price": 80,
+     "image": "https://code.s3.yandex.net/react/code/sauce-04.png",
+     "image_mobile": "https://code.s3.yandex.net/react/code/sauce-04-mobile.png",
+     "image_large": "https://code.s3.yandex.net/react/code/sauce-04-large.png",
+     "__v": 0,
+     "id": "6f55ce7b-0381-45db-a5b8-bf6cb7125c99"
+}

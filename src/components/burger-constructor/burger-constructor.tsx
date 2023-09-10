@@ -59,7 +59,10 @@ const BurgerConstructor: FC = () => {
      }, [activeItems]);
 
      return (
-          <section className={`${style.burger_constructor} ${isOver ? style.isOver : null}`} ref={dragRef}>
+          <section
+               className={`${style.burger_constructor} ${isOver ? style.isOver : null}`}
+               ref={dragRef}
+               data-cy='dropzone'>
                <ContentConstructor />
 
                <div className={style.checkout}>
@@ -67,7 +70,7 @@ const BurgerConstructor: FC = () => {
                          {totalPrice ? totalPrice : 0}
                          <CurrencyIcon type='primary' />
                     </div>
-                    <Button htmlType='button' type='primary' size='medium' onClick={checkoutSubmit}>
+                    <Button htmlType='button' type='primary' size='medium' onClick={checkoutSubmit} data-cy='btn-order'>
                          Оформить заказ
                     </Button>
                </div>
