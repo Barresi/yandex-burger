@@ -30,7 +30,8 @@
           "build": "react-scripts build",
           "test": "react-scripts test",
           "eject": "react-scripts eject",
-          "cypress:open": "cypress open"
+          "cypress:open": "cypress open",
+          "deploy-script": "npm run build && scp -r ./build/* barresi@158.160.115.100:/home/barresi/stellar-burgers/frontend"
      },
      "eslintConfig": {
           "extends": [
