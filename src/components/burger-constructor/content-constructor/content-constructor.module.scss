@@ -1,6 +1,9 @@
 .top,
 .bottom {
      max-height: 80px;
+     & div {
+          margin-left: 45px;
+     }
 }
 
 .wrapper {
@@ -16,6 +19,9 @@
           position: relative;
           flex: 0 0 80px;
           margin-right: 16px;
+          & div {
+               margin-left: 45px;
+          }
           & ::before {
                content: url('../../../images/burger-component.svg');
                position: absolute;
