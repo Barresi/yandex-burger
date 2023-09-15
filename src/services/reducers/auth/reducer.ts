@@ -11,7 +11,7 @@ import {
      IRegisterPayload,
 } from '../../../types/api-types';
 
-const initialState: IInitialStateAuth = {
+export const initialState: IInitialStateAuth = {
      user: {
           email: '',
           name: '',
@@ -60,8 +60,9 @@ const authReducer = createSlice({
                     name: action.payload.user.name,
                };
                state.isUserAuth = true;
+
+               localStorage.setItem('refreshToken', action.payload.refreshToken);
                setCookie('accessToken', action.payload.accessToken);
-               setCookie('refreshToken', action.payload.refreshToken);
           });
           //Registration
           builder.addCase(register.pending, (state) => {
@@ -79,7 +80,7 @@ const authReducer = createSlice({
                };
                state.isUserAuth = true;
                setCookie('accessToken', action.payload.accessToken);
-               setCookie('refreshToken', action.payload.refreshToken);
+               localStorage.setItem('refreshToken', action.payload.refreshToken);
           });
           //LogOut
           builder.addCase(logout.pending, (state) => {
@@ -97,7 +98,7 @@ const authReducer = createSlice({
                };
                state.isUserAuth = false;
                deleteCookie('accessToken');
-               deleteCookie('refreshToken');
+               localStorage.removeItem('refreshToken');
           });
           //CheckAuthenticity
           builder.addCase(getUserInfo.pending, (state) => {

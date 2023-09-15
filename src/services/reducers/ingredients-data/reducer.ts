@@ -4,7 +4,7 @@ import { IInitialStateIngredientsSlice } from '../../../types/reducers/ingredien
 import { IIngredient } from '../../../types/ingredient';
 import { IIngredientsResponse } from '../../../types/api-types';
 
-const initialState: IInitialStateIngredientsSlice = {
+export const initialState: IInitialStateIngredientsSlice = {
      error: null,
      isLoading: false,
      ingredients: [],
@@ -28,7 +28,7 @@ const ingredientsReducer = createSlice({
           deleteError: (state) => {
                state.error = null;
           },
-          updateQuantity: (state, action: PayloadAction<IIngredient>) => {
+          incrementQuantity: (state, action: PayloadAction<IIngredient>) => {
                if (action.payload.type === 'bun') {
                     state.ingredients = state.ingredients.map((item) =>
                          item.type === 'bun'
@@ -76,4 +76,4 @@ const ingredientsReducer = createSlice({
 });
 
 export default ingredientsReducer.reducer;
-export const { deleteError, updateQuantity, clearQuantity, decrementQuantity } = ingredientsReducer.actions;
+export const { deleteError, incrementQuantity, clearQuantity, decrementQuantity } = ingredientsReducer.actions;

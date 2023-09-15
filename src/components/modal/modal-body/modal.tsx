@@ -37,6 +37,7 @@ const Modal: FC<PropsWithChildren<IModal>> = ({ modalType, onClose, children }) 
                               <div className={`${style.order_title} text text_type_main-large `}>{modalType}</div>
 
                               <button
+                                   data-cy='close-modal'
                                    className={style.btn_close}
                                    onClick={(e) => {
                                         onClose();

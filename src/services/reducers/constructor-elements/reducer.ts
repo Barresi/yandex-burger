@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IInitialStateActiveItems } from '../../../types/reducers/active-ingredients';
 import { IIngredient } from '../../../types/ingredient';
 
-const initialState: IInitialStateActiveItems = {
+export const initialState: IInitialStateActiveItems = {
      bun: null,
      ingredients: [],
 };

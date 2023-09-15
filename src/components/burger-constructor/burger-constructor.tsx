@@ -9,7 +9,7 @@ import { closeModal, getOrder, setIsError } from '../../services/reducers/get-or
 import Loader from '../loader/loader';
 import { addIngredient, clearIngredients } from '../../services/reducers/constructor-elements/reducer';
 import { useDrop } from 'react-dnd';
-import { clearQuantity, updateQuantity } from '../../services/reducers/ingredients-data/reducer';
+import { clearQuantity, incrementQuantity } from '../../services/reducers/ingredients-data/reducer';
 import { useNavigate } from 'react-router-dom';
 import { IIngredient } from '../../types/ingredient';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks/redux-hook';
@@ -24,7 +24,7 @@ const BurgerConstructor: FC = () => {
           accept: 'ingredient',
           drop(item) {
                dispatch(addIngredient(item));
-               dispatch(updateQuantity(item));
+               dispatch(incrementQuantity(item));
           },
           collect: (monitor) => ({
                isOver: monitor.isOver(),
@@ -59,7 +59,10 @@ const BurgerConstructor: FC = () => {
      }, [activeItems]);
 
      return (
-          <section className={`${style.burger_constructor} ${isOver ? style.isOver : null}`} ref={dragRef}>
+          <section
+               className={`${style.burger_constructor} ${isOver ? style.isOver : null}`}
+               ref={dragRef}
+               data-cy='dropzone'>
                <ContentConstructor />
 
                <div className={style.checkout}>
@@ -67,7 +70,7 @@ const BurgerConstructor: FC = () => {
                          {totalPrice ? totalPrice : 0}
                          <CurrencyIcon type='primary' />
                     </div>
-                    <Button htmlType='button' type='primary' size='medium' onClick={checkoutSubmit}>
+                    <Button htmlType='button' type='primary' size='medium' onClick={checkoutSubmit} data-cy='btn-order'>
                          Оформить заказ
                     </Button>
                </div>

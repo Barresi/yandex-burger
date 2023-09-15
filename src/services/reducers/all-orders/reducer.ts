@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { IInitialStateFeed, WebsocketStatus } from '../../../types/reducers/feed-web-socket';
 import { wsClose, wsConnecting, wsError, wsMessage, wsOpen } from './actions';
 
-const initialState: IInitialStateFeed = {
+export const initialState: IInitialStateFeed = {
      status: WebsocketStatus.OFFLINE,
      connectionError: '',
      data: null,

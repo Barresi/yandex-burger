@@ -95,7 +95,7 @@ export async function logoutRequest() {
                'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-               token: getCookie('refreshToken'),
+               token: localStorage.getItem('refreshToken'),
           }),
      });
      return await checkResponse<ILogoutResponse>(response);
@@ -108,13 +108,13 @@ export async function refreshRequest(): Promise<IRefreshResponse> {
                'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-               token: getCookie('refreshToken'),
+               token: localStorage.getItem('refreshToken'),
           }),
      });
      const data = await response.json();
      if (data.success) {
           setCookie('accessToken', data.accessToken);
-          setCookie('refreshToken', data.refreshToken);
+          localStorage.setItem('refreshToken', data.refreshToken);
      }
      return data;
 }
@@ -124,7 +124,7 @@ export async function fetchWithRefresh<T>(url: RequestInfo, options: RequestInit
           const res = await fetch(url, options);
           return await checkResponse<T>(res);
      } catch (err) {
-          if ((err as Error).message === 'jwt expired') {
+          if ((err as Error).message === 'jwt expired' || (err as Error).message === 'You should be authorised') {
                const refreshData = await refreshRequest();
                if (!refreshData.success) return Promise.reject(refreshData);
                (options.headers as { [key: string]: string }).authorization = refreshData.accessToken;
