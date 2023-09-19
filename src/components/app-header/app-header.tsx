@@ -32,9 +32,9 @@ const AppHeader: FC = () => {
                </div>
 
                <div className={style.mobile}>
-                    <div className={style.burger}>
+                    <Link to='/' className={style.burger}>
                          <img src={smallLogo} alt='mobileBurger' />
-                    </div>
+                    </Link>
                     <div className={style.burger}>
                          <img src={burger} alt='burger' />
                     </div>

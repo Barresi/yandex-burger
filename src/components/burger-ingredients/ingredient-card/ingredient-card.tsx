@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FC } from 'react';
 import { IIngredient } from '../../../types/ingredient';
 import { useAppDispatch } from '../../../utils/hooks/redux-hook';
+import { incrementQuantity } from '../../../services/reducers/ingredients-data/reducer';
 
 const IngredientCard: FC<{ cardInfo: IIngredient }> = ({ cardInfo }) => {
      const location = useLocation();
@@ -34,7 +35,10 @@ const IngredientCard: FC<{ cardInfo: IIngredient }> = ({ cardInfo }) => {
                     htmlType='button'
                     type='secondary'
                     size='small'
-                    onClick={() => dispatch(addIngredient(cardInfo))}>
+                    onClick={() => {
+                         dispatch(addIngredient(cardInfo));
+                         dispatch(incrementQuantity(cardInfo));
+                    }}>
                     Добавить
                </Button>
           </div>

@@ -3,12 +3,13 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import ContentCards from './content-cards/content-cards';
 import style from './burger-ingredients.module.scss';
 import { scrollTabs } from '../../utils/scrollTabs';
-import { useRef, useState, FC, RefObject } from 'react';
+import { useRef, useState, FC, RefObject, useMemo } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useAppSelector } from '../../utils/hooks/redux-hook';
 
 const BurgerIngredients: FC = () => {
      const [activeTab, setActiveTab] = useState<'one' | 'two' | 'three'>('one');
-
+     const activeItems = useAppSelector((store) => store.activeConstructorItems);
      const bunRef = useRef<HTMLDivElement>(null);
      const saucesRef = useRef<HTMLDivElement>(null);
      const mainRef = useRef<HTMLDivElement>(null);
@@ -21,6 +22,13 @@ const BurgerIngredients: FC = () => {
      const setScrollTabs = (ref: RefObject<HTMLElement>) => {
           ref.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
      };
+
+     const totalPrice = useMemo(() => {
+          return (
+               activeItems.ingredients.reduce((acc, curr) => acc + curr.price, 0) +
+               (activeItems.bun ? activeItems.bun.price * 2 : 0)
+          );
+     }, [activeItems]);
 
      return (
           <section className={style.burger_ingredients}>
@@ -42,7 +50,7 @@ const BurgerIngredients: FC = () => {
 
                <div className={style.checkout}>
                     <div className={`${style.price} text text_type_digits-default`}>
-                         420 <CurrencyIcon type='primary' />
+                         {totalPrice} <CurrencyIcon type='primary' />
                     </div>
                     <Button htmlType='button' type='primary' size='small' extraClass='ml-2'>
                          Смотреть заказ
