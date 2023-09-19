@@ -6,6 +6,7 @@ import { scrollTabs } from '../../utils/scrollTabs';
 import { useRef, useState, FC, RefObject, useMemo } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useAppSelector } from '../../utils/hooks/redux-hook';
+import { Link } from 'react-router-dom';
 
 const BurgerIngredients: FC = () => {
      const [activeTab, setActiveTab] = useState<'one' | 'two' | 'three'>('one');
@@ -52,9 +53,11 @@ const BurgerIngredients: FC = () => {
                     <div className={`${style.price} text text_type_digits-default`}>
                          {totalPrice} <CurrencyIcon type='primary' />
                     </div>
-                    <Button htmlType='button' type='primary' size='small' extraClass='ml-2'>
-                         Смотреть заказ
-                    </Button>
+                    <Link to='order'>
+                         <Button htmlType='button' type='primary' size='small' extraClass='ml-2'>
+                              Смотреть заказ
+                         </Button>
+                    </Link>
                </div>
           </section>
      );

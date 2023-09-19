@@ -1,0 +1,20 @@
+.order {
+     display: flex;
+     align-items: center;
+     border-bottom: 1px solid rgba(47, 47, 55, 1);
+     flex: 1 0 100px;
+}
+.img {
+     width: 90px;
+     height: 65px;
+     object-fit: cover;
+}
+.text {
+     flex: 1 1;
+}
+.price {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     margin-left: 20px;
+}
