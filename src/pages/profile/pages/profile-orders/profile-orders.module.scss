@@ -16,3 +16,12 @@
           background-color: #8585ad;
      }
 }
+.title {
+     margin-bottom: 30px;
+     display: none;
+}
+@media (max-width: 767px) {
+     .title {
+          display: block;
+     }
+}

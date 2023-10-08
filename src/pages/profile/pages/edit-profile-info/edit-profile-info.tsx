@@ -40,46 +40,49 @@ const EditProfileInfo = () => {
           }
      }, [userName, userEmail, password, name, email]);
      return (
-          <form className={style.form} onSubmit={editProfileInfo}>
-               <Input
-                    value={userName}
-                    name='name'
-                    placeholder='Имя'
-                    icon={'EditIcon'}
-                    onChange={(e) => {
-                         setUserName(e.target.value);
-                    }}
-               />
-               <Input
-                    value={userEmail}
-                    type='email'
-                    name='login'
-                    placeholder='Логин'
-                    icon={'EditIcon'}
-                    onChange={(e) => {
-                         setUserEmail(e.target.value);
-                    }}
-               />
-               <Input
-                    value={password}
-                    name='password'
-                    placeholder='Пароль'
-                    icon={'EditIcon'}
-                    onChange={(e) => {
-                         setPassword(e.target.value);
-                    }}
-               />
-               {isActiveBtns && (
-                    <div className={style.btns}>
-                         <Button htmlType='button' type='secondary' size='medium' onClick={resetData}>
-                              Отмена
-                         </Button>
-                         <Button htmlType='submit' type='primary' size='medium'>
-                              Сохранить
-                         </Button>
-                    </div>
-               )}
-          </form>
+          <>
+               <h2 className={`${style.title} text text_type_main-large`}>Профиль</h2>
+               <form className={style.form} onSubmit={editProfileInfo}>
+                    <Input
+                         value={userName}
+                         name='name'
+                         placeholder='Имя'
+                         icon={'EditIcon'}
+                         onChange={(e) => {
+                              setUserName(e.target.value);
+                         }}
+                    />
+                    <Input
+                         value={userEmail}
+                         type='email'
+                         name='login'
+                         placeholder='Логин'
+                         icon={'EditIcon'}
+                         onChange={(e) => {
+                              setUserEmail(e.target.value);
+                         }}
+                    />
+                    <Input
+                         value={password}
+                         name='password'
+                         placeholder='Пароль'
+                         icon={'EditIcon'}
+                         onChange={(e) => {
+                              setPassword(e.target.value);
+                         }}
+                    />
+                    {isActiveBtns && (
+                         <div className={style.btns}>
+                              <Button htmlType='button' type='secondary' size='medium' onClick={resetData}>
+                                   Отмена
+                              </Button>
+                              <Button htmlType='submit' type='primary' size='medium'>
+                                   Сохранить
+                              </Button>
+                         </div>
+                    )}
+               </form>
+          </>
      );
 };
 

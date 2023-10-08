@@ -32,26 +32,22 @@
 .top {
      display: flex;
      align-items: center;
-
-     left: 40px;
-     right: 40px;
-}
-.title {
      position: absolute;
      left: 40px;
+     right: 40px;
+     top: 35px;
+     justify-content: space-between;
 }
 .order_title {
      font-size: 28px;
-     position: absolute;
-     left: 40px;
+     text-align: left;
 }
 .btn_close {
      border: none;
      cursor: pointer;
      appearance: none;
      background-color: inherit;
-     position: absolute;
-     right: 40px;
+
      height: 30px;
      width: 30px;
      padding: 20px;
@@ -61,22 +57,16 @@
 }
 @media (max-width: 767px) {
      .content {
-          padding: 56px 8px 56px 8px;
+          padding: 80px 8px 56px 8px;
           width: 100vw;
           height: 100vh;
           border-radius: 0;
           position: static;
      }
-     .title {
-          display: none;
-     }
-     .btn_close {
+
+     .top {
           position: absolute;
-          right: 11px;
-          top: 19px;
-          left: auto;
-     }
-     .order_title {
-          display: none;
+          left: 30px;
+          right: 30px;
      }
 }

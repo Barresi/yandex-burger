@@ -25,6 +25,7 @@ import ProfileOrdersPage from '../../pages/profile/pages/profile-orders/profile-
 import { WebsocketStatus } from '../../types/reducers/feed-web-socket';
 import IngredientFeedPage from '../../pages/ingredient-feed/ingredient-feed';
 import ModalIngredientFeed from '../modal/modal-content/modal-ingredient-feed/modal-ingredient-feed';
+import CheckOrderPage from '../../pages/check-order/check-order';
 
 const App: FC = () => {
      const { isLoading } = useAppSelector((store) => store.profileInfo);
@@ -47,6 +48,7 @@ const App: FC = () => {
                <Routes location={locationState?.backgroundLocation || location}>
                     <Route path='/' element={<MainPage />} />
                     <Route path='/ingredients/:id' element={<IngredientDetailsPage />} />
+                    <Route path='/order' element={<CheckOrderPage />} />
 
                     <Route path='/profile' element={<ProtectedRouteElement element={<ProfilePage />} />}>
                          <Route path='' element={<EditProfileInfo />} />
