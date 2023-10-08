@@ -1,0 +1,59 @@
+.burger {
+     width: 100vw;
+     height: 100vh;
+     background-color: rgba(28, 28, 33, 1);
+     z-index: 10;
+     position: fixed;
+     padding: 10px;
+}
+
+.link {
+     display: flex;
+     gap: 10px;
+     padding: 16px 10px;
+     align-items: center;
+     background-color: transparent;
+}
+
+.activeLink {
+     & > svg {
+          transition: var(--common-transition);
+          fill: #f2f2f3;
+     }
+     & > div {
+          transition: var(--common-transition);
+          color: #f2f2f3;
+     }
+}
+
+.head {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     height: 64px;
+}
+.profile {
+     padding: 16px 10px;
+     display: flex;
+     justify-content: space-between;
+}
+.profile_text {
+     display: flex;
+     gap: 10px;
+}
+.accordion {
+     & a {
+          padding-left: 44px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+     }
+}
+.exit_btn {
+     background-color: transparent;
+     padding-left: 44px;
+     padding-top: 10px;
+     padding-bottom: 10px;
+     padding-right: 10px;
+     width: 100%;
+     text-align: left;
+}

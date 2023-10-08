@@ -44,3 +44,9 @@
      margin-bottom: 16px;
      color: #e52b1a;
 }
+
+@media (max-width: 500px) {
+     .link {
+          display: block;
+     }
+}
