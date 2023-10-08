@@ -15,7 +15,12 @@ const ProfileOrdersPage: FC = () => {
           };
      }, [dispatch]);
      return (
-          <div className={style.orders}>{orders?.map((item, ind) => <OrderFeed {...item} key={ind} />).reverse()}</div>
+          <>
+               <h2 className={`${style.title} text text_type_main-large`}>История заказов</h2>
+               <div className={style.orders}>
+                    {orders?.map((item, ind) => <OrderFeed {...item} key={ind} />).reverse()}
+               </div>
+          </>
      );
 };
 

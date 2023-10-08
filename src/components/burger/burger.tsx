@@ -11,6 +11,13 @@ import { clx } from '../../utils/set-active-links';
 import { FC } from 'react';
 import { useAppDispatch } from '../../utils/hooks/redux-hook';
 import { logout } from '../../services/reducers/auth/reducer';
+import {
+     Accordion,
+     AccordionItem,
+     AccordionItemButton,
+     AccordionItemHeading,
+     AccordionItemPanel,
+} from 'react-accessible-accordion';
 
 interface IBurger {
      isActive: boolean;
@@ -33,45 +40,57 @@ const Burger: FC<IBurger> = ({ isActive, setActive }) => {
                     <CloseIcon type='primary' onClick={() => setActive(false)} />
                </div>
                <div>
-                    <div className={style.accordion}>
-                         <div className={style.profile}>
-                              <div
-                                   className={clx({
-                                        [style.profile_text]: true,
-                                        [style.activeLink]: pathname === '/profile/' || pathname === '/profile/orders',
-                                   })}>
-                                   <ProfileIcon type={'secondary'} />
-                                   <div className={'text_color_inactive text text_type_main-default'}>
-                                        Личный кабинет
-                                   </div>
-                              </div>
-                              <ArrowUpIcon
-                                   type={
-                                        pathname === '/profile/' || pathname === '/profile/orders'
-                                             ? 'primary'
-                                             : 'secondary'
-                                   }
-                              />
-                         </div>
-
-                         <NavLink
-                              onClick={() => setActive(false)}
-                              to='/profile/'
-                              className={({ isActive }) => clx({ [style.link]: true, [style.activeLink]: isActive })}>
-                              <div className={'text_color_inactive text text_type_main-default'}>Профиль</div>
-                         </NavLink>
-                         <NavLink
-                              onClick={() => setActive(false)}
-                              to='/profile/orders'
-                              className={({ isActive }) => clx({ [style.link]: true, [style.activeLink]: isActive })}>
-                              <div className={'text_color_inactive text text_type_main-default'}>История заказов</div>
-                         </NavLink>
-                         <button
-                              className={`text_color_inactive text text_type_main-default ${style.exit_btn}`}
-                              onClick={exitProfile}>
-                              Выход
-                         </button>
-                    </div>
+                    <Accordion className={style.accordion} allowZeroExpanded preExpanded={['accordionItem1']}>
+                         <AccordionItem uuid={'accordionItem1'}>
+                              <AccordionItemHeading>
+                                   <AccordionItemButton className={style.profile}>
+                                        <div
+                                             className={clx({
+                                                  [style.profile_text]: true,
+                                                  [style.activeLink]:
+                                                       pathname === '/profile/' || pathname === '/profile/orders',
+                                             })}>
+                                             <ProfileIcon type={'secondary'} />
+                                             <div className={'text_color_inactive text text_type_main-default'}>
+                                                  Личный кабинет
+                                             </div>
+                                        </div>
+                                        <ArrowUpIcon
+                                             type={
+                                                  pathname === '/profile/' || pathname === '/profile/orders'
+                                                       ? 'primary'
+                                                       : 'secondary'
+                                             }
+                                        />
+                                   </AccordionItemButton>
+                              </AccordionItemHeading>
+                              <AccordionItemPanel>
+                                   <NavLink
+                                        onClick={() => setActive(false)}
+                                        to='/profile/'
+                                        className={({ isActive }) =>
+                                             clx({ [style.link]: true, [style.activeLink]: isActive })
+                                        }>
+                                        <div className={'text_color_inactive text text_type_main-default'}>Профиль</div>
+                                   </NavLink>
+                                   <NavLink
+                                        onClick={() => setActive(false)}
+                                        to='/profile/orders'
+                                        className={({ isActive }) =>
+                                             clx({ [style.link]: true, [style.activeLink]: isActive })
+                                        }>
+                                        <div className={'text_color_inactive text text_type_main-default'}>
+                                             История заказов
+                                        </div>
+                                   </NavLink>
+                                   <button
+                                        className={`text_color_inactive text text_type_main-default ${style.exit_btn}`}
+                                        onClick={exitProfile}>
+                                        Выход
+                                   </button>
+                              </AccordionItemPanel>
+                         </AccordionItem>
+                    </Accordion>
 
                     <NavLink
                          onClick={() => setActive(false)}

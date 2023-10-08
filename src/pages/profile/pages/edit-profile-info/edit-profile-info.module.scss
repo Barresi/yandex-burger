@@ -18,11 +18,18 @@
      justify-content: flex-end;
 }
 
+.title {
+     margin-bottom: 30px;
+     display: none;
+}
 @media (max-width: 767px) {
      .btns {
           margin-top: 20px;
      }
      .form div {
           max-width: none;
+     }
+     .title {
+          display: block;
      }
 }
