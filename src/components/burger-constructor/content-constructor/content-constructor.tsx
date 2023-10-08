@@ -21,7 +21,7 @@ const ContentConstructor: FC = () => {
                               thumbnail={activeItems.bun.image}
                          />
                     ) : (
-                         <SampleContentConstructor type='top' text='Выбери булку' />
+                         <SampleContentConstructor type='top' text='Выберите булку' />
                     )}
                </div>
 
@@ -31,7 +31,7 @@ const ContentConstructor: FC = () => {
                               <ElementConstructor {...item} index={index} key={item.id} />
                          ))
                     ) : (
-                         <SampleContentConstructor text='Выбери начинку' type='medium' />
+                         <SampleContentConstructor text='Выберите начинку' type='medium' />
                     )}
                </div>
 
@@ -45,7 +45,7 @@ const ContentConstructor: FC = () => {
                               thumbnail={activeItems.bun.image}
                          />
                     ) : (
-                         <SampleContentConstructor type='bottom' text='Выбери булку' />
+                         <SampleContentConstructor type='bottom' text='Выберите булку' />
                     )}
                </div>
           </>
