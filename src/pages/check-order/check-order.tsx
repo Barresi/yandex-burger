@@ -49,7 +49,7 @@ const CheckOrderPage: FC = () => {
                     {bun && <OrderElement ingredient={{ ...bun, name: bun.name + ' (низ)' }} />}
                </ul>
                <div className={style.checkout}>
-                    <input type='image' src={arrow} onClick={() => navigate('/')} />
+                    <input type='image' src={arrow} onClick={() => navigate('/')} alt='arrow' />
                     <div className={style.totalPrice}>
                          <div className={`${style.price} text text_type_digits-default`}>
                               {totalPrice} <CurrencyIcon type='primary' />
